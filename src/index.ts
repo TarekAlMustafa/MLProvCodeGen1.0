@@ -7,15 +7,9 @@ import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
 import { requestAPI } from './handler';
 
-/**
- * Initialization data for the extension extension.
- */
-const plugin: JupyterFrontEndPlugin<void> = {
-  id: 'extension:plugin',
-  autoStart: true,
-  optional: [ISettingRegistry],
-  activate: (app: JupyterFrontEnd, settingRegistry: ISettingRegistry | null) => {
-    console.log('JupyterLab extension extension is activated!');
+
+async function activate (app: JupyterFrontEnd, settingRegistry: ISettingRegistry | null) {
+	console.log('JupyterLab extension extension is activated!');
 
     if (settingRegistry) {
       settingRegistry
@@ -37,7 +31,29 @@ const plugin: JupyterFrontEndPlugin<void> = {
           `The extension server extension appears to be missing.\n${reason}`
         );
       });
-  }
-};
+	  
+	const dataToSend = { name: 'MLProvCodeGen' };
+	try {
+		const reply = await requestAPI<any>('post_example', {
+		body: JSON.stringify(dataToSend),
+		method: 'POST'
+		});
+		console.log(reply);
+	} catch (reason) {
+		console.error(
+		`ERROR on post_example ${dataToSend}.\n${reason}`
+		);
+	}  
+  } 
+/**
+ * Initialization data for the extension extension.
+ */
+const plugin: JupyterFrontEndPlugin<void> = {
+  id: 'extension:plugin',
+  autoStart: true,
+  optional: [ISettingRegistry],
+  activate: activate
+}
+    
 
 export default plugin;

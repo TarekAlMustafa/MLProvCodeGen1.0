@@ -1,5 +1,22 @@
-/*
-    See the JupyterLab Developer Guide for useful CSS Patterns:
+<style>
+        fieldset{
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 2px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            padding: 0 .625em;
+        }
 
-    https://jupyterlab.readthedocs.io/en/stable/developer/css.html
-*/
+        label{
+            cursor: pointer;
+            display: inline-block;
+            padding: 3px 6px;
+            text-align: left;
+            width: 300px;
+            vertical-align: top;
+        }
+
+        input{
+            font-size: inherit;
+        }
