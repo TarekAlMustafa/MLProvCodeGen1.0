@@ -34,7 +34,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, setting
         );
       });
 	  
-	const dataToSend = { 'name': 'MLProvCodeGen1.0' };
+	const dataToSend = { 'name': 'MLProvCodeGen1.0' };  
 	try {
 		const reply = await requestAPI<any>('post_example', {
 		body: JSON.stringify(dataToSend),

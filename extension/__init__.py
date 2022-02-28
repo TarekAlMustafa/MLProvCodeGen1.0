@@ -45,5 +45,5 @@ load_jupyter_server_extension = _load_jupyter_server_extension
 
 # This is typically defined in the root `__init__.py`
 # file of the extension package.
-load_jupyter_server_extension = ExtensionApp.load_classic_server_extension
+load_jupyter_server_extension = _load_classic_server_extension
 
