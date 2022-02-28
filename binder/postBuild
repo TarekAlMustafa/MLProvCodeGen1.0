@@ -39,6 +39,9 @@ _(sys.executable, "-m", "pip", "check")
 # list the extensions
 _("jupyter", "server", "extension", "list")
 
+# enable this extension on Binder.org
+_("jupyter", "server", "extension", "enable", "extension")
+
 # initially list installed extensions to determine if there are any surprises
 _("jupyter", "labextension", "list")
 
