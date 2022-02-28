@@ -42,3 +42,6 @@ def _load_jupyter_server_extension(server_app):
 # For backward compatibility with notebook server - useful for Binder/JupyterHub
 load_jupyter_server_extension = _load_jupyter_server_extension
 
+# This is typically defined in the root `__init__.py`
+# file of the extension package.
+load_jupyter_server_extension = MyExtensionApp.load_classic_server_extension
