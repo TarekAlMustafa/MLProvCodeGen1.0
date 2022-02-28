@@ -41,7 +41,8 @@ _("jupyter", "server", "extension", "list")
 
 # enable this extension on Binder.org
 _("jupyter", "server", "extension", "enable", "extension")
-
+_("jupyter", "lab", "extension", "enable", "extension")
+_("jupyter", "nbextension", "enable", "extension")
 # initially list installed extensions to determine if there are any surprises
 _("jupyter", "labextension", "list")
 
