@@ -2,13 +2,15 @@ import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-
+import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
+import { Widget } from '@lumino/widgets';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
-
 import { requestAPI } from './handler';
 
+/* eslint-disable no-useless-escape */
 
-async function activate (app: JupyterFrontEnd, settingRegistry: ISettingRegistry | null) {
+
+async function activate (app: JupyterFrontEnd, palette: ICommandPalette, settingRegistry: ISettingRegistry | null) {
 	console.log('JupyterLab extension extension is activated!');
 
     if (settingRegistry) {
@@ -32,7 +34,7 @@ async function activate (app: JupyterFrontEnd, settingRegistry: ISettingRegistry
         );
       });
 	  
-	const dataToSend = { name: 'MLProvCodeGen' };
+	const dataToSend = { 'name': 'MLProvCodeGen1.0' };
 	try {
 		const reply = await requestAPI<any>('post_example', {
 		body: JSON.stringify(dataToSend),
@@ -43,7 +45,31 @@ async function activate (app: JupyterFrontEnd, settingRegistry: ISettingRegistry
 		console.error(
 		`ERROR on post_example ${dataToSend}.\n${reason}`
 		);
-	}  
+	}
+// ------------------------------------------------------------------------------------------------------------------------------- //
+  // Create a blank content widget inside of a MainAreaWidget
+  const content = new Widget();
+  const widget = new MainAreaWidget({ content });
+  widget.id = 'MLProvCodeGen-jupyterlab';
+  widget.title.label = 'MLProvCodeGen';
+  widget.title.closable = true;	
+// ------------------------------------------------------------------------------------------------------------------------------- //
+  // Add an application command
+  const command = 'codegenerator:open';
+  app.commands.addCommand(command, {
+    label: 'Code Generation from Provenance data',
+    execute: () => {
+      if (!widget.isAttached) {
+        // Attach content to the main work area if it's not there
+        app.shell.add(widget, 'main');
+      }
+      // Activate the widget
+      app.shell.activateById(widget.id);
+    }
+  });
+  // ------------------------------------------------------------------------------------------------------------------------------- //
+  // Add the command to the palette.
+  palette.addItem({ command, category: 'Tutorial' });	
   } 
 /**
  * Initialization data for the extension extension.
@@ -51,6 +77,7 @@ async function activate (app: JupyterFrontEnd, settingRegistry: ISettingRegistry
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'extension:plugin',
   autoStart: true,
+  requires: [ICommandPalette],
   optional: [ISettingRegistry],
   activate: activate
 }
