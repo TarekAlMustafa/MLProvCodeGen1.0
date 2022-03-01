@@ -12,7 +12,7 @@ import { requestAPI } from './handler';
 
 async function activate (app: JupyterFrontEnd, palette: ICommandPalette, settingRegistry: ISettingRegistry | null) {
 	console.log('JupyterLab extension extension is activated!');
-
+// setup and HTTP Request test; used to check if the server extension is enabled locally/ ob Binder
     if (settingRegistry) {
       settingRegistry
         .load(plugin.id)
@@ -115,15 +115,15 @@ switch (problemSubmit) {
 				`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
-      var frameworkButton = document.createElement('div');
-      content.node.appendChild(frameworkButton);
-      frameworkButton.innerHTML = `
+      var IC_frameworkButton = document.createElement('div');
+      content.node.appendChild(IC_frameworkButton);
+      IC_frameworkButton.innerHTML = `
 				<button id="inputButton" type="button"> Submit the framework </button> 
 				`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // After selecting the framework, the other input units pop up
       // event listener on that input is needed for that
-      frameworkButton.addEventListener('click', event => {
+      IC_frameworkButton.addEventListener('click', event => {
         // ------------------------------------------------------------------------------------------------------------------------------- //
         // if clause for each framework (frameworks require different inputs
         const frameworkSubmit = (<HTMLSelectElement>(
@@ -581,15 +581,15 @@ switch (problemSubmit) {
 					`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
-      var frameworkButton = document.createElement('div');
-      content.node.appendChild(frameworkButton);
-      frameworkButton.innerHTML = `
+      var Clustering_frameworkButton = document.createElement('div');
+      content.node.appendChild(Clustering_frameworkButton);
+      Clustering_frameworkButton.innerHTML = `
 				<button id="inputButton" type="button"> Submit the framework </button> 
 				`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // After selecting the framework, the other input units pop up
       // event listener on that input is needed for that
-      frameworkButton.addEventListener('click', event => {
+      Clustering_frameworkButton.addEventListener('click', event => {
         // ------------------------------------------------------------------------------------------------------------------------------- //
         // if clause for each framework (frameworks require different inputs
         const frameworkSubmit = (<HTMLSelectElement>(

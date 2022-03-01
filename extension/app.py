@@ -22,7 +22,7 @@ def app(code):
 
 
 
-    nbf.write(nb, 'MLProvCodeGen/userInputNotebook.ipynb')
+    nbf.write(nb, 'extension/userInputNotebook.ipynb')
 
     return code
 
@@ -43,7 +43,7 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
 """
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('MLProvCodeGen/jinjaTemplates/IC_pytorch')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/IC_pytorch')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
 # GET VARIABLES
     problemName = user_inputs['exercise']
@@ -110,7 +110,7 @@ Install required packages before running"""))
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
 
-    nbf.write(nb, 'MLProvCodeGen/ImageClassification_PyTorch.ipynb')
+    nbf.write(nb, 'extension/ImageClassification_PyTorch.ipynb')
     reply = {"greetings": "success"}
     return reply
 
@@ -132,7 +132,7 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
         """
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('MLProvCodeGen/jinjaTemplates/IC_scikit')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/IC_scikit')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
     # TODO: scikit template with 5 variables
     #   model variable might be really weird
@@ -194,7 +194,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'MLProvCodeGen/ImageClassification_Scikit.ipynb')
+    nbf.write(nb, 'extension/ImageClassification_Scikit.ipynb')
 
     reply = {"greetings": "success"}
 
@@ -211,7 +211,7 @@ def Clustering_scikit(user_inputs):
     text = """This is an auto-generated notebook."""
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('MLProvCodeGen/jinjaTemplates/scikitClustering')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/scikitClustering')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
     # add a cell for each step
     #pip installs:
@@ -265,7 +265,7 @@ def Clustering_scikit(user_inputs):
     #output = template.render(model_func = model_func, data_format = data_format)
 
     #nb['cells'].append(nbf.v4.new_code_cell(output))
-    nbf.write(nb, 'MLProvCodeGen/userInputNotebook.ipynb')
+    nbf.write(nb, 'extension/userInputNotebook.ipynb')
 
     reply = {"greetings": "success"}
 
@@ -277,7 +277,7 @@ def MS_scikit(user_inputs):
 
     nb['cells'] = []
 
-    file_loader = FileSystemLoader('MLProvCodeGen/jinjaTemplates/MS_scikit')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/MS_scikit')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
 # GET VARIABLES
     problemName = user_inputs['exercise']
@@ -342,7 +342,7 @@ Install required packages before running"""))
     output = template.render(visualization_tool = visualization_tool)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'MLProvCodeGen/ModelSelection_scikit.ipynb')
+    nbf.write(nb, 'extension/ModelSelection_scikit.ipynb')
 
     reply = {"greetings": "success"}
 
@@ -367,7 +367,7 @@ Original author: N. Janakiev https://github.com/njanakiev Twitter: https://twitt
 
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('MLProvCodeGen/jinjaTemplates/MulticlassClassification')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/MulticlassClassification')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
     ###Extract Variables from user_inputs
     dataset = user_inputs['dataset']
@@ -444,7 +444,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'MLProvCodeGen/MulticlassClassification.ipynb')
+    nbf.write(nb, 'extension/MulticlassClassification.ipynb')
 
 
     reply = {"greetings": "success"}
