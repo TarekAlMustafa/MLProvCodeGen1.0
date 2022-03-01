@@ -34,7 +34,7 @@ _(sys.executable, "-m", "pip", "install", "jupyter-packaging")
 _(sys.executable, "-m", "pip", "install", ".")
 _(sys.executable, "-m", "jupyter", "labextension", "develop", "--overwrite", ".")
 _(sys.executable, "-m", "jupyter", "server", "extension", "enable", "extension")
-_(sys.executable, "-m", "cd", "extension")
+#_(sys.executable, "-m", "cd", "extension")
 
 
 # verify the environment the extension didn't break anything
@@ -49,6 +49,7 @@ _("jupyter", "lab", "extension", "enable", "extension")
 _("jupyter", "nbextension", "enable", "extension")
 # initially list installed extensions to determine if there are any surprises
 _("jupyter", "labextension", "list")
+_("cd", "extension")
 
 
 print("JupyterLab with extension is ready to run with:\n")
