@@ -115,7 +115,7 @@ switch (problemSubmit) {
 				`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
-      const frameworkButton = document.createElement('div');
+      var frameworkButton = document.createElement('div');
       content.node.appendChild(frameworkButton);
       frameworkButton.innerHTML = `
 				<button id="inputButton" type="button"> Submit the framework </button> 
@@ -565,10 +565,10 @@ switch (problemSubmit) {
         // end on the frameworkButton event listener
       });
       // ------------------------------------------------------------------------------------------------------------------------------- //
-      break;
+      // endif problemSubmit, start clustering
  case 'Clustering':
       // ------------------------------------------------------------------------------------------------------------------------------- //
-      const clustering_framework = document.createElement('div');
+      var clustering_framework = document.createElement('div');
       content.node.appendChild(clustering_framework);
       clustering_framework.innerHTML = `
 					<form action="/action_page.php">
@@ -581,7 +581,7 @@ switch (problemSubmit) {
 					`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
-      const frameworkButton = document.createElement('div');
+      var frameworkButton = document.createElement('div');
       content.node.appendChild(frameworkButton);
       frameworkButton.innerHTML = `
 				<button id="inputButton" type="button"> Submit the framework </button> 
@@ -694,7 +694,6 @@ switch (problemSubmit) {
         // end on the frameworkButton event listener
       });
       // ------------------------------------------------------------------------------------------------------------------------------- //
-	break;
  case 'ModelSelection':
       // ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_framework = document.createElement('div');
@@ -985,9 +984,8 @@ switch (problemSubmit) {
       });
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // end of exercise selection if loop
-	break;
  case 'MulticlassClassification':
-      const clustering_framework = document.createElement('div');
+      var clustering_framework = document.createElement('div');
       content.node.appendChild(clustering_framework);
       clustering_framework.innerHTML = `
 					<form action="/action_page.php">
@@ -999,15 +997,15 @@ switch (problemSubmit) {
 					`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
-      const frameworkButton = document.createElement('div');
-      content.node.appendChild(frameworkButton);
-      frameworkButton.innerHTML = `
+      var MC_frameworkButton = document.createElement('div');
+      content.node.appendChild(MC_frameworkButton);
+      MC_frameworkButton.innerHTML = `
 					<button id="inputButton" type="button"> Submit the framework </button> 
 					`;
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // After selecting the framework, the other input units pop up
       // event listener on that input is needed for that
-      frameworkButton.addEventListener('click', event => {
+      MC_frameworkButton.addEventListener('click', event => {
         // ------------------------------------------------------------------------------------------------------------------------------- //
         // UI Inputs
         const dataHeader = document.createElement('div');
@@ -1241,10 +1239,10 @@ switch (problemSubmit) {
           }
         });
       });
-    } 
+     
     // ------------------------------------------------------------------------------------------------------------------------------- //
-    // end on the problemButton event listener
-  });  
+	} // end switch
+  });// end on the problemButton event listener
 // ------------------------------------------------------------------------------------------------------------------------------- //
   // Add an application command
   const command = 'codegenerator:open';
@@ -1262,7 +1260,8 @@ switch (problemSubmit) {
   // ------------------------------------------------------------------------------------------------------------------------------- //
   // Add the command to the palette.
   palette.addItem({ command, category: 'Tutorial' });	
-  } 
+}
+  
 /**
  * Initialization data for the extension extension.
  */
