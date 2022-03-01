@@ -349,6 +349,7 @@ Install required packages before running"""))
     return reply
 
 def MulticlassClassification(user_inputs):
+    _(sys.executable, "cd", "..")
     nb = nbf.v4.new_notebook()
 
     text = """

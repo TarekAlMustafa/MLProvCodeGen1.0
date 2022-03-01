@@ -49,7 +49,7 @@ _("jupyter", "lab", "extension", "enable", "extension")
 _("jupyter", "nbextension", "enable", "extension")
 # initially list installed extensions to determine if there are any surprises
 _("jupyter", "labextension", "list")
-_(sys.executable, "-m", "cd", "..")
+#_(sys.executable, "cd", "..")
 
 
 print("JupyterLab with extension is ready to run with:\n")
