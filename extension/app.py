@@ -367,7 +367,7 @@ Original author: N. Janakiev https://github.com/njanakiev Twitter: https://twitt
 
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('extension/jinjaTemplates/MulticlassClassification')
+    file_loader = FileSystemLoader('jinjaTemplates/MulticlassClassification')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
     ###Extract Variables from user_inputs
     dataset = user_inputs['dataset']
