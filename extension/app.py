@@ -350,7 +350,7 @@ Install required packages before running"""))
     return reply
 
 def MulticlassClassification(user_inputs):
-    #_(sys.executable, "cd", "..")
+    _(sys.executable, "cd", "..")
     nb = nbf.v4.new_notebook()
 
     text = """
@@ -369,7 +369,7 @@ Original author: N. Janakiev https://github.com/njanakiev Twitter: https://twitt
 
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('jinjaTemplates/MulticlassClassification')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/MulticlassClassification')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
     ###Extract Variables from user_inputs
     dataset = user_inputs['dataset']
