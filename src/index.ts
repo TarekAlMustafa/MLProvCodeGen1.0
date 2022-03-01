@@ -408,13 +408,13 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/MLProvCodeGen/ImageClassification_PyTorch.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/ImageClassification_PyTorch.ipynb')"> Open Notebook </button>  
 										`;
               }
               // ------------------------------------------------------------------------------------------------------------------------------- //
             } catch (reason) {
               console.error(
-                `Error on POST /MLProvCodeGen/ImageClassification_pytorch ${dataToSend}.\n${reason}`
+                `Error on POST /extension/ImageClassification_pytorch ${dataToSend}.\n${reason}`
               );
             }
           });
@@ -549,12 +549,12 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/MLProvCodeGen/ImageClassification_Scikit.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/ImageClassification_Scikit.ipynb')"> Open Notebook </button>  
 										`;
               }
             } catch (reason) {
               console.error(
-                `Error on POST /MLProvCodeGen/ImageClassification_scikit ${dataToSend}.\n${reason}`
+                `Error on POST /extension/ImageClassification_scikit ${dataToSend}.\n${reason}`
               );
             }
           });
@@ -679,12 +679,12 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/MLProvCodeGen/userInputNotebook.ipynb')"> Open Notebook </button>  
+									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/userInputNotebook.ipynb')"> Open Notebook </button>  
 									`;
               }
             } catch (reason) {
               console.error(
-                `Error on POST /MLProvCodeGen/Clustering_scikit ${dataToSend}.\n${reason}`
+                `Error on POST /extension/Clustering_scikit ${dataToSend}.\n${reason}`
               );
             }
           });
@@ -972,13 +972,13 @@ switch (problemSubmit) {
             const notebook_open = document.createElement('div');
             content.node.appendChild(notebook_open);
             notebook_open.innerHTML = `
-								<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/MLProvCodeGen/ModelSelection_scikit.ipynb')"> Open Notebook </button>  
+								<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/ModelSelection_scikit.ipynb')"> Open Notebook </button>  
 								`;
           }
           // ------------------------------------------------------------------------------------------------------------------------------- //
         } catch (reason) {
           console.error(
-            `Error on POST /MLProvCodeGen/ModelSelection_scikit ${dataToSend}.\n${reason}`
+            `Error on POST /extension/ModelSelection_scikit ${dataToSend}.\n${reason}`
           );
         }
       });
@@ -1228,13 +1228,13 @@ switch (problemSubmit) {
               const notebook_open = document.createElement('div');
               content.node.appendChild(notebook_open);
               notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/MLProvCodeGen/MulticlassClassification.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/MulticlassClassification.ipynb')"> Open Notebook </button>  
 										`;
             }
             // ------------------------------------------------------------------------------------------------------------------------------- //
-          } catch (reason) {
+          } catch (reason) { 
             console.error(
-              `Error on POST /MLProvCodeGen/MulticlassClassification ${dataToSend}.\n${reason}`
+              `Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
             );
           }
         });
