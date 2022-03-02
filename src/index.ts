@@ -566,6 +566,7 @@ switch (problemSubmit) {
       });
       // ------------------------------------------------------------------------------------------------------------------------------- //
       // endif problemSubmit, start clustering
+	  break;
  case 'Clustering':
       // ------------------------------------------------------------------------------------------------------------------------------- //
       var clustering_framework = document.createElement('div');
@@ -693,6 +694,7 @@ switch (problemSubmit) {
         // ------------------------------------------------------------------------------------------------------------------------------- //
         // end on the frameworkButton event listener
       });
+	  break;
       // ------------------------------------------------------------------------------------------------------------------------------- //
  case 'ModelSelection':
       // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -981,9 +983,8 @@ switch (problemSubmit) {
             `Error on POST /extension/ModelSelection_scikit ${dataToSend}.\n${reason}`
           );
         }
-      });
-      // ------------------------------------------------------------------------------------------------------------------------------- //
-      // end of exercise selection if loop
+      }); // end of SubmitButton event listener
+	break;
  case 'MulticlassClassification':
       var clustering_framework = document.createElement('div');
       content.node.appendChild(clustering_framework);
@@ -995,18 +996,18 @@ switch (problemSubmit) {
 						</select>
 					</form>	
 					`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
       var MC_frameworkButton = document.createElement('div');
       content.node.appendChild(MC_frameworkButton);
       MC_frameworkButton.innerHTML = `
 					<button id="inputButton" type="button"> Submit the framework </button> 
 					`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       // After selecting the framework, the other input units pop up
       // event listener on that input is needed for that
       MC_frameworkButton.addEventListener('click', event => {
-        // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
         // UI Inputs
         const dataHeader = document.createElement('div');
         content.node.appendChild(dataHeader);
@@ -1148,7 +1149,7 @@ switch (problemSubmit) {
 						<button id="inputButton" type="button"> Submit your values </button>  
 						`;
         submitButton.addEventListener('click', async event => {
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           // Get Variables
           const exercise = (<HTMLSelectElement>(
             document.getElementById('exercise')
@@ -1194,7 +1195,7 @@ switch (problemSubmit) {
           } else {
             use_gpu = 0;
           }
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           // convert variables into JSON/ input Object
           const objBody = {
             exercise: exercise,
@@ -1218,7 +1219,7 @@ switch (problemSubmit) {
               method: 'POST'
             });
             console.log(reply);
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             if (reply['greetings'] === 'success') {
               const success_message = document.createElement('text');
               content.node.appendChild(success_message);
@@ -1228,19 +1229,18 @@ switch (problemSubmit) {
               const notebook_open = document.createElement('div');
               content.node.appendChild(notebook_open);
               notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/MulticlassClassification.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/extension/MulticlassClassification.ipynb')"> Open Notebook </button>  
 										`;
             }
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           } catch (reason) { 
             console.error(
               `Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
             );
           }
-        });
-      });
-     
-    // ------------------------------------------------------------------------------------------------------------------------------- //
+        }); // end of SubmitButton event listener
+      }); // end of FrameworkButton event listener
+    break;
 	} // end switch
   });// end on the problemButton event listener
 // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -1257,14 +1257,11 @@ switch (problemSubmit) {
       app.shell.activateById(widget.id);
     }
   });
-  // ------------------------------------------------------------------------------------------------------------------------------- //
   // Add the command to the palette.
   palette.addItem({ command, category: 'Tutorial' });	
 }
-  
-/**
- * Initialization data for the extension extension.
- */
+// ------------------------------------------------------------------------------------------------------------------------------- //  
+// Main
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'extension:plugin',
   autoStart: true,
