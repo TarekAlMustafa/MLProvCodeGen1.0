@@ -1229,7 +1229,7 @@ switch (problemSubmit) {
               const notebook_open = document.createElement('div');
               content.node.appendChild(notebook_open);
               notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/extension/MulticlassClassification.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/MulticlassClassification.ipynb')"> Open Notebook </button>  
 										`;
             }
 // ------------------------------------------------------------------------------------------------------------------------------- //
