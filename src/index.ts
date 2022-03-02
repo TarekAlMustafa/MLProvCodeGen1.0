@@ -93,7 +93,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, setting
   // After selecting the problem, the other input units pop up
   // event listener on that input is needed for that
   problemButton.addEventListener('click', event => {
-    // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
     // if clause for each framework (frameworks require different inputs
     const problemSubmit = (<HTMLSelectElement>(
       document.getElementById('exercise')
@@ -101,7 +101,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, setting
 	
 switch (problemSubmit) {
     case 'ImageClassification':
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const dropdown2 = document.createElement('div');
       content.node.appendChild(dropdown2);
       dropdown2.innerHTML = `
@@ -113,24 +113,24 @@ switch (problemSubmit) {
 					</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
       var IC_frameworkButton = document.createElement('div');
       content.node.appendChild(IC_frameworkButton);
       IC_frameworkButton.innerHTML = `
 				<button id="inputButton" type="button"> Submit the framework </button> 
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       // After selecting the framework, the other input units pop up
       // event listener on that input is needed for that
       IC_frameworkButton.addEventListener('click', event => {
-        // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
         // if clause for each framework (frameworks require different inputs
         const frameworkSubmit = (<HTMLSelectElement>(
           document.getElementById('framework')
         )).value;
         if (frameworkSubmit === 'PyTorch') {
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const dropdown3 = document.createElement('div');
           content.node.appendChild(dropdown3);
           dropdown3.innerHTML = `
@@ -144,7 +144,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const numberInput1 = document.createElement('div');
           content.node.appendChild(numberInput1);
           numberInput1.innerHTML = `
@@ -154,7 +154,7 @@ switch (problemSubmit) {
 							Default: 1000 classes for training on ImageNet
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const checkbox1 = document.createElement('div');
           content.node.appendChild(checkbox1);
           checkbox1.innerHTML = `
@@ -163,7 +163,7 @@ switch (problemSubmit) {
 							<label for="preTrainedModel"> Do you want to use a pre trained model?</label><br>
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const dropdown4 = document.createElement('div');
           content.node.appendChild(dropdown4);
           dropdown4.innerHTML = `
@@ -176,7 +176,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const dropdown5 = document.createElement('div');
           content.node.appendChild(dropdown5);
           dropdown5.innerHTML = `
@@ -189,9 +189,9 @@ switch (problemSubmit) {
 						</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
-          // add pre processing text
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
+// add pre processing text
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const checkbox2 = document.createElement('div');
           content.node.appendChild(checkbox2);
           checkbox2.innerHTML = `
@@ -200,7 +200,7 @@ switch (problemSubmit) {
 							<label for="useGPU"> Use GPU if available? </label><br>
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const checkbox3 = document.createElement('div');
           content.node.appendChild(checkbox3);
           checkbox3.innerHTML = `
@@ -209,7 +209,7 @@ switch (problemSubmit) {
 							<label for="modelCheckpoint"> Save model checkpoint each epoch?</label><br>
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const dropdown6 = document.createElement('div');
           content.node.appendChild(dropdown6);
           dropdown6.innerHTML = `
@@ -221,7 +221,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const dropdown7 = document.createElement('div');
           content.node.appendChild(dropdown7);
           dropdown7.innerHTML = `
@@ -237,7 +237,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const numberInput2 = document.createElement('div');
           content.node.appendChild(numberInput2);
           numberInput2.innerHTML = `
@@ -246,7 +246,7 @@ switch (problemSubmit) {
 							<input type="number" id="rate" name="rate" value="0.001">
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const numberInput3 = document.createElement('div');
           content.node.appendChild(numberInput3);
           numberInput3.innerHTML = `
@@ -255,7 +255,7 @@ switch (problemSubmit) {
 							<input type="number" id="batches" name="batches" value="128">
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const numberInput4 = document.createElement('div');
           content.node.appendChild(numberInput4);
           numberInput4.innerHTML = `
@@ -264,7 +264,7 @@ switch (problemSubmit) {
 							<input type="number" id="epochs" name="epochs" value="3">
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const numberInput5 = document.createElement('div');
           content.node.appendChild(numberInput5);
           numberInput5.innerHTML = `
@@ -273,7 +273,7 @@ switch (problemSubmit) {
 							<input type="number" id="printProgress" name="printProgress" value="1">
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const dropdown8 = document.createElement('div');
           content.node.appendChild(dropdown8);
           dropdown8.innerHTML = `
@@ -288,13 +288,13 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const submitButton = document.createElement('div');
           content.node.appendChild(submitButton);
           submitButton.innerHTML = `
 						<button id="inputButton" type="button"> Submit your values </button>  
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           submitButton.addEventListener('click', async event => {
             // dropdowns
             const exerciseValue = (<HTMLSelectElement>(
@@ -364,7 +364,7 @@ switch (problemSubmit) {
             } else {
               modelCheckpointValue = 0;
             }
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             // convert variables into JSON/ input Object
             const objBody = {
               // dropdowns
@@ -387,7 +387,7 @@ switch (problemSubmit) {
               use_GPU: useGPUValue,
               model_checkpoint: modelCheckpointValue
             };
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             // Post request with input data
             try {
               const reply = await requestAPI<any>(
@@ -398,7 +398,7 @@ switch (problemSubmit) {
                 }
               );
               console.log(reply);
-              // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
               if (reply['greetings'] === 'success') {
                 const success_message = document.createElement('text');
                 content.node.appendChild(success_message);
@@ -408,23 +408,21 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/ImageClassification_PyTorch.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/ImageClassification_PyTorch.ipynb')"> Open Notebook </button>  
 										`;
               }
-              // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             } catch (reason) {
               console.error(
                 `Error on POST /extension/ImageClassification_pytorch ${dataToSend}.\n${reason}`
               );
             }
-          });
-          // ------------------------------------------------------------------------------------------------------------------------------- //
-          // End on the frameworkButton event listener  AND end of if
-        }
-        // ------------------------------------------------------------------------------------------------------------------------------- //
+          }); // end of submitButton event listener
+        } // end if for framework selection
+// ------------------------------------------------------------------------------------------------------------------------------- //
         // else for image classification --> scikit-learn
         else if (frameworkSubmit === 'scikit-learn') {
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const scikit_model = document.createElement('div');
           content.node.appendChild(scikit_model);
           scikit_model.innerHTML = `
@@ -439,7 +437,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const scikit_input_data = document.createElement('div');
           content.node.appendChild(scikit_input_data);
           scikit_input_data.innerHTML = `
@@ -451,7 +449,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const checkbox1 = document.createElement('div');
           content.node.appendChild(checkbox1);
           checkbox1.innerHTML = `
@@ -460,7 +458,7 @@ switch (problemSubmit) {
 							<label for="scale_mean_std"> Scale to mean 0, std1 </label><br>
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const scikit_visualization = document.createElement('div');
           content.node.appendChild(scikit_visualization);
           scikit_visualization.innerHTML = `
@@ -473,7 +471,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const cometAPIKey = document.createElement('div');
           content.node.appendChild(cometAPIKey);
           cometAPIKey.innerHTML = `
@@ -482,7 +480,7 @@ switch (problemSubmit) {
 							<input type="text" id="APIKey" name="APIKey">
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const cometName = document.createElement('div');
           content.node.appendChild(cometName);
           cometName.innerHTML = `
@@ -491,13 +489,13 @@ switch (problemSubmit) {
 							<input type="text" id="cometName" name="cometName">
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const submitButton = document.createElement('div');
           content.node.appendChild(submitButton);
           submitButton.innerHTML = `
 						<button id="inputButton" type="button"> Submit your values </button>  
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           submitButton.addEventListener('click', async event => {
             // var setup
             const model_func = (<HTMLSelectElement>(
@@ -518,7 +516,7 @@ switch (problemSubmit) {
             const cometName = (<HTMLInputElement>(
               document.getElementById('cometName')
             )).value;
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             // convert variables into JSON/ input Object
             const objBody = {
               // dropdowns
@@ -529,7 +527,7 @@ switch (problemSubmit) {
               cometAPIKey: cometAPIKey,
               cometName: cometName
             };
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             // Post request with input data
             try {
               const reply = await requestAPI<any>(
@@ -549,7 +547,7 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/ImageClassification_Scikit.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/ImageClassification_Scikit.ipynb')"> Open Notebook </button>  
 										`;
               }
             } catch (reason) {
@@ -557,18 +555,12 @@ switch (problemSubmit) {
                 `Error on POST /extension/ImageClassification_scikit ${dataToSend}.\n${reason}`
               );
             }
-          });
-          // ------------------------------------------------------------------------------------------------------------------------------- //
-          // endif
-        }
-        // ------------------------------------------------------------------------------------------------------------------------------- //
-        // end on the frameworkButton event listener
-      });
-      // ------------------------------------------------------------------------------------------------------------------------------- //
-      // endif problemSubmit, start clustering
+          }); // end of submitButton event listener
+        } // endif for framework selection 
+      }); // end of frameworkButton event listener
 	  break;
  case 'Clustering':
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       var clustering_framework = document.createElement('div');
       content.node.appendChild(clustering_framework);
       clustering_framework.innerHTML = `
@@ -580,24 +572,24 @@ switch (problemSubmit) {
 						</select>
 					</form>	
 					`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       // submit button for framework selection
       var Clustering_frameworkButton = document.createElement('div');
       content.node.appendChild(Clustering_frameworkButton);
       Clustering_frameworkButton.innerHTML = `
 				<button id="inputButton" type="button"> Submit the framework </button> 
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       // After selecting the framework, the other input units pop up
       // event listener on that input is needed for that
       Clustering_frameworkButton.addEventListener('click', event => {
-        // ------------------------------------------------------------------------------------------------------------------------------- //
-        // if clause for each framework (frameworks require different inputs
+// ------------------------------------------------------------------------------------------------------------------------------- //
+        // if clause for each framework (frameworks require different inputs)
         const frameworkSubmit = (<HTMLSelectElement>(
           document.getElementById('framework')
         )).value;
         if (frameworkSubmit === 'scikit-learn') {
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const scikit_model = document.createElement('div');
           content.node.appendChild(scikit_model);
           scikit_model.innerHTML = `
@@ -610,7 +602,7 @@ switch (problemSubmit) {
 							</select>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const scikit_data_format = document.createElement('div');
           content.node.appendChild(scikit_data_format);
           scikit_data_format.innerHTML = `
@@ -626,7 +618,7 @@ switch (problemSubmit) {
 							<p><i> If you want to use your own data then select the corresponding option here and follow the instructions in the generated notebook. <\i><\p>
 						</form>	
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const preprocessing_check = document.createElement('div');
           content.node.appendChild(preprocessing_check);
           preprocessing_check.innerHTML = `
@@ -635,15 +627,15 @@ switch (problemSubmit) {
 							<label for="preprocessing"> Use a Min-Max-Scaler? (Recommended) </label><br>
 						</form>
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           const submitButton = document.createElement('div');
           content.node.appendChild(submitButton);
           submitButton.innerHTML = `
 						<button id="inputButton" type="button"> Submit your values </button>  
 						`;
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           submitButton.addEventListener('click', async event => {
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             // var setup
             const model_func = (<HTMLSelectElement>(
               document.getElementById('model_func')
@@ -654,7 +646,7 @@ switch (problemSubmit) {
             const preprocessing = (<HTMLInputElement>(
               document.getElementById('preprocessing')
             )).checked;
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             // convert variables into JSON/ input Object
             const objBody = {
               // dropdowns
@@ -662,7 +654,7 @@ switch (problemSubmit) {
               data_format: data_format,
               preprocessing: preprocessing
             };
-            // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
             // Post request with input data
             try {
               const reply = await requestAPI<any>('Clustering_scikit', {
@@ -680,7 +672,7 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/userInputNotebook.ipynb')"> Open Notebook </button>  
+									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/userInputNotebook.ipynb')"> Open Notebook </button>  
 									`;
               }
             } catch (reason) {
@@ -688,16 +680,12 @@ switch (problemSubmit) {
                 `Error on POST /extension/Clustering_scikit ${dataToSend}.\n${reason}`
               );
             }
-          });
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+          }); // end of submitButton event listener
         } //else if (frameworkSubmit === 'PyTorch') {}
-        // ------------------------------------------------------------------------------------------------------------------------------- //
-        // end on the frameworkButton event listener
-      });
+      }); // end of frameworkButton event listener
 	  break;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
  case 'ModelSelection':
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_framework = document.createElement('div');
       content.node.appendChild(MS_framework);
       MS_framework.innerHTML = `
@@ -708,7 +696,7 @@ switch (problemSubmit) {
 					</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_model = document.createElement('div');
       content.node.appendChild(MS_model);
       MS_model.innerHTML = `
@@ -721,7 +709,7 @@ switch (problemSubmit) {
 					</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const classes = document.createElement('div');
       content.node.appendChild(classes);
       classes.innerHTML = `
@@ -731,7 +719,7 @@ switch (problemSubmit) {
 					Default: 1000 classes for training on ImageNet
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const preTrainedModel = document.createElement('div');
       content.node.appendChild(preTrainedModel);
       preTrainedModel.innerHTML = `
@@ -740,7 +728,7 @@ switch (problemSubmit) {
 					<label for="preTrainedModel"> Do you want to use a pre trained model?</label><br>
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_data_format = document.createElement('div');
       content.node.appendChild(MS_data_format);
       MS_data_format.innerHTML = `
@@ -753,7 +741,7 @@ switch (problemSubmit) {
 					</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_dataset = document.createElement('div');
       content.node.appendChild(MS_dataset);
       MS_dataset.innerHTML = `
@@ -765,9 +753,9 @@ switch (problemSubmit) {
 				</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
-      // add pre processing text
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
+// add pre processing text
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const GPU = document.createElement('div');
       content.node.appendChild(GPU);
       GPU.innerHTML = `
@@ -776,7 +764,7 @@ switch (problemSubmit) {
 					<label for="useGPU"> Use GPU if available? </label><br>
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const modelCheckpoint = document.createElement('div');
       content.node.appendChild(modelCheckpoint);
       modelCheckpoint.innerHTML = `
@@ -785,7 +773,7 @@ switch (problemSubmit) {
 					<label for="modelCheckpoint"> Save model checkpoint each epoch?</label><br>
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_loss = document.createElement('div');
       content.node.appendChild(MS_loss);
       MS_loss.innerHTML = `
@@ -797,7 +785,7 @@ switch (problemSubmit) {
 					</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_optimizer = document.createElement('div');
       content.node.appendChild(MS_optimizer);
       MS_optimizer.innerHTML = `
@@ -813,7 +801,7 @@ switch (problemSubmit) {
 					</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const lr = document.createElement('div');
       content.node.appendChild(lr);
       lr.innerHTML = `
@@ -822,7 +810,7 @@ switch (problemSubmit) {
 					<input type="number" id="rate" name="rate" value="0.001">
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const batches = document.createElement('div');
       content.node.appendChild(batches);
       batches.innerHTML = `
@@ -831,7 +819,7 @@ switch (problemSubmit) {
 					<input type="number" id="batches" name="batches" value="128">
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const epochs = document.createElement('div');
       content.node.appendChild(epochs);
       epochs.innerHTML = `
@@ -840,7 +828,7 @@ switch (problemSubmit) {
 					<input type="number" id="epochs" name="epochs" value="3">
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const printProgress = document.createElement('div');
       content.node.appendChild(printProgress);
       printProgress.innerHTML = `
@@ -849,7 +837,7 @@ switch (problemSubmit) {
 					<input type="number" id="printProgress" name="printProgress" value="1">
 				</form>
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const MS_visualization_tool = document.createElement('div');
       content.node.appendChild(MS_visualization_tool);
       MS_visualization_tool.innerHTML = `
@@ -864,7 +852,7 @@ switch (problemSubmit) {
 					</select>
 				</form>	
 				`;
-      // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
       const submitButton = document.createElement('div');
       content.node.appendChild(submitButton);
       submitButton.innerHTML = `
@@ -933,7 +921,7 @@ switch (problemSubmit) {
         } else {
           modelCheckpointValue = 0;
         }
-        // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
         // convert variables into JSON/ input Object
         const objBody = {
           // dropdowns
@@ -956,7 +944,7 @@ switch (problemSubmit) {
           use_GPU: useGPUValue,
           model_checkpoint: modelCheckpointValue
         };
-        // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
         // Post request with input data
         try {
           const reply = await requestAPI<any>('ModelSelection_scikit', {
@@ -964,7 +952,7 @@ switch (problemSubmit) {
             method: 'POST'
           });
           console.log(reply);
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
           if (reply['greetings'] === 'success') {
             const success_message = document.createElement('text');
             content.node.appendChild(success_message);
@@ -974,10 +962,10 @@ switch (problemSubmit) {
             const notebook_open = document.createElement('div');
             content.node.appendChild(notebook_open);
             notebook_open.innerHTML = `
-								<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/notebooks/extension/ModelSelection_scikit.ipynb')"> Open Notebook </button>  
+								<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/ModelSelection_scikit.ipynb')"> Open Notebook </button>  
 								`;
           }
-          // ------------------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------------- //
         } catch (reason) {
           console.error(
             `Error on POST /extension/ModelSelection_scikit ${dataToSend}.\n${reason}`
@@ -1229,7 +1217,7 @@ switch (problemSubmit) {
               const notebook_open = document.createElement('div');
               content.node.appendChild(notebook_open);
               notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/extension/MulticlassClassification.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
 										`;
             }
 // ------------------------------------------------------------------------------------------------------------------------------- //
