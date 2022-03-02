@@ -6,11 +6,12 @@ import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
 import { Widget } from '@lumino/widgets';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { requestAPI } from './handler';
+import { ILauncher } from '@jupyterlab/launcher';
 
 /* eslint-disable no-useless-escape */
 
 
-async function activate (app: JupyterFrontEnd, palette: ICommandPalette, settingRegistry: ISettingRegistry | null) {
+async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launcher: ILauncher, settingRegistry: ISettingRegistry | null) {
 	console.log('JupyterLab extension extension is activated!');
 // setup and HTTP Request test; used to check if the server extension is enabled locally/ ob Binder
     if (settingRegistry) {
@@ -1246,14 +1247,15 @@ switch (problemSubmit) {
     }
   });
   // Add the command to the palette.
-  palette.addItem({ command, category: 'Tutorial' });	
+	palette.addItem({ command, category: 'MLProvCodeGen' });	
+	launcher.add({ command, category: 'Other', rank: 0 });
 }
 // ------------------------------------------------------------------------------------------------------------------------------- //  
 // Main
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'extension:plugin',
   autoStart: true,
-  requires: [ICommandPalette],
+  requires: [ICommandPalette, ILauncher],
   optional: [ISettingRegistry],
   activate: activate
 }
