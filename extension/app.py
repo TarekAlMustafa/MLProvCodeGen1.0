@@ -23,7 +23,7 @@ def app(code):
 
 
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/userInputNotebook.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/userInputNotebook.ipynb')
 
     return code
 
@@ -111,7 +111,7 @@ Install required packages before running"""))
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/ImageClassification_PyTorch.ipynb')
     reply = {"greetings": "success"}
     return reply
 
@@ -195,7 +195,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/ImageClassification_Scikit.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/ImageClassification_Scikit.ipynb')
 
     reply = {"greetings": "success"}
 
@@ -266,7 +266,7 @@ def Clustering_scikit(user_inputs):
     #output = template.render(model_func = model_func, data_format = data_format)
 
     #nb['cells'].append(nbf.v4.new_code_cell(output))
-    nbf.write(nb, 'extension/GeneratedNotebooks/userInputNotebook.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/userInputNotebook.ipynb')
 
     reply = {"greetings": "success"}
 
@@ -343,7 +343,7 @@ Install required packages before running"""))
     output = template.render(visualization_tool = visualization_tool)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/ModelSelection_scikit.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/ModelSelection_scikit.ipynb')
 
     reply = {"greetings": "success"}
 
@@ -446,7 +446,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/MulticlassClassification.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/MulticlassClassification.ipynb')
 
 
     reply = {"greetings": "success"}
