@@ -408,7 +408,7 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/ImageClassification_PyTorch.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/ImageClassification_PyTorch.ipynb')"> Open Notebook </button>  
 										`;
               }
 // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -547,7 +547,7 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/ImageClassification_Scikit.ipynb')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/ImageClassification_Scikit.ipynb')"> Open Notebook </button>  
 										`;
               }
             } catch (reason) {
@@ -672,7 +672,7 @@ switch (problemSubmit) {
                 const notebook_open = document.createElement('div');
                 content.node.appendChild(notebook_open);
                 notebook_open.innerHTML = `
-									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/userInputNotebook.ipynb')"> Open Notebook </button>  
+									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/userInputNotebook.ipynb')"> Open Notebook </button>  
 									`;
               }
             } catch (reason) {
@@ -962,7 +962,7 @@ switch (problemSubmit) {
             const notebook_open = document.createElement('div');
             content.node.appendChild(notebook_open);
             notebook_open.innerHTML = `
-								<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/ModelSelection_scikit.ipynb')"> Open Notebook </button>  
+								<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/ModelSelection_scikit.ipynb')"> Open Notebook </button>  
 								`;
           }
 // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -1217,7 +1217,7 @@ switch (problemSubmit) {
               const notebook_open = document.createElement('div');
               content.node.appendChild(notebook_open);
               notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
 										`;
             }
 // ------------------------------------------------------------------------------------------------------------------------------- //
