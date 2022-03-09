@@ -352,7 +352,12 @@ Install required packages before running"""))
 def MulticlassClassification(user_inputs):
     #_(sys.executable, "cd", "..")
     nb = nbf.v4.new_notebook()
-
+    #write provenance data to file 
+    #f = open("provenanceText.txt", "w")
+    #json_object = json.dumps(user_inputs, indent = 4) 
+    #f.write(json_object)
+    #f.close()
+    
     text = """
 # Multiclass Classification
 
@@ -447,7 +452,7 @@ Install required packages before running"""))
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     nbf.write(nb, 'extension/GeneratedNotebooks/MulticlassClassification.ipynb')
-
+    
 
     reply = {"greetings": "success"}
     return reply

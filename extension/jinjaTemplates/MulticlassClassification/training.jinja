@@ -16,7 +16,7 @@ y_test  = Variable(y_test).long()
 loss_list     = np.zeros((EPOCHS,))
 accuracy_list = np.zeros((EPOCHS,))
 
-for epoch in tqdm.trange(EPOCHS):
+for epoch in trange(EPOCHS):
     y_pred = model(X_train)
     loss = loss_fn(y_pred, y_train)
     loss_list[epoch] = loss.item()

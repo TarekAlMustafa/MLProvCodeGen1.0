@@ -1,4 +1,6 @@
-#pip install numpy torch torchvision pytorch-ignite{% if visualization_tool == "Tensorboard" %} tensorboardX tensorboard{% endif %}{% if visualization_tool == "Weights & Biases" %} wandb{% endif %}{% if visualization_tool == "comet.ml" %} comet_ml{% endif %}{% if visualization_tool == "Aim" %} aim{% endif %}
+#pip install numpy===1.22.2 ipywidgets torch torchvision===0.11.3 pytorch-ignite{% if visualization_tool == "Tensorboard" %} tensorboardX tensorboard{% endif %}{% if visualization_tool == "Weights & Biases" %} wandb{% endif %}{% if visualization_tool == "comet.ml" %} comet_ml{% endif %}{% if visualization_tool == "Aim" %} aim{% endif %}
+
+#torch currently not supported with python 3.10, downgrading to python 3.9.7 possibly required
 {% if visualization_tool == "Weights & Biases" %}
 
 # Also, you need to login to Weights & Biases on the terminal:
