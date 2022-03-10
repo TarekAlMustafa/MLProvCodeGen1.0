@@ -30,3 +30,10 @@ for epoch in trange(EPOCHS):
         y_pred = model(X_test)
         correct = (torch.argmax(y_pred, dim=1) == y_test).type(torch.FloatTensor)
         accuracy_list[epoch] = correct.mean()
+		
+def set_training():
+    training = {
+    "epochs" : EPOCHS,
+	"hierarchical_summary" : hierarchical_summary(model, print_summary = False) }
+    
+    return training

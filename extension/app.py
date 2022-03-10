@@ -352,11 +352,6 @@ Install required packages before running"""))
 def MulticlassClassification(user_inputs):
     #_(sys.executable, "cd", "..")
     nb = nbf.v4.new_notebook()
-    #write provenance data to file 
-    #f = open("provenanceText.txt", "w")
-    #json_object = json.dumps(user_inputs, indent = 4) 
-    #f.write(json_object)
-    #f.close()
     
     text = """
 # Multiclass Classification
@@ -402,7 +397,13 @@ Install required packages before running"""))
     template = env.get_template('imports.jinja')
     output = template.render(dataset = dataset)
     nb['cells'].append(nbf.v4.new_code_cell(output))
-
+    
+    #provenance (experiment, hardware, packages
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Provenance Data """))
+    template = env.get_template('provenanceInit.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
     #dataIngestion
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Ingestion"""))
     template = env.get_template('dataIngestion.jinja')
@@ -448,6 +449,18 @@ Install required packages before running"""))
     #ROC
     nb['cells'].append(nbf.v4.new_markdown_cell("""### ROC"""))
     template = env.get_template('ROC.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+
+    #Generate Provenance Data
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Generate Provenance Data"""))
+    template = env.get_template('GenerateProvenanceData.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #Write Provenance Data
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Write Provenance Data"""))
+    template = env.get_template('WriteProvenanceData.jinja')
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 

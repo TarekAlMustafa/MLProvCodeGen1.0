@@ -29,4 +29,14 @@ optimizer = {{ optimizer }}model.parameters())
 optimizer = {{ optimizer }}model.parameters(), lr={{ lr }})
 {% endif %}
 loss_fn   = {{ loss_func }}
+
+def set_model_parameters():
+    model_parameters = {
+        "gpu_enable" : {{ use_gpu }},
+        "modelParameters" : str(model),
+        "loss_function" : '{{ loss_func }}',
+        "optimizer" : str(optimizer),
+        "activation_function": '{{ activation_func }}' }
+    return model_parameters
+
 model

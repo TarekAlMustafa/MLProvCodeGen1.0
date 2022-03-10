@@ -6,3 +6,10 @@ ax1.set_ylabel("validation accuracy")
 ax2.plot(loss_list)
 ax2.set_ylabel("validation loss")
 ax2.set_xlabel("epochs");
+
+def set_evaluation():
+    evaluation = {
+    "accuracy": accuracy_list[(len(accuracy_list)-1)],
+    "loss": loss_list[(len(loss_list)-1)]}
+    
+    return evaluation

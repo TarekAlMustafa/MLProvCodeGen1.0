@@ -1,0 +1,38 @@
+def set_experiment_info() : 
+    created_by = "Tarek Al Mustafa"
+    email = "tarek.almustafa@uni-jena.de"
+    title = "Multiclass Classification"
+    creation_date = str(date.today())
+    
+    experiment_info = { 
+            'author': created_by,
+            'email': email,
+            'title': title,
+            'creation_date': creation_date }
+    
+    return experiment_info
+
+def set_hardware_info():
+    hardware_info = {
+        "cpu": "Intel Core i7",
+        "memory": "8 GB",
+        "hdType": "SSD",
+        "cache": '6M',
+        "os": "OSX El Capitan 10.11.5",
+        "video": "Nvidia GForce 630M" }
+    
+    return hardware_info
+
+def set_packages():
+    packages = {
+        "python" : "python===3.9.7",
+        "numpy" : "numpy===1.22.2",
+        "pandas" : "pandas===1.3.3",
+        "matplotlib" : "matplotlib===3.5.1",
+        "sklearn" : "sklearn==0.0",
+        "torch" : "torch===1.8.0",
+        "tqdm" : "tqdm===4.60.0",
+        "ipywidgets" : "ipywidgets===7.6.5",
+		"pytorch_model_summary" : "pytorch-model-summary===0.1.2" }
+    
+    return packages

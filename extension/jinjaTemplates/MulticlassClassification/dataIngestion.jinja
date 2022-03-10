@@ -64,3 +64,12 @@ y = torch.tensor(df['target'].values)
 y = y-1
 y
 {% endif %}
+
+def set_data_ingestion():
+    data_ingestion = {
+        "dataset_id" : '{{ dataset }}',
+        "output_dimensions" : output_dim,
+        "samples_total" : len(X),
+        "feature_dimensions" : len(feature_names) }
+    
+    return data_ingestion

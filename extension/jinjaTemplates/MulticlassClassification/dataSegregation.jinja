@@ -1,3 +1,12 @@
 # Data Segregation
 X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size={{ test_split }}, random_state={{ random_seed }})
+	
+def set_data_segregation():
+    data_segregation = {
+        "segregation_method" : "sklearn.model_selection.train_test_split",
+        "test_size" : {{ test_split }},
+        "train_size" : 1-{{ test_split }},
+        "random_state" : {{ random_seed }} }
+    
+    return data_segregation
