@@ -1,4 +1,8 @@
-with open('../GeneratedProvenanceData/TestGen.json', 'w') as prov_file:
+timestring = time.strftime('%Y%m%d-%H%M%S')
+timestring
+ProvenanceName = ('Provenance_MulticlassClassification_' + timestring + '.json')
+
+with open('../GeneratedProvenanceData/'+ProvenanceName, 'w') as prov_file:
     prov_file.write('{' + '\n  ')
     prov_file.write('"experiment info":' + json.dumps(set_experiment_info(),sort_keys=False, indent=4) +',' + '\n\n' )
     prov_file.write('"hardware info":' + json.dumps(set_hardware_info(),sort_keys=False, indent=4) +',' + '\n\n' )

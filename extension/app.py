@@ -463,8 +463,15 @@ Install required packages before running"""))
     template = env.get_template('WriteProvenanceData.jinja')
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #Open Provenance Data Button
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Show Provenance Data"""))
+    template = env.get_template('OpenProvenanceData.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
 
     nbf.write(nb, 'GeneratedNotebooks/MulticlassClassification.ipynb')
+    
     
 
     reply = {"greetings": "success"}

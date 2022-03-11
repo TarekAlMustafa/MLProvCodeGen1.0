@@ -10,7 +10,7 @@ feature_names = iris['feature_names']
 {% if dataset == "Spiral" %}
 #spiral
 column_names = ['0', '1', 'target']
-df = pd.read_csv("../../datasets/spiral.csv", names = column_names, header = None)
+df = pd.read_csv("../datasets/spiral.csv", names = column_names, header = None)
 X = pd.DataFrame(df, columns=['0', '1'])
 y = pd.DataFrame(df, columns=['target'])
 y = df['target']
@@ -24,7 +24,7 @@ y
 {% if dataset == "Aggregation" %}
 #Aggregation
 column_names = ['0', '1', 'target']
-df = pd.read_csv("../../datasets/Aggregation.csv", names = column_names, header = None)
+df = pd.read_csv("../datasets/Aggregation.csv", names = column_names, header = None)
 X = pd.DataFrame(df, columns=['0', '1'])
 y = pd.DataFrame(df, columns=['target'])
 y = df['target']
@@ -38,7 +38,7 @@ y
 {% if dataset == "R15" %}
 #R15
 column_names = ['0', '1', 'target']
-df = pd.read_csv("../../datasets/R15.csv", names = column_names, header = None)
+df = pd.read_csv("../datasets/R15.csv", names = column_names, header = None)
 X = pd.DataFrame(df, columns=['0', '1'])
 y = pd.DataFrame(df, columns=['target'])
 y = df['target']
@@ -53,7 +53,7 @@ y
 #User Data --> insert file path below and add column_names and names = number_outputClasses
 # feature names can stay as 0/1 or custom labels
 column_names = ['0', '1', 'target']
-df = pd.read_csv("../../datasets/.csv", names = column_names,  header = None)
+df = pd.read_csv("../datasets/.csv", names = column_names,  header = None)
 X = pd.DataFrame(df, columns=['0', '1'])
 y = pd.DataFrame(df, columns=['target'])
 y = df['target']
