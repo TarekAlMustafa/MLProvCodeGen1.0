@@ -1,14 +1,16 @@
-def set_experiment_info() : 
+def set_experiment_info() :
     created_by = "Tarek Al Mustafa"
     email = "tarek.almustafa@uni-jena.de"
     title = "Multiclass Classification"
+    task_type = "MulticlassClassification"
     creation_date = str(date.today())
     
     experiment_info = { 
             'author': created_by,
             'email': email,
             'title': title,
-            'creation_date': creation_date }
+            'creation_date': creation_date,
+            'task_type': task_type}
     
     return experiment_info
 

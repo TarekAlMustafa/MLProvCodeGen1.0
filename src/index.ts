@@ -11,6 +11,13 @@ import { ILauncher } from '@jupyterlab/launcher';
 /* eslint-disable no-useless-escape */
 
 
+/*function newDiv(elementName: any, content: Widget, inner: string) {
+	elementName = document.createElement('div');
+	elementName.innerHTML = inner
+	
+	return elementName;
+} */
+
 async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launcher: ILauncher, settingRegistry: ISettingRegistry | null) {
 	console.log('JupyterLab extension extension is activated!');
 // setup and HTTP Request test; used to check if the server extension is enabled locally/ ob Binder
@@ -70,6 +77,69 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
     }
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //
+	/*const FileInput = content.node.appendChild(newDiv('FileInput', widget, `
+		<br>
+		<input type="file">
+	`));
+	
+	FileInput; */
+	
+	const provenanceInput = document.createElement('div');
+	content.node.appendChild(provenanceInput);
+	provenanceInput.innerHTML = `
+		<br>
+		<input type="file">
+	`
+	provenanceInput.addEventListener('change', event => {
+		let file = (<HTMLInputElement>event.target).files![0];
+		const submitProvenanceFile = document.createElement('div');
+        content.node.appendChild(submitProvenanceFile);
+        submitProvenanceFile.innerHTML = `
+						<button id="inputButton" type="button"> Submit your Provenance File </button>  
+						`;
+		
+		submitProvenanceFile.addEventListener('click', async event => {
+			console.log(file);
+			
+			let reader = new FileReader();
+			reader.readAsText(file)
+			reader.onload = async function() {
+				//console.log(reader.result);
+				var provenanceDataObj = JSON.parse(reader.result!.toString());
+				console.log(provenanceDataObj); 
+				console.log(provenanceDataObj.experiment_info.task_type);
+// ------------------------------------------------------------------------------------------------------------------------------- //				
+				try {
+            const reply = await requestAPI<any>(provenanceDataObj.experiment_info.task_type, {
+              body: JSON.stringify(provenanceDataObj),
+              method: 'POST'
+            });
+            console.log(reply);
+// ------------------------------------------------------------------------------------------------------------------------------- //
+            if (reply['greetings'] === 'success') {
+              const success_message = document.createElement('text');
+              content.node.appendChild(success_message);
+              success_message.textContent =
+                'Your Code has been generated successfully. Press the button below to open it.';
+
+              const notebook_open = document.createElement('div');
+              content.node.appendChild(notebook_open);
+              notebook_open.innerHTML = `
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+										`;
+            }
+// ------------------------------------------------------------------------------------------------------------------------------- //
+          } catch (reason) { 
+            console.error(
+              `Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
+            );
+          }
+			};
+		}); // end of submitProvenanceFile event listener	
+	}); // end of provenanceInput event listener
+	
+	
+// ------------------------------------------------------------------------------------------------------------------------------- //
   const dropdown1 = document.createElement('div');
   content.node.appendChild(dropdown1);
   dropdown1.innerHTML = `
@@ -95,7 +165,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   // event listener on that input is needed for that
   problemButton.addEventListener('click', event => {
 // ------------------------------------------------------------------------------------------------------------------------------- //
-    // if clause for each framework (frameworks require different inputs
+    // if clause for each framework (frameworks require different inputs)
     const problemSubmit = (<HTMLSelectElement>(
       document.getElementById('exercise')
     )).value;
