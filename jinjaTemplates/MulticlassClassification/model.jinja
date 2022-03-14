@@ -6,6 +6,8 @@ use_cuda = False
 {% endif %}
 device = torch.device("cuda" if use_cuda else "cpu")
 
+neuron_number = {{ neuron_number }}
+
 #Configure Neural Network Models
 class Model(nn.Module):
     def __init__(self, input_dim):
@@ -26,16 +28,28 @@ optimizer = {{ optimizer}}model.parameters(), lr = 1)
 {% elif default %}
 optimizer = {{ optimizer }}model.parameters())
 {% else %}
-optimizer = {{ optimizer }}model.parameters(), lr={{ lr }})
+lr={{ lr }} 
+optimizer = {{ optimizer }}model.parameters(), lr=lr)
 {% endif %}
 loss_fn   = {{ loss_func }}
 
+try:
+    lr
+except NameError:
+    default = 1
+    lr = None 
+else:
+    default = 0
+
 def set_model_parameters():
     model_parameters = {
-        "gpu_enable" : {{ use_gpu }},
+        "gpu_enable" : 1,
         "modelParameters" : str(model),
+        "neuron_number" : neuron_number,
         "loss_function" : '{{ loss_func }}',
-        "optimizer" : str(optimizer),
+        "optimizer" : '{{ optimizer }}',
+        "optimizer_default_learning_rate" : default,
+        "optimizer_learning_rate": lr,
         "activation_function": '{{ activation_func }}' }
     return model_parameters
 

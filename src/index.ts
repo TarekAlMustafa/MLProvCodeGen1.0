@@ -107,7 +107,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				//console.log(reader.result);
 				var provenanceDataObj = JSON.parse(reader.result!.toString());
 				console.log(provenanceDataObj); 
-				console.log(provenanceDataObj.experiment_info.task_type);
+				console.log(provenanceDataObj.experiment_info.task_type); 
 // ------------------------------------------------------------------------------------------------------------------------------- //				
 				try {
             const reply = await requestAPI<any>(provenanceDataObj.experiment_info.task_type, {
@@ -1259,17 +1259,32 @@ switch (problemSubmit) {
           const objBody = {
             exercise: exercise,
             framework: framework,
-            dataset: dataset,
-            random_seed: random_seed,
-            test_split: test_split,
-            activation_func: activation_func,
-            neuron_number: neuron_number,
-            optimizer: optimizer,
-            loss_func: loss_func,
-            epochs: epochs,
-            lr: lr,
-            use_gpu: use_gpu,
-            default: defaultValue
+			'data_ingestion': {
+				'dataset_id': dataset
+			},			
+			'data_segregation': {
+				'test_size': test_split,
+				'random_state': random_seed
+			},
+            //activation_func: activation_func,
+			'model_parameters': {
+				'gpu_enable': use_gpu,
+				'neuron_number': neuron_number,
+				'loss_function': loss_func,
+				'optimizer': optimizer,
+				'optimizer_default_learning_rate': defaultValue,
+				'optimizer_learning_rate': lr,
+				'activation_function': activation_func
+			},
+            //optimizer: optimizer,
+            //loss_func: loss_func,
+            //epochs: epochs,
+			'training': {
+				'epochs': epochs
+			},
+            //lr: lr,
+            //use_gpu: use_gpu,
+            //default: defaultValue
           };
           // Post request with input data
           try {
