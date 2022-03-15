@@ -20,3 +20,15 @@
         input{
             font-size: inherit;
         }
+
+		#provenanceSubmit {
+			position: absolute;
+			left: 500px;
+			top: 21px;
+		}
+		
+		#provenanceFileInput {
+			position: absolute;
+			left: 500px;
+			top: 0px;
+		}

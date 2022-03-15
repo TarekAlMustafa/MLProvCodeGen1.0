@@ -72,8 +72,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   reset.addEventListener('click', event => {
     const nodeList = content.node.childNodes;
     console.log(nodeList);
-    while (nodeList.length > 3) {
-      nodeList[3].remove();
+    while (nodeList.length > 4) {
+      nodeList[4].remove();
     }
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -87,15 +87,14 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 	const provenanceInput = document.createElement('div');
 	content.node.appendChild(provenanceInput);
 	provenanceInput.innerHTML = `
-		<br>
-		<input type="file">
+		<input type="file" id="provenanceFileInput">
 	`
 	provenanceInput.addEventListener('change', event => {
 		let file = (<HTMLInputElement>event.target).files![0];
 		const submitProvenanceFile = document.createElement('div');
         content.node.appendChild(submitProvenanceFile);
         submitProvenanceFile.innerHTML = `
-						<button id="inputButton" type="button"> Submit your Provenance File </button>  
+						<button id="provenanceSubmit" type="button"> Submit your Provenance File </button>  
 						`;
 		
 		submitProvenanceFile.addEventListener('click', async event => {
@@ -108,9 +107,13 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				var provenanceDataObj = JSON.parse(reader.result!.toString());
 				console.log(provenanceDataObj); 
 				console.log(provenanceDataObj.experiment_info.task_type); 
+				var taskName = provenanceDataObj.experiment_info.task_type;
+				var notebookPath = "('http://localhost:8888/lab/tree/GeneratedNotebooks/"+provenanceDataObj.experiment_info.task_type+".ipynb')";
+				var openCall = `onclick="window.open`+notebookPath+`">`;
+				console.log(openCall);
 // ------------------------------------------------------------------------------------------------------------------------------- //				
 				try {
-            const reply = await requestAPI<any>(provenanceDataObj.experiment_info.task_type, {
+            const reply = await requestAPI<any>(taskName, {
               body: JSON.stringify(provenanceDataObj),
               method: 'POST'
             });
@@ -125,7 +128,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
               const notebook_open = document.createElement('div');
               content.node.appendChild(notebook_open);
               notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+										<button id="inputButton" type="button" `+openCall+` Open Notebook </button>  
 										`;
             }
 // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -146,7 +149,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 	<form id="dropdown1ID" onsubmit="return false">
 		<label for="exercise">Choose a problem to solve:</label>
 		<select name="exercise" id="exercise">
-			<option value="MulticlassClassification"> Multiclass Classification using a Neural Network </option>
+			<option value="MulticlassClassification"> Multiclass Classification</option>
 			<option value="ImageClassification"> Image Classification </option>
 		</select>
 	</form>	
@@ -1051,7 +1054,7 @@ switch (problemSubmit) {
 					<form action="/action_page.php">
 						<label for="framework">Which framework do you want to use?</label>
 						<select name="framework" id="framework">
-							<option value="PyTorch"> PyTorch (currently the only option for model training)</option>
+							<option value="PyTorch"> PyTorch</option>
 						</select>
 					</form>	
 					`;

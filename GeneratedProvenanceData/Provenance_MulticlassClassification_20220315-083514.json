@@ -1,0 +1,75 @@
+{
+  "experiment_info":{
+    "author": "Tarek Al Mustafa",
+    "email": "tarek.almustafa@uni-jena.de",
+    "title": "Multiclass Classification",
+    "creation_date": "2022-03-15",
+    "task_type": "MulticlassClassification"
+},
+
+"hardware_info":{
+    "cpu": "Intel Core i7",
+    "memory": "8 GB",
+    "hdType": "SSD",
+    "cache": "6M",
+    "os": "OSX El Capitan 10.11.5",
+    "video": "Nvidia GForce 630M"
+},
+
+"packages":{
+    "python": "python===3.9.7",
+    "numpy": "numpy===1.22.2",
+    "pandas": "pandas===1.3.3",
+    "matplotlib": "matplotlib===3.5.1",
+    "sklearn": "sklearn==0.0",
+    "torch": "torch===1.8.0",
+    "tqdm": "tqdm===4.60.0",
+    "ipywidgets": "ipywidgets===7.6.5",
+    "pytorch_model_summary": "pytorch-model-summary===0.1.2",
+    "ipython": "ipython===7.31.1"
+},
+
+"data_ingestion":{
+    "dataset_id": "R15",
+    "output_dimensions": 8,
+    "samples_total": 320,
+    "feature_dimensions": 2
+},
+
+"data_preparation":{
+    "number_operations": 1,
+    "transformation": "sklearn.preprocessing.StandardScaler",
+    "transformation_method": "Standardscaler.fit_transform"
+},
+
+"data_segregation":{
+    "segregation_method": "sklearn.model_selection.train_test_split",
+    "test_size": 0.2,
+    "train_size": 0.8,
+    "random_state": 2
+},
+
+"model_parameters":{
+    "gpu_enable": 1,
+    "modelParameters": "Model(\n  (layer1): Linear(in_features=2, out_features=51, bias=True)\n  (layer2): Linear(in_features=51, out_features=51, bias=True)\n  (layer3): Linear(in_features=51, out_features=8, bias=True)\n)",
+    "neuron_number": 51,
+    "loss_function": "nn.MultiMarginLoss()",
+    "optimizer": "torch.optim.Adam(",
+    "optimizer_default_learning_rate": 1,
+    "optimizer_learning_rate": null,
+    "activation_function": "torch.tanh(self.layer3(x))"
+},
+
+"training":{
+    "epochs": 99,
+    "hierarchical_summary": [
+        "============================ Hierarchical Summary ============================\n\nModel(\n  (layer1): Linear(in_features=2, out_features=51, bias=True), 153 params\n  (layer2): Linear(in_features=51, out_features=51, bias=True), 2,652 params\n  (layer3): Linear(in_features=51, out_features=8, bias=True), 416 params\n), 3,221 params\n\n\n==============================================================================\n",
+        3221
+    ]
+},
+
+"evaluation":{
+    "accuracy": 0.96875,
+    "loss": 0.0730244517326355
+}
+}
