@@ -1,3 +1,16 @@
+def get_size(bytes, suffix="B"):
+    """
+    Scale bytes to its proper format
+    e.g:
+        1253656 => '1.20MB'
+        1253656678 => '1.17GB'
+    """
+    factor = 1024
+    for unit in ["", "K", "M", "G", "T", "P"]:
+        if bytes < factor:
+            return f"{bytes:.2f}{unit}{suffix}"
+        bytes /= factor
+
 def set_experiment_info() :
     created_by = "Tarek Al Mustafa"
     email = "tarek.almustafa@uni-jena.de"
@@ -15,13 +28,24 @@ def set_experiment_info() :
     return experiment_info
 
 def set_hardware_info():
+    uname = platform.uname()
+    sysInfo = str(uname.system +' '+ uname.release +' Version: '+ uname.version +' Machine: '+ uname.machine)
+    
+    svmem = psutil.virtual_memory()
+
+    GPUs = GPUtil.getGPUs()
+    gpuList = []
+    for gpu in GPUs:
+        gpu_id = gpu.id
+        gpu_name = gpu.name
+        gpuList.append((gpu_id , gpu_name))
+
     hardware_info = {
-        "cpu": "Intel Core i7",
-        "memory": "8 GB",
-        "hdType": "SSD",
-        "cache": '6M',
-        "os": "OSX El Capitan 10.11.5",
-        "video": "Nvidia GForce 630M" }
+        "Python Version": cpuinfo.get_cpu_info()['python_version'],
+        "CPU": cpuinfo.get_cpu_info()['brand_raw'],
+        "RAM": get_size(svmem.total),
+        "Operating System": sysInfo,
+        "GPUs": str(gpuList) }
     
     return hardware_info
 

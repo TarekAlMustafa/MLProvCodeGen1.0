@@ -77,24 +77,23 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
     }
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //
-	/*const FileInput = content.node.appendChild(newDiv('FileInput', widget, `
-		<br>
-		<input type="file">
-	`));
-	
-	FileInput; */
+	const provenanceInputText = document.createElement('div');
+	content.node.appendChild(provenanceInputText);
+	provenanceInputText.id = 'provenanceInputText';
+	provenanceInputText.innerHTML = '<b>Insert a MLProvCodeGen Provenance File:</b>';
 	
 	const provenanceInput = document.createElement('div');
 	content.node.appendChild(provenanceInput);
 	provenanceInput.innerHTML = `
 		<input type="file" id="provenanceFileInput">
-	`
+	`;
+	
 	provenanceInput.addEventListener('change', event => {
 		let file = (<HTMLInputElement>event.target).files![0];
 		const submitProvenanceFile = document.createElement('div');
         content.node.appendChild(submitProvenanceFile);
         submitProvenanceFile.innerHTML = `
-						<button id="provenanceSubmit" type="button"> Submit your Provenance File </button>  
+						<button id="provenanceSubmit" name"provenanceSubmit" type="button"> Submit Provenance File </button>  
 						`;
 		
 		submitProvenanceFile.addEventListener('click', async event => {
@@ -122,13 +121,14 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
             if (reply['greetings'] === 'success') {
               const success_message = document.createElement('text');
               content.node.appendChild(success_message);
+			  success_message.id = 'successTextRight';
               success_message.textContent =
-                'Your Code has been generated successfully. Press the button below to open it.';
+                'Your Code has been generated successfully.';
 
               const notebook_open = document.createElement('div');
               content.node.appendChild(notebook_open);
               notebook_open.innerHTML = `
-										<button id="inputButton" type="button" `+openCall+` Open Notebook </button>  
+										<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
 										`;
             }
 // ------------------------------------------------------------------------------------------------------------------------------- //
