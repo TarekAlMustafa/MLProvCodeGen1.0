@@ -50,16 +50,20 @@ def set_hardware_info():
     return hardware_info
 
 def set_packages():
+    cpuInfo_version = !pip list | grep -i py-cpuinfo
+    pytorch_model_summary_version = !pip list | grep -i pytorch-model-summary
     packages = {
-        "python" : "python===3.9.7",
-        "numpy" : "numpy===1.22.2",
-        "pandas" : "pandas===1.3.3",
-        "matplotlib" : "matplotlib===3.5.1",
-        "sklearn" : "sklearn==0.0",
-        "torch" : "torch===1.8.0",
-        "tqdm" : "tqdm===4.60.0",
-        "ipywidgets" : "ipywidgets===7.6.5",
-        "pytorch_model_summary" : "pytorch-model-summary===0.1.2",
-        "ipython" : "ipython===7.31.1"}
+        "numpy" : np.__version__,
+        "pandas" : pd.__version__,
+        "matplotlib" : matplotlib.__version__,
+        "sklearn" : sklearn.__version__,
+        "torch" : torch.__version__,
+        "tqdm" : tqdm.__version__,
+        "ipywidgets" : widgets.__version__,
+        "pytorch-model-summary" : pytorch_model_summary_version[0],
+        "ipython" : IPython.__version__,
+        "gputil" : GPUtil.__version__, 
+        "psutil" : psutil.__version__,
+        "py-cpuinfo" : cpuInfo_version[0]}
     
     return packages

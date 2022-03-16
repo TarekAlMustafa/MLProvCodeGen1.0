@@ -11,6 +11,7 @@ with torch.no_grad():
     fpr, tpr, threshold = roc_curve(Y_onehot.ravel(), y_pred.ravel())
     
 plt.plot(fpr, tpr, label='AUC = {:.3f}'.format(auc(fpr, tpr)))
+AUC = '{:.5f}'.format(auc(fpr, tpr))
 plt.xlabel('False positive rate')
 plt.ylabel('True positive rate')
 plt.title('ROC curve')

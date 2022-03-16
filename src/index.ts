@@ -72,8 +72,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   reset.addEventListener('click', event => {
     const nodeList = content.node.childNodes;
     console.log(nodeList);
-    while (nodeList.length > 4) {
-      nodeList[4].remove();
+    while (nodeList.length > 5) {
+      nodeList[5].remove();
     }
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //

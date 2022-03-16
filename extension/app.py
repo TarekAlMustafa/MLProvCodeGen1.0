@@ -452,6 +452,24 @@ Install required packages before running"""))
     template = env.get_template('evaluation.jinja')
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #confusion matrix
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Confusion Matrix"""))
+    template = env.get_template('confusionMatrix.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #F1 score
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### F1 Score"""))
+    template = env.get_template('F1.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #mean absolute error & mean squared error
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Mean Absolute Error & Mean Squared Error"""))
+    template = env.get_template('meanErrors.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #ROC
     nb['cells'].append(nbf.v4.new_markdown_cell("""### ROC"""))
