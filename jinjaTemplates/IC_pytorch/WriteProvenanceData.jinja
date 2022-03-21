@@ -1,0 +1,16 @@
+timestring = time.strftime('%Y%m%d-%H%M%S')
+timestring
+ProvenanceName = ('Provenance_MulticlassClassification_' + timestring + '.json')
+
+with open('../GeneratedProvenanceData/'+ProvenanceName, 'w') as prov_file:
+    prov_file.write('{' + '\n  ')
+    prov_file.write('"experiment_info":' + json.dumps(set_experiment_info(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"hardware_info":' + json.dumps(set_hardware_info(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"packages":' + json.dumps(set_packages(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"data_ingestion":' + json.dumps(set_data_ingestion(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"data_preparation":' + json.dumps(set_data_preparation(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"data_segregation":' + json.dumps(set_data_segregation(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"model_parameters":' + json.dumps(set_model_parameters(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"training":' + json.dumps(set_training(),sort_keys=False, indent=4) +',' + '\n\n' )
+    prov_file.write('"evaluation":' + json.dumps(set_evaluation(),sort_keys=False, indent=4) + '\n' )
+    prov_file.write('}')

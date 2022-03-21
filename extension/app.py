@@ -77,6 +77,12 @@ Install required packages before running"""))
     template = env.get_template('imports.jinja')
     output = template.render(visualization_tool = visualization_tool, data_format = data_format, checkpoint = checkpoint)
     nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    # init provenance
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Provenance Data"""))
+    template = env.get_template('provenanceInit.jinja')
+    output = template.render(visualization_tool = visualization_tool)
+    nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #preSetup
     if data_format == "Numpy arrays" or data_format == "Image files":
@@ -93,8 +99,26 @@ Install required packages before running"""))
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #Datasets and Preprocessing
-    nb['cells'].append(nbf.v4.new_markdown_cell("""### Datasets and Preprocessing"""))
-    template = env.get_template('datasetPreprocessing.jinja')
+    #nb['cells'].append(nbf.v4.new_markdown_cell("""### Datasets and Preprocessing"""))
+    #template = env.get_template('datasetPreprocessing.jinja')
+    #output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu)
+    #nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #Data Ingestion
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Ingestion"""))
+    template = env.get_template('dataIngestion.jinja')
+    output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu)
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #Data Preperation
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Preperation"""))
+    template = env.get_template('dataPreperation.jinja')
+    output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu)
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #Data Segregation
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Segregation"""))
+    template = env.get_template('dataSegregation.jinja')
     output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
@@ -109,7 +133,24 @@ Install required packages before running"""))
     template = env.get_template('training.jinja')
     output = template.render(visualization_tool = visualization_tool)
     nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    # Generate Provenance Data
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Generate Provenance Data"""))
+    template = env.get_template('GenerateProvenanceData.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
 
+    # Write Provenance Data
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Write Provenance Data"""))
+    template = env.get_template('WriteProvenanceData.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    # Open Provenance Data
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Open Provenance Data"""))
+    template = env.get_template('OpenProvenanceData.jinja')
+    output = template.render()
+    nb['cells'].append(nbf.v4.new_code_cell(output))
 
     nbf.write(nb, 'GeneratedNotebooks/ImageClassification_PyTorch.ipynb')
     reply = {"greetings": "success"}
