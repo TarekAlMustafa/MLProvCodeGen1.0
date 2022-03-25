@@ -1,4 +1,13 @@
+# Set up device.
+{% if gpu %}
+use_cuda = torch.cuda.is_available()
+{% else %}
+use_cuda = False
+{% endif %}
+device = torch.device("cuda" if use_cuda else "cpu")
 {% if data_format == "Public dataset" %}
+batch_size = {{ batch_size }}
+print_every = {{ print_every }}  # batches
 # Wrap in data loader.
 training_dataset = dataset("./data", train=True, download=True, transform=transform)
 #training_dataset = datasets.MNIST("./data", train=True, download=True, transform=transform)
@@ -13,23 +22,12 @@ train_loader = DataLoader(training_dataset, batch_size=batch_size, shuffle=True,
 test_loader = DataLoader(testing_dataset, batch_size=batch_size, shuffle=False, **kwargs)
 val_loader = None
 
-print(training_dataset.__len__)    
-print(testing_dataset.__len__)
-
-def set_data_ingestion():
-    dataInfo = training_dataset.__len__
-    root_location =  str(dataInfo).splitlines()[2]
-    transform_method = str(dataInfo).splitlines()[4:11]
-    data_ingestion = {
-        "dataset_id" : '{{ dataset }}',
-        "feature_classes" : 10,
-        "training_samples" : training_dataset.__len__(),
-        "testing_samples" : testing_dataset.__len__(),
-        "root_location" : root_location,
-        "preprocessing" : transform_method}
+def set_data_segregation():
+    data_segregation = {
+        "training_dataset" : str(training_dataset.__len__),
+        "testing_dataset" : str(testing_dataset.__len__)}
     
-    return data_ingestion
-{% else %}
+    return data_segregation{% else %}
 ### Preprocessing
 def preprocess(data, name):
     if data is None:  # val/test can be empty

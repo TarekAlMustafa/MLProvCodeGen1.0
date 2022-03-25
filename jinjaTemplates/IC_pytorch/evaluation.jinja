@@ -1,0 +1,8 @@
+def set_evaluation():
+    evaluation = {
+		"report" : evaluator.state.metrics['report'],
+        "accuracy" : evaluator.state.metrics['accuracy'],
+        "loss" : evaluator.state.metrics['loss']
+    }
+    
+    return evaluation

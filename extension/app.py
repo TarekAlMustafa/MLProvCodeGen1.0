@@ -47,23 +47,25 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
     file_loader = FileSystemLoader('jinjaTemplates/IC_pytorch')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
 # GET VARIABLES
-    problemName = user_inputs['exercise']
-    selectedFramework = user_inputs['framework']
-    visualization_tool = user_inputs['visualization_tool']
+    #not even needed??? problemName = user_inputs['exercise']
+    #not even nedeed=?= selectedFramework = user_inputs['framework']
+    #TODOvisualization_tool = user_inputs['visualization_tool']['tool']
+    visualization_tool = 'notAtAll'
     notebook = True
-    data_format = user_inputs['data']
-    checkpoint = user_inputs['model_checkpoint']
-    lr = user_inputs['rate']
-    batch_size = user_inputs['batches']
-    num_epochs = user_inputs['epochs']
-    print_every = user_inputs['print_progress']
-    gpu = user_inputs['use_GPU']
-    dataset = user_inputs['data_selection']
-    model_func = user_inputs['model']
-    pretrained = user_inputs['pre_trained_model']
-    num_classes = user_inputs['quantity']
-    loss = user_inputs['loss_function']
-    optimizer = user_inputs['optimizer']
+    data_format = user_inputs['data_ingestion']['data_format']
+    checkpoint = user_inputs['model_parameters']['save_checkpoint']
+    lr = user_inputs['model_parameters']['optimizer_learning_rate']
+    batch_size = user_inputs['training']['batch_size']
+    num_epochs = user_inputs['training']['epochs']
+    print_every = user_inputs['training']['print_progress']
+    gpu = user_inputs['model_parameters']['gpu_enable']
+    dataset = user_inputs['data_ingestion']['dataset_id']
+    model_func = user_inputs['model_parameters']['model_name']
+    pretrained = user_inputs['model_parameters']['pretrained']
+    num_classes = user_inputs['model_parameters']['num_classes']
+    loss = user_inputs['model_parameters']['loss_function']
+    optimizer = user_inputs['model_parameters']['optimizer']
+    
 #-----------------------------------------------------------------------------
     # installs
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Installs
@@ -84,20 +86,6 @@ Install required packages before running"""))
     output = template.render(visualization_tool = visualization_tool)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    #preSetup
-    if data_format == "Numpy arrays" or data_format == "Image files":
-        nb['cells'].append(nbf.v4.new_markdown_cell("""### preSetup"""))
-        template = env.get_template('preSetup.jinja')
-        output = template.render(data_format = data_format)
-        nb['cells'].append(nbf.v4.new_code_cell(output))
-
-    #Setup
-    # TODO: each logging method needs its own variables
-    nb['cells'].append(nbf.v4.new_markdown_cell("""### Setup"""))
-    template = env.get_template('setup.jinja')
-    output = template.render(data_format = data_format, lr = lr, batch_size = batch_size, num_epochs = num_epochs, visualization_tool = visualization_tool, gpu = gpu, print_every = print_every)
-    nb['cells'].append(nbf.v4.new_code_cell(output))
-
     #Datasets and Preprocessing
     #nb['cells'].append(nbf.v4.new_markdown_cell("""### Datasets and Preprocessing"""))
     #template = env.get_template('datasetPreprocessing.jinja')
@@ -107,31 +95,37 @@ Install required packages before running"""))
     #Data Ingestion
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Ingestion"""))
     template = env.get_template('dataIngestion.jinja')
-    output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu)
+    output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, visualization_tool = visualization_tool, checkpoint = checkpoint)
     nb['cells'].append(nbf.v4.new_code_cell(output))
     
-    #Data Preperation
-    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Preperation"""))
-    template = env.get_template('dataPreperation.jinja')
+    #Data preparation
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Preparation"""))
+    template = env.get_template('dataPreparation.jinja')
     output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu)
     nb['cells'].append(nbf.v4.new_code_cell(output))
     
     #Data Segregation
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Segregation"""))
     template = env.get_template('dataSegregation.jinja')
-    output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu)
+    output = template.render(data_format = data_format, dataset = dataset, pretrained = pretrained, gpu = gpu, batch_size = batch_size, print_every=print_every)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #Model
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Model"""))
     template = env.get_template('model.jinja')
-    output = template.render(model_func = model_func, pretrained = pretrained, num_classes = num_classes, loss = loss, optimizer = optimizer, visualization_tool = visualization_tool)
+    output = template.render(model_func = model_func, pretrained = pretrained, num_classes = num_classes, loss = loss, optimizer = optimizer, visualization_tool = visualization_tool, lr = lr, gpu = gpu, checkpoint = checkpoint)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #Training
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Training"""))
     template = env.get_template('training.jinja')
-    output = template.render(visualization_tool = visualization_tool)
+    output = template.render(visualization_tool = visualization_tool, lr = lr, num_epochs = num_epochs, data_format = data_format, print_every = print_every)
+    nb['cells'].append(nbf.v4.new_code_cell(output))
+    
+    #Evaluation
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Evaluation"""))
+    template = env.get_template('evaluation.jinja')
+    output = template.render(visualization_tool = visualization_tool, lr = lr, num_epochs = num_epochs, data_format = data_format)
     nb['cells'].append(nbf.v4.new_code_cell(output))
     
     # Generate Provenance Data
@@ -458,9 +452,9 @@ Install required packages before running"""))
     output = template.render(dataset = dataset)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    #dataPreperation
-    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Preperation"""))
-    template = env.get_template('dataPreperation.jinja')
+    #datapreparation
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data preparation"""))
+    template = env.get_template('datapreparation.jinja')
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 

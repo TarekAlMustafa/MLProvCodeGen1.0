@@ -1,13 +1,18 @@
+{%if checkpoint%}# Set up logging.
+experiment_id = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+checkpoint_dir = Path(f"checkpoints/{experiment_id}")
+checkpoint_dir.mkdir(parents=True, exist_ok=True){%endif%}
 # Set up model, loss, optimizer.
+lr = {{ lr }}
 model = models.{{ model_func }}(pretrained={{ pretrained }})
 {# TODO: Maybe enable this by default, so that people can adapt num_classes afterward. #}
 {% if num_classes != 1000 %}
 num_classes = {{ num_classes }}
-{% if "resnet" in model_func %}
+{% if "resnet18" in model_func %}
 model.fc = torch.nn.Linear(in_features=model.fc.in_features, out_features=num_classes, bias=True)
 {% elif "alexnet" in model_func or "vgg" in model_func %}
 model.classifier[-1] = torch.nn.Linear(in_features=model.classifier[-1].in_features, out_features=num_classes, bias=True)
-{% elif "densenet" in model_func %}
+{% elif "densenet161" in model_func %}
 model.classifier = torch.nn.Linear(in_features=model.classifier.in_features, out_features=num_classes, bias=True)
 {% endif %}
 {% endif %}
@@ -20,3 +25,17 @@ optimizer = optim.{{ optimizer }}(model.parameters(), lr=lr)
 wandb.watch(model)
 
 {% endif %}
+def set_model_parameters():
+    model_parameters = {
+        "model_name" : '{{ model_func }}',
+        "pretrained" : 0,
+        "gpu_enable" : 1,
+        "modelParameters" : str(model),
+        "loss_function" : 'CrossEntropyLoss',
+        "optimizer" : 'Adam',
+        "optimizer_learning_rate": lr,
+		"save_checkpoint" : {{ checkpoint }},
+		"num_classes" : {{num_classes}}}
+    return model_parameters
+
+model

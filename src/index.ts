@@ -211,10 +211,9 @@ switch (problemSubmit) {
 						<form action="/action_page.php">
 							<label for="model">Which model do you want to use?     </label>
 							<select name="model" id="model">
-								<option value="AlexNet"> AlexNet </option>
-								<option value="ResNet"> ResNet </option>
-								<option value="DenseNet"> DenseNet </option>
-								<option value="VGG"> VGG </option>
+								<option value="resnet18"> resnet18 </option>
+								<option value="densenet161"> densenet161 </option>
+								<option value="vgg16"> vgg16 </option>
 							</select>
 						</form>	
 						`;
@@ -441,7 +440,31 @@ switch (problemSubmit) {
 // ------------------------------------------------------------------------------------------------------------------------------- //
             // convert variables into JSON/ input Object
             const objBody = {
-              // dropdowns
+				exercise: exerciseValue,
+				framework: frameworkValue,
+				'data_ingestion': {
+					'data_format': dataValue,
+					'dataset_id': dataSelectionValue
+				},
+				'model_parameters': {
+					'model_name': modelValue,
+					'pretrained': preTrainedModelValue,
+					'gpu_enable': useGPUValue,
+					'num_classes': quantityValue, 
+					'save_checkpoint': modelCheckpointValue,
+					'loss_function': lossFuncValue,
+					'optimizer': optimizerValue,
+					'optimizer_learning_rate': rateValue
+				},
+				'training': {
+					'batch_size': batchesValue,
+					'epochs': epochsValue,
+					'print_progress': printProgressValue
+				},
+				'visualization_tool':{
+					'tool' : logsValue
+				},
+              /* dropdowns
               exercise: exerciseValue,
               framework: frameworkValue,
               model: modelValue,
@@ -459,7 +482,7 @@ switch (problemSubmit) {
               // checkboxes
               pre_trained_model: preTrainedModelValue,
               use_GPU: useGPUValue,
-              model_checkpoint: modelCheckpointValue
+              model_checkpoint: modelCheckpointValue */
             };
 // ------------------------------------------------------------------------------------------------------------------------------- //
             // Post request with input data
