@@ -99,36 +99,36 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				console.log(provenanceDataObj); 
 				console.log(provenanceDataObj.experiment_info.task_type); 
 				var taskName = provenanceDataObj.experiment_info.task_type;
-				var notebookPath = "('http://localhost:8888/lab/tree/GeneratedNotebooks/"+provenanceDataObj.experiment_info.task_type+".ipynb')";
+				var notebookPath = "('http://localhost:8888/lab/tree/GeneratedNotebooks/"+provenanceDataObj.experiment_info.task_type+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
 // ------------------------------------------------------------------------------------------------------------------------------- //				
 				try {
-            const reply = await requestAPI<any>(taskName, {
-              body: JSON.stringify(provenanceDataObj),
-              method: 'POST'
-            });
-            console.log(reply);
+					const reply = await requestAPI<any>(taskName, {
+						body: JSON.stringify(provenanceDataObj),
+						method: 'POST'
+					});
+					console.log(reply);
 // ------------------------------------------------------------------------------------------------------------------------------- //
-            if (reply['greetings'] === 'success') {
-              const success_message = document.createElement('text');
-              content.node.appendChild(success_message);
-			  success_message.id = 'successTextRight';
-              success_message.textContent =
-                'Your Code has been generated successfully.';
+					if (reply['greetings'] === 'success') {
+						const success_message = document.createElement('text');
+						content.node.appendChild(success_message);
+						success_message.id = 'successTextRight';
+						success_message.textContent =
+							'Your code has been generated successfully.';
 
-              const notebook_open = document.createElement('div');
-              content.node.appendChild(notebook_open);
-              notebook_open.innerHTML = `
+						const notebook_open = document.createElement('div');
+						content.node.appendChild(notebook_open);
+						notebook_open.innerHTML = `
 										<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
 										`;
-            }
+					}
 // ------------------------------------------------------------------------------------------------------------------------------- //
-          } catch (reason) { 
-            console.error(
-              `Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
-            );
-          }
+				} catch (reason) { 
+					console.error(
+						`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
+						);
+				}
 			};
 		}); // end of submitProvenanceFile event listener	
 	}); // end of provenanceInput event listener
