@@ -219,7 +219,7 @@ Install required packages before running"""))
 
     #datapreparation
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Data preparation"""))
-    template = env.get_template('datapreparation.jinja')
+    template = env.get_template('dataPreparation.jinja')
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
