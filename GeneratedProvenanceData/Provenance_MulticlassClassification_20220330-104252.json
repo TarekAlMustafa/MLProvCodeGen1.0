@@ -92,9 +92,10 @@
       "modelparameters:loss_function": "nn.CrossEntropyLoss()",
       "modelparameters:optimizer": "torch.optim.Adam(",
       "modelparameters:optimizer_default_learning_rate": {
-        "$": 1,
+        "$": 0,
         "type": "xsd:int"
       },
+      "modelparameters:optimizer_learning_rate": "0.002",
       "modelparameters:activation_function": "F.softmax(self.layer3(x), dim=1)"
     },
     "training": {
@@ -109,10 +110,10 @@
     },
     "evaluation": {
       "evaluation:Accuracy": 0.9333333373069763,
-      "evaluation:Loss": 0.6390359401702881,
+      "evaluation:Loss": 0.58389812707901,
       "evaluation:Confusion Matrix": "[[13  1  0]\n [ 0  7  1]\n [ 0  0  8]]",
       "evaluation:AUC": {
-        "$": 0.97944,
+        "$": 0.99778,
         "type": "xsd:double"
       },
       "evaluation:F1 Score": "[0.96296296 0.875      0.94117647]",
@@ -122,10 +123,11 @@
   },
   "activity": {
     "set_experiment_info()": {
-      "prov:startTime": "2022-03-30T08:23:17.532914"
+      "prov:startTime": "2022-03-30T10:42:47.100729"
     },
+    "date.today()": {},
     "set_hardware_info()": {
-      "prov:startTime": "2022-03-30T08:23:20.220540"
+      "prov:startTime": "2022-03-30T10:42:49.779864"
     },
     "platform.uname()": {},
     "cpuinfo.get_cpu_info()": {},
@@ -133,29 +135,29 @@
     "get_size(svmem.total)": {},
     "GPUtil.getGPUs()": {},
     "set_packages()": {
-      "prov:startTime": "2022-03-30T08:23:21.849021"
+      "prov:startTime": "2022-03-30T10:42:51.466376"
     },
     "{package_name}.__version__": {},
     "!pip list | grep -i py-cpuinfo": {},
     "!pip list | grep -i pytorch-model-summary": {},
     "set_data_ingestion()": {
-      "prov:startTime": "2022-03-30T08:23:21.884320"
+      "prov:startTime": "2022-03-30T10:42:51.479388"
     },
     "set_data_preparation()": {
-      "prov:startTime": "2022-03-30T08:23:21.916350"
+      "prov:startTime": "2022-03-30T10:42:51.494402"
     },
     "set_data_segregation()": {
-      "prov:startTime": "2022-03-30T08:23:21.948347"
+      "prov:startTime": "2022-03-30T10:42:51.510417"
     },
     "set_model_parameters()": {
-      "prov:startTime": "2022-03-30T08:23:22.173552"
+      "prov:startTime": "2022-03-30T10:42:51.769652"
     },
     "set_training()": {
-      "prov:startTime": "2022-03-30T08:23:22.301667"
+      "prov:startTime": "2022-03-30T10:42:51.882923"
     },
     "hierarchical_summary(model, print_summary = False)[1]": {},
     "set_evaluation()": {
-      "prov:startTime": "2022-03-30T08:23:22.671003"
+      "prov:startTime": "2022-03-30T10:42:52.099120"
     }
   },
   "wasGeneratedBy": {
@@ -163,35 +165,35 @@
       "prov:entity": "experiment_info",
       "prov:activity": "set_experiment_info()"
     },
-    "_:id3": {
+    "_:id4": {
       "prov:entity": "hardware_info",
       "prov:activity": "set_hardware_info()"
     },
-    "_:id9": {
+    "_:id10": {
       "prov:entity": "packages",
       "prov:activity": "set_packages()"
     },
-    "_:id13": {
+    "_:id14": {
       "prov:entity": "data_ingestion",
       "prov:activity": "set_data_ingestion()"
     },
-    "_:id14": {
+    "_:id15": {
       "prov:entity": "data_preparation",
       "prov:activity": "set_data_preparation()"
     },
-    "_:id15": {
+    "_:id17": {
       "prov:entity": "data_segregation",
       "prov:activity": "set_data_segregation()"
     },
-    "_:id16": {
+    "_:id19": {
       "prov:entity": "model_parameters",
       "prov:activity": "set_model_parameters()"
     },
-    "_:id17": {
+    "_:id21": {
       "prov:entity": "training",
       "prov:activity": "set_training()"
     },
-    "_:id19": {
+    "_:id25": {
       "prov:entity": "evaluation",
       "prov:activity": "set_evaluation()"
     }
@@ -206,41 +208,71 @@
     "Tarek Al Mustafa": {}
   },
   "wasInformedBy": {
-    "_:id4": {
-      "prov:informed": "set_hardware_info()",
-      "prov:informant": "platform.uname()"
+    "_:id3": {
+      "prov:informed": "set_experiment_info()",
+      "prov:informant": "date.today()"
     },
     "_:id5": {
       "prov:informed": "set_hardware_info()",
-      "prov:informant": "cpuinfo.get_cpu_info()"
+      "prov:informant": "platform.uname()"
     },
     "_:id6": {
       "prov:informed": "set_hardware_info()",
-      "prov:informant": "svmem.total"
+      "prov:informant": "cpuinfo.get_cpu_info()"
     },
     "_:id7": {
+      "prov:informed": "set_hardware_info()",
+      "prov:informant": "svmem.total"
+    },
+    "_:id8": {
       "prov:informed": "svmem.total",
       "prov:informant": "get_size(svmem.total)"
     },
-    "_:id8": {
+    "_:id9": {
       "prov:informed": "set_hardware_info()",
       "prov:informant": "GPUtil.getGPUs()"
     },
-    "_:id10": {
+    "_:id11": {
       "prov:informed": "set_packages()",
       "prov:informant": "{package_name}.__version__"
     },
-    "_:id11": {
+    "_:id12": {
       "prov:informed": "set_packages()",
       "prov:informant": "!pip list | grep -i py-cpuinfo"
     },
-    "_:id12": {
+    "_:id13": {
       "prov:informed": "set_packages()",
       "prov:informant": "!pip list | grep -i pytorch-model-summary"
     },
-    "_:id18": {
+    "_:id22": {
       "prov:informed": "set_training()",
       "prov:informant": "hierarchical_summary(model, print_summary = False)[1]"
+    }
+  },
+  "used": {
+    "_:id16": {
+      "prov:activity": "set_data_preparation()",
+      "prov:entity": "data_ingestion"
+    },
+    "_:id18": {
+      "prov:activity": "set_data_segregation()",
+      "prov:entity": "data_preparation"
+    },
+    "_:id20": {
+      "prov:activity": "set_model_parameters()",
+      "prov:entity": "data_ingestion"
+    },
+    "_:id23": {
+      "prov:activity": "set_training()",
+      "prov:entity": "model_parameters"
+    },
+    "_:id24": {
+      "prov:activity": "set_training()",
+      "prov:entity": "data_segregation"
+    },
+    "_:id26": {
+      "prov:activity": "set_evaluation()",
+      "prov:entity": "training"
     }
   }
 }

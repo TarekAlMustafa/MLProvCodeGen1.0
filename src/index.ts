@@ -97,9 +97,9 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				//console.log(reader.result);
 				var provenanceDataObj = JSON.parse(reader.result!.toString());
 				console.log(provenanceDataObj); 
-				console.log(provenanceDataObj.experiment_info.task_type); 
-				var taskName = provenanceDataObj.experiment_info.task_type;
-				var notebookPath = "('http://localhost:8888/lab/tree/GeneratedNotebooks/"+provenanceDataObj.experiment_info.task_type+".ipynb', 'MLProvCodeGen')";
+				console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
+				var taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
+				var notebookPath = "('http://localhost:8888/lab/tree/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
 // ------------------------------------------------------------------------------------------------------------------------------- //				
@@ -616,25 +616,48 @@ case 'MulticlassClassification':
 			// convert variables into JSON/ input Object
 			const objBody = {
 				exercise: exercise,
-				'data_ingestion': {
-					'dataset_id': dataset
-				},			
-				'data_segregation': {
-					'test_size': test_split,
-					'random_state': random_seed
-				},
-				'model_parameters': {
-					'gpu_enable': use_gpu,
-					'neuron_number': neuron_number,
-					'loss_function': loss_func,
-					'optimizer': optimizer,
-					'optimizer_default_learning_rate': defaultValue,
-					'optimizer_learning_rate': lr,
-					'activation_function': activation_func
-				},
-				'training': {
-					'epochs': epochs
-				},
+				'entity':{
+					'data_ingestion': {
+						'dataingestion:dataset_id': dataset
+					},			
+					'data_segregation': {
+						'datasegregation:test_size':{
+							'$': test_split,
+							'type' : typeof(test_split),
+						},
+						'datasegregation:random_state': {
+							'$': random_seed,
+							'type': typeof(random_seed),
+						},
+					},
+					'model_parameters': {
+						'modelparameters:gpu_enable': {
+							'$':use_gpu,
+							'type':typeof(use_gpu),
+						},
+						'modelparameters:neuron_number': {
+							'$':neuron_number,
+							'type':typeof(neuron_number),
+						},
+						'modelparameters:loss_function': loss_func,
+						'modelparameters:optimizer': optimizer,
+						'modelparameters:optimizer_default_learning_rate':{
+							'$':defaultValue,
+							'type': typeof(defaultValue),
+						},
+						'modelparameters:optimizer_learning_rate':{
+							'$': lr,
+							'type': typeof(lr),
+						},
+						'modelparameters:activation_function': activation_func
+					},
+					'training': {
+						'training:epochs': {
+							'$':epochs,
+							'type':typeof(epochs),
+						}
+					},
+				}
 			};
 // ------------------------------------------------------------------------------------------------------------------------------- //		  
 			// Post request with input data

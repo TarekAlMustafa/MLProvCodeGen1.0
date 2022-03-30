@@ -165,17 +165,22 @@ Original author: N. Janakiev https://github.com/njanakiev Twitter: https://twitt
 
     file_loader = FileSystemLoader('jinjaTemplates/MulticlassClassification')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
-    dataset = user_inputs['data_ingestion']['dataset_id']
-    random_seed = user_inputs['data_segregation']['random_state']
-    test_split = user_inputs['data_segregation']['test_size']
-    activation_func = user_inputs['model_parameters']['activation_function']
-    neuron_number = user_inputs['model_parameters']['neuron_number']
-    optimizer = user_inputs['model_parameters']['optimizer']
-    loss_func = user_inputs['model_parameters']['loss_function']
-    epochs = user_inputs['training']['epochs']
-    lr = user_inputs['model_parameters']['optimizer_learning_rate']
-    use_gpu = user_inputs['model_parameters']['gpu_enable']
-    default = user_inputs['model_parameters']['optimizer_default_learning_rate']
+    dataset = user_inputs['entity']['data_ingestion']['dataingestion:dataset_id']
+    random_seed = user_inputs['entity']['data_segregation']['datasegregation:random_state']['$']
+    test_split = user_inputs['entity']['data_segregation']['datasegregation:test_size']['$']
+    activation_func = user_inputs['entity']['model_parameters']['modelparameters:activation_function']
+    neuron_number = user_inputs['entity']['model_parameters']['modelparameters:neuron_number']['$']
+    optimizer = user_inputs['entity']['model_parameters']['modelparameters:optimizer']
+    loss_func = user_inputs['entity']['model_parameters']['modelparameters:loss_function']
+    epochs = user_inputs['entity']['training']['training:epochs']['$']
+    #lr can be either 'NULL' or an actual value, therefore exception required
+    try:
+        lr = user_inputs['entity']['model_parameters']['modelparameters:optimizer_learning_rate'][0]
+    except KeyError:
+        lr = user_inputs['entity']['model_parameters']['modelparameters:optimizer_learning_rate']['$']
+
+    use_gpu = user_inputs['entity']['model_parameters']['modelparameters:gpu_enable']['$']
+    default = user_inputs['entity']['model_parameters']['modelparameters:optimizer_default_learning_rate']['$']
 
 
     #installs

@@ -51,7 +51,7 @@ e_modelparameters = d1.entity('model_parameters', (
     ('modelparameters:loss_function', '{{ loss_func }}'), 
     ('modelparameters:optimizer', '{{ optimizer }}'), 
     ('modelparameters:optimizer_default_learning_rate', default), 
-    ('modelparameters:optimizer_learning_rate', lr), 
+    ('modelparameters:optimizer_learning_rate', str(lr)), 
     ('modelparameters:activation_function', '{{ activation_func }}'), 
 ))
 a_setmodelparameters = d1.activity('set_model_parameters()', datetime.datetime.now())

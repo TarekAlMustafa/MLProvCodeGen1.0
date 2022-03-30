@@ -16,4 +16,4 @@ def on_button_clicked(b):
     provenanceImage_open.on_click = webbrowser.open('http://localhost:8888/lab/tree/GeneratedProvenanceData/'+ProvenanceNameImage)
 
 provenanceImage_open.on_click(on_button_clicked)
-Image(ProvenanceNameImage)
+Image('../GeneratedProvenanceData/'+ProvenanceNameImage)
