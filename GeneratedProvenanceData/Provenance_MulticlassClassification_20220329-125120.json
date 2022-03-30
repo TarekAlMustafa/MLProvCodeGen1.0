@@ -1,0 +1,226 @@
+{
+  "prefix": {
+    "experimentinfo": "experimentinfo.org",
+    "hardwareinfo": "hardwareinfo.org",
+    "packages": "packages.org",
+    "dataingestion": "dataingestion.org",
+    "datapreparation": "datapreparation.org",
+    "datasegregation": "datasegregation.org",
+    "modelparameters": "modelparameters.org",
+    "training": "training.org",
+    "default": "provenanceexample.org"
+  },
+  "entity": {
+    "experiment_info": {
+      "experimentinfo:author": "Tarek Al Mustafa",
+      "experimentinfo:email": "tarek.almustafa@uni-jena.de",
+      "experimentinfo:title": "Multiclass Classification",
+      "experimentinfo:creation_date": "2022-03-29",
+      "experimentinfo:task_type": "MulticlassClassification"
+    },
+    "hardware_info": {
+      "hardwareinfo:Python Version": "3.9.7.final.0 (64 bit)",
+      "hardwareinfo:CPU": "AMD Ryzen 7 3700X 8-Core Processor",
+      "hardwareinfo:RAM": "15.95GB",
+      "hardwareinfo:Operating System": "Windows 10 Version: 10.0.19041 Machine: AMD64",
+      "hardwareinfo:GPUs": "[(0, 'NVIDIA GeForce GTX 1060 6GB')]"
+    },
+    "packages": {
+      "packages:numpy": "1.22.2",
+      "packages:pandas": "1.3.3",
+      "packages:matplotlib": "3.5.1",
+      "packages:sklearn": "1.0.2",
+      "packages:torch": "1.10.2+cpu",
+      "packages:tqdm": "4.60.0",
+      "packages:ipywidgets": "7.6.5",
+      "packages:pytorch-model-summary": "pytorch-model-summary         0.1.2",
+      "packages:ipython": "7.31.1",
+      "packages:gputil": "1.4.0",
+      "packages:psutil": "5.9.0",
+      "packages:py-cpuinfo": "py-cpuinfo                    8.0.0",
+      "packages:prov": "2.0.0"
+    },
+    "data_ingestion": {
+      "dataingestion:dataset_id": "Iris",
+      "dataingestion:output_dimensions": {
+        "$": 3,
+        "type": "xsd:int"
+      },
+      "dataingestion:samples_total": {
+        "$": 150,
+        "type": "xsd:int"
+      },
+      "dataingestion:feature_dimensions": {
+        "$": 4,
+        "type": "xsd:int"
+      }
+    },
+    "data_preparation": {
+      "datapreparation:number_operations": {
+        "$": 1,
+        "type": "xsd:int"
+      },
+      "datapreparation:transformation": "sklearn.preprocessing.StandardScaler",
+      "datapreparation:transformation_method": "Standardscaler.fit_transform"
+    },
+    "data_segregation": {
+      "datasegregation:segregation_method": "sklearn.model_selection.train_test_split",
+      "datasegregation:test_size": {
+        "$": 0.2,
+        "type": "xsd:double"
+      },
+      "datasegregation:train_size": {
+        "$": 0.8,
+        "type": "xsd:double"
+      },
+      "datasegregation:random_state": {
+        "$": 2,
+        "type": "xsd:int"
+      }
+    },
+    "model_parameters": {
+      "modelparameters:gpu_enable": {
+        "$": 1,
+        "type": "xsd:int"
+      },
+      "modelparameters:modelParameters": "Model(\n  (layer1): Linear(in_features=4, out_features=50, bias=True)\n  (layer2): Linear(in_features=50, out_features=50, bias=True)\n  (layer3): Linear(in_features=50, out_features=3, bias=True)\n)",
+      "modelparameters:neuron_number": {
+        "$": 50,
+        "type": "xsd:int"
+      },
+      "modelparameters:loss_function": "nn.CrossEntropyLoss()",
+      "modelparameters:optimizer": "torch.optim.Adam(",
+      "modelparameters:optimizer_default_learning_rate": {
+        "$": 1,
+        "type": "xsd:int"
+      },
+      "modelparameters:activation_function": "F.softmax(self.layer3(x), dim=1)"
+    },
+    "training": {
+      "training:epochs": {
+        "$": 100,
+        "type": "xsd:int"
+      },
+      "hierarchical_summary": [
+        "============================ Hierarchical Summary ============================\n\nModel(\n  (layer1): Linear(in_features=4, out_features=50, bias=True), 250 params\n  (layer2): Linear(in_features=50, out_features=50, bias=True), 2,550 params\n  (layer3): Linear(in_features=50, out_features=3, bias=True), 153 params\n), 2,953 params\n\n\n==============================================================================\n",
+        2953
+      ]
+    }
+  },
+  "activity": {
+    "set_experiment_info()": {
+      "prov:startTime": "2022-03-29T12:51:14.901656"
+    },
+    "set_hardware_info()": {
+      "prov:startTime": "2022-03-29T12:51:17.613339"
+    },
+    "platform.uname()": {},
+    "cpuinfo.get_cpu_info()": {},
+    "svmem.total": {},
+    "get_size(svmem.total)": {},
+    "GPUtil.getGPUs()": {},
+    "set_packages()": {
+      "prov:startTime": "2022-03-29T12:51:19.420359"
+    },
+    "{package_name}.__version__": {},
+    "!pip list | grep -i py-cpuinfo": {},
+    "!pip list | grep -i pytorch-model-summary": {},
+    "set_data_ingestion()": {
+      "prov:startTime": "2022-03-29T12:51:19.450197"
+    },
+    "set_data_preparation()": {
+      "prov:startTime": "2022-03-29T12:51:19.483238"
+    },
+    "set_data_segregation()": {
+      "prov:startTime": "2022-03-29T12:51:19.514872"
+    },
+    "set_model_parameters()": {
+      "prov:startTime": "2022-03-29T12:51:19.739076"
+    },
+    "set_training()": {
+      "prov:startTime": "2022-03-29T12:51:19.862187"
+    },
+    "hierarchical_summary(model, print_summary = False)": {}
+  },
+  "wasGeneratedBy": {
+    "_:id1": {
+      "prov:entity": "experiment_info",
+      "prov:activity": "set_experiment_info()"
+    },
+    "_:id3": {
+      "prov:entity": "hardware_info",
+      "prov:activity": "set_hardware_info()"
+    },
+    "_:id9": {
+      "prov:entity": "packages",
+      "prov:activity": "set_packages()"
+    },
+    "_:id13": {
+      "prov:entity": "data_ingestion",
+      "prov:activity": "set_data_ingestion()"
+    },
+    "_:id14": {
+      "prov:entity": "data_preparation",
+      "prov:activity": "set_data_preparation()"
+    },
+    "_:id15": {
+      "prov:entity": "data_segregation",
+      "prov:activity": "set_data_segregation()"
+    },
+    "_:id16": {
+      "prov:entity": "model_parameters",
+      "prov:activity": "set_model_parameters()"
+    },
+    "_:id17": {
+      "prov:entity": "training",
+      "prov:activity": "set_training()"
+    }
+  },
+  "wasAssociatedWith": {
+    "_:id2": {
+      "prov:activity": "experiment_info",
+      "prov:agent": "Tarek Al Mustafa"
+    }
+  },
+  "agent": {
+    "Tarek Al Mustafa": {}
+  },
+  "wasInformedBy": {
+    "_:id4": {
+      "prov:informed": "set_hardware_info()",
+      "prov:informant": "platform.uname()"
+    },
+    "_:id5": {
+      "prov:informed": "set_hardware_info()",
+      "prov:informant": "cpuinfo.get_cpu_info()"
+    },
+    "_:id6": {
+      "prov:informed": "set_hardware_info()",
+      "prov:informant": "svmem.total"
+    },
+    "_:id7": {
+      "prov:informed": "svmem.total",
+      "prov:informant": "get_size(svmem.total)"
+    },
+    "_:id8": {
+      "prov:informed": "set_hardware_info()",
+      "prov:informant": "GPUtil.getGPUs()"
+    },
+    "_:id10": {
+      "prov:informed": "set_packages()",
+      "prov:informant": "{package_name}.__version__"
+    },
+    "_:id11": {
+      "prov:informed": "set_packages()",
+      "prov:informant": "!pip list | grep -i py-cpuinfo"
+    },
+    "_:id12": {
+      "prov:informed": "set_packages()",
+      "prov:informant": "!pip list | grep -i pytorch-model-summary"
+    },
+    "_:id18": {
+      "prov:informed": "set_training()",
+      "prov:informant": "hierarchical_summary(model, print_summary = False)"
+    }
+  }
+}

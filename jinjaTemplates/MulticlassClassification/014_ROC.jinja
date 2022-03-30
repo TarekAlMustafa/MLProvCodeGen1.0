@@ -16,3 +16,19 @@ plt.xlabel('False positive rate')
 plt.ylabel('True positive rate')
 plt.title('ROC curve')
 plt.legend();
+
+#set_evaluation
+d1.add_namespace('evaluation', 'evaluation.org')
+
+e_evaluation = d1.entity('evaluation', (
+    ('evaluation:Accuracy', accuracy_list[(len(accuracy_list)-1)]),
+    ('evaluation:Loss', loss_list[(len(loss_list)-1)]),
+    ('evaluation:Confusion Matrix', str(confusionMatrix)),
+    ('evaluation:AUC', float(AUC)),
+    ('evaluation:F1 Score', str(F1)),
+    ('evaluation:Mean Absolute Error', MAE),
+    ('evaluation:Mean Squared Error', MSE),
+))
+a_settraining = d1.activity('set_evaluation()', datetime.datetime.now())
+d1.wasGeneratedBy(e_evaluation, a_settraining, None, {'packages:fct': 'set'})
+d1.used(a_settraining, e_training)

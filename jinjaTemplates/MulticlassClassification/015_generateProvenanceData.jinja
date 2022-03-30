@@ -1,9 +1,19 @@
-set_experiment_info()
-set_hardware_info()
-set_packages()
-set_data_ingestion()
-set_data_preparation()
-set_data_segregation()
-set_model_parameters()
-set_training()
-set_evaluation()
+#add visualization to PATH
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+
+#get time for filenames
+timestring = time.strftime('%Y%m%d-%H%M%S')
+timestring
+ProvenanceNameImage = ('Provenance_MulticlassClassification_' + timestring + '.png')
+
+dot = prov_to_dot(d1)
+dot.write_png('../GeneratedProvenanceData/'+ProvenanceNameImage)
+
+provenanceImage_open = widgets.Button(description = 'Open Image File')
+display(provenanceImage_open)
+
+def on_button_clicked(b):
+    provenanceImage_open.on_click = webbrowser.open('http://localhost:8888/lab/tree/GeneratedProvenanceData/'+ProvenanceNameImage)
+
+provenanceImage_open.on_click(on_button_clicked)
+Image(ProvenanceNameImage)

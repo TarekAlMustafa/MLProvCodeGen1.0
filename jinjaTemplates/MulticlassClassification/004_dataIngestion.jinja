@@ -65,11 +65,14 @@ y = y-1
 y
 {% endif %}
 
-def set_data_ingestion():
-    data_ingestion = {
-        "dataset_id" : '{{ dataset }}',
-        "output_dimensions" : output_dim,
-        "samples_total" : len(X),
-        "feature_dimensions" : len(feature_names) }
-    
-    return data_ingestion
+#set_data_ingestion
+d1.add_namespace('dataingestion', 'dataingestion.org')
+
+e_dataingestion = d1.entity('data_ingestion', (
+    ('dataingestion:dataset_id', '{{ dataset }}'),
+    ('dataingestion:output_dimensions', output_dim),
+    ('dataingestion:samples_total',  len(X)),
+    ('dataingestion:feature_dimensions', len(feature_names)),  
+))
+a_setdataingestion = d1.activity('set_data_ingestion()', datetime.datetime.now())
+d1.wasGeneratedBy(e_dataingestion, a_setdataingestion, None, {'packages:fct': 'set'})	

@@ -4,10 +4,14 @@
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-def set_data_preparation():
-    data_preparation = {
-        "number_operations" : 1,
-        "transformation" : "sklearn.preprocessing.StandardScaler",
-        "transformation_method" : "Standardscaler.fit_transform"}
-    
-    return data_preparation
+#set_data_preparation
+d1.add_namespace('datapreparation', 'datapreparation.org')
+
+e_datapreparation = d1.entity('data_preparation', (
+    ('datapreparation:number_operations', 1),
+    ('datapreparation:transformation', 'sklearn.preprocessing.StandardScaler'),
+    ('datapreparation:transformation_method', 'Standardscaler.fit_transform'), 
+))
+a_setdatapreparation = d1.activity('set_data_preparation()', datetime.datetime.now())
+d1.wasGeneratedBy(e_datapreparation, a_setdatapreparation, None, {'packages:fct': 'set'})
+d1.used(a_setdatapreparation, e_dataingestion)

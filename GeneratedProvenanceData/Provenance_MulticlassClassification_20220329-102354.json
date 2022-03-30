@@ -1,0 +1,81 @@
+{
+  "experiment_info":{
+    "author": "Tarek Al Mustafa",
+    "email": "tarek.almustafa@uni-jena.de",
+    "title": "Multiclass Classification",
+    "creation_date": "2022-03-29",
+    "task_type": "MulticlassClassification"
+},
+
+"hardware_info":{
+    "Python Version": "3.9.7.final.0 (64 bit)",
+    "CPU": "AMD Ryzen 7 3700X 8-Core Processor",
+    "RAM": "15.95GB",
+    "Operating System": "Windows 10 Version: 10.0.19041 Machine: AMD64",
+    "GPUs": "[(0, 'NVIDIA GeForce GTX 1060 6GB')]"
+},
+
+"packages":{
+    "numpy": "1.22.2",
+    "pandas": "1.3.3",
+    "matplotlib": "3.5.1",
+    "sklearn": "1.0.2",
+    "torch": "1.10.2+cpu",
+    "tqdm": "4.60.0",
+    "ipywidgets": "7.6.5",
+    "pytorch-model-summary": "pytorch-model-summary         0.1.2",
+    "ipython": "7.31.1",
+    "gputil": "1.4.0",
+    "psutil": "5.9.0",
+    "py-cpuinfo": "py-cpuinfo                    8.0.0"
+},
+
+"data_ingestion":{
+    "dataset_id": "Iris",
+    "output_dimensions": 3,
+    "samples_total": 150,
+    "feature_dimensions": 4
+},
+
+"data_preparation":{
+    "number_operations": 1,
+    "transformation": "sklearn.preprocessing.StandardScaler",
+    "transformation_method": "Standardscaler.fit_transform"
+},
+
+"data_segregation":{
+    "segregation_method": "sklearn.model_selection.train_test_split",
+    "test_size": 0.2,
+    "train_size": 0.8,
+    "random_state": 2
+},
+
+"model_parameters":{
+    "gpu_enable": 1,
+    "modelParameters": "Model(\n  (layer1): Linear(in_features=4, out_features=50, bias=True)\n  (layer2): Linear(in_features=50, out_features=50, bias=True)\n  (layer3): Linear(in_features=50, out_features=3, bias=True)\n)",
+    "neuron_number": 50,
+    "loss_function": "nn.CrossEntropyLoss()",
+    "optimizer": "torch.optim.Adam(",
+    "optimizer_default_learning_rate": 1,
+    "optimizer_learning_rate": null,
+    "activation_function": "F.softmax(self.layer3(x), dim=1)"
+},
+
+"training":{
+    "epochs": 100,
+    "hierarchical_summary": [
+        "============================ Hierarchical Summary ============================\n\nModel(\n  (layer1): Linear(in_features=4, out_features=50, bias=True), 250 params\n  (layer2): Linear(in_features=50, out_features=50, bias=True), 2,550 params\n  (layer3): Linear(in_features=50, out_features=3, bias=True), 153 params\n), 2,953 params\n\n\n==============================================================================\n",
+        2953
+    ]
+},
+
+"evaluation":{
+    "Accuracy": 0.8999999761581421,
+    "Loss": 0.6519215106964111,
+    "Confusion Matrix": "[[13  1  0]\n [ 0  6  2]\n [ 0  0  8]]",
+    "AUC": 0.98667,
+    "F1 Score": "[0.96296296 0.8        0.88888889]",
+    "Mean Absolute Error": 0.1,
+    "Mean Squared Error": 0.1
+}
+}

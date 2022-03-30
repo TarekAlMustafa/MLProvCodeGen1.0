@@ -282,8 +282,6 @@ Install required packages before running"""))
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     nbf.write(nb, 'GeneratedNotebooks/MulticlassClassification.ipynb')
-    
-    
 
     reply = {"greetings": "success"}
     return reply

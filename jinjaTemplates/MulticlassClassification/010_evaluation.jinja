@@ -6,15 +6,3 @@ ax1.set_ylabel("validation accuracy")
 ax2.plot(loss_list)
 ax2.set_ylabel("validation loss")
 ax2.set_xlabel("epochs");
-
-def set_evaluation():
-    evaluation = {
-    "Accuracy": accuracy_list[(len(accuracy_list)-1)],
-    "Loss": loss_list[(len(loss_list)-1)],
-    "Confusion Matrix": str(confusionMatrix),
-    "AUC": float(AUC),
-    "F1 Score": str(F1),
-    "Mean Absolute Error": MAE,
-    "Mean Squared Error": MSE}
-    
-    return evaluation

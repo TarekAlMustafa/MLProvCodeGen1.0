@@ -31,9 +31,16 @@ for epoch in trange(EPOCHS):
         correct = (torch.argmax(y_pred, dim=1) == y_test).type(torch.FloatTensor)
         accuracy_list[epoch] = correct.mean()
 
-def set_training():
-    training = {
-    "epochs" : EPOCHS,
-    "hierarchical_summary" : hierarchical_summary(model, print_summary = False) }
-    
-    return training
+#set_training
+d1.add_namespace('training', 'training.org')
+
+e_training = d1.entity('training', (
+    ('training:epochs', EPOCHS),
+    ('training:numberOfParameters', hierarchical_summary(model, print_summary = False)[1]),
+))
+a_settraining = d1.activity('set_training()', datetime.datetime.now())
+a_hierarchichalsummary = d1.activity('hierarchical_summary(model, print_summary = False)[1]')
+d1.wasGeneratedBy(e_training, a_settraining, None, {'packages:fct': 'set'})
+d1.wasInformedBy(a_settraining, a_hierarchichalsummary)
+d1.used(a_settraining, e_modelparameters)
+d1.used(a_settraining, e_datasegregation)

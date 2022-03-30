@@ -19,6 +19,7 @@ import torch.nn as nn
 from torch.autograd import Variable
 import tqdm
 from tqdm import trange
+import datetime
 from datetime import date
 import time
 from pytorch_model_summary import hierarchical_summary
@@ -26,6 +27,10 @@ import json
 import ipywidgets as widgets
 import webbrowser
 import IPython
-from IPython.display import display
+from IPython.display import display, Image
+import prov
+from prov.model import ProvDocument
+from prov.dot import prov_to_dot
+import os
 
 plt.style.use('ggplot')
