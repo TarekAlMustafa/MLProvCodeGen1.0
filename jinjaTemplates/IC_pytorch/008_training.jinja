@@ -81,14 +81,15 @@ print(train_log)
 wandb.finish()
 {% endif %}
 
-def set_training():
+#set_training
+d1.add_namespace('training', 'training.org')
 
-    training = {
-	{% if data_format == "Public dataset" %}
-	"batch_size" : batch_size,
-	{% endif %}
-    "epochs" : num_epochs,
-    "train_metrics" : str(train_log),
-	"print_progress" : {{print_every}}}
-    
-    return training
+e_training = d1.entity('training', (
+    ('training:batch_size', batch_size),    ('training:epochs', num_epochs),
+    ('training:train_metrics', str(train_log)),
+    ('training:print_progress', 1),
+))
+a_settraining = d1.activity('set_training()', datetime.datetime.now())
+d1.wasGeneratedBy(e_training, a_settraining, None, {'packages:fct': 'set'})
+d1.used(a_settraining, e_modelparameters)
+d1.used(a_settraining, e_datasegregation)

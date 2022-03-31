@@ -10,7 +10,6 @@ batch_size = {{ batch_size }}
 print_every = {{ print_every }}  # batches
 # Wrap in data loader.
 training_dataset = dataset("./data", train=True, download=True, transform=transform)
-#training_dataset = datasets.MNIST("./data", train=True, download=True, transform=transform)
 testing_dataset = dataset("./data", train=False, download=True, transform=transform)
 
 if use_cuda:
@@ -22,12 +21,18 @@ train_loader = DataLoader(training_dataset, batch_size=batch_size, shuffle=True,
 test_loader = DataLoader(testing_dataset, batch_size=batch_size, shuffle=False, **kwargs)
 val_loader = None
 
-def set_data_segregation():
-    data_segregation = {
-        "training_dataset" : str(training_dataset.__len__),
-        "testing_dataset" : str(testing_dataset.__len__)}
-    
-    return data_segregation{% else %}
+#set_data_segregation
+d1.add_namespace('datasegregation', 'datasegregation.org')
+
+e_datasegregation = d1.entity('data_segregation', (
+    ('datasegregation:training_dataset', str(training_dataset.__len__)),
+    ('datasegregation:testing_dataset', str(testing_dataset.__len__)),
+))
+a_setdatasegregation = d1.activity('set_data_segregation()', datetime.datetime.now())
+d1.wasGeneratedBy(e_datasegregation, a_setdatasegregation, None, {'packages:fct': 'set'})
+d1.used(a_setdatasegregation, e_datapreparation)
+d1.wasInformedBy(a_setdatasegregation, a_getlength)
+{% else %}
 ### Preprocessing
 def preprocess(data, name):
     if data is None:  # val/test can be empty

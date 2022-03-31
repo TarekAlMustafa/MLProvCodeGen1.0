@@ -50,19 +50,19 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
     #TODOvisualization_tool = user_inputs['visualization_tool']['tool']
     visualization_tool = 'notAtAll'
     notebook = True
-    data_format = user_inputs['data_ingestion']['data_format']
-    checkpoint = user_inputs['model_parameters']['save_checkpoint']
-    lr = user_inputs['model_parameters']['optimizer_learning_rate']
-    batch_size = user_inputs['training']['batch_size']
-    num_epochs = user_inputs['training']['epochs']
-    print_every = user_inputs['training']['print_progress']
-    gpu = user_inputs['model_parameters']['gpu_enable']
-    dataset = user_inputs['data_ingestion']['dataset_id']
-    model_func = user_inputs['model_parameters']['model_name']
-    pretrained = user_inputs['model_parameters']['pretrained']
-    num_classes = user_inputs['model_parameters']['num_classes']
-    loss = user_inputs['model_parameters']['loss_function']
-    optimizer = user_inputs['model_parameters']['optimizer']
+    data_format = user_inputs['entity']['data_ingestion']['dataingestion:data_format']
+    dataset = user_inputs['entity']['data_ingestion']['dataingestion:dataset_id']
+    checkpoint = user_inputs['entity']['model_parameters']['modelparameters:save_checkpoint']['$']
+    lr = user_inputs['entity']['model_parameters']['modelparameters:optimizer_learning_rate']['$']
+    gpu = user_inputs['entity']['model_parameters']['modelparameters:gpu_enable']['$']
+    model_func = user_inputs['entity']['model_parameters']['modelparameters:model_name']
+    pretrained = user_inputs['entity']['model_parameters']['modelparameters:pretrained']['$']
+    num_classes = user_inputs['entity']['model_parameters']['modelparameters:num_classes']['$']
+    loss = user_inputs['entity']['model_parameters']['modelparameters:loss_function']
+    optimizer = user_inputs['entity']['model_parameters']['modelparameters:optimizer']
+    batch_size = user_inputs['entity']['training']['training:batch_size']['$']
+    num_epochs = user_inputs['entity']['training']['training:epochs']['$']
+    print_every = user_inputs['entity']['training']['training:print_progress']['$']
     
 #-----------------------------------------------------------------------------
     # installs

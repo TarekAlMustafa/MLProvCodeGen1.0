@@ -6,13 +6,21 @@ transform = transforms.Compose([
     transforms.Lambda(lambda x: x.repeat(3, 1, 1)),  # grayscale to RGB
 ])
 
-def set_data_preparation():
-    dataInfo = training_dataset.__len__
-    transform_method = str(dataInfo).splitlines()[4:11]
-    data_preparation = {
-        "preprocessing" : str(transform_method)}
-    
-    return data_preparation{% else %}
+#set_data_preparation
+d1.add_namespace('datapreparation', 'datapreparation.org')
+
+dataInfo = training_dataset.__len__
+transform_method = str(dataInfo).splitlines()[4:11]
+
+e_datapreparation = d1.entity('data_preparation', (
+        ('datapreparation:preprocessing', str(transform_method)),
+))
+a_setdatapreparation = d1.activity('set_data_preparation()', datetime.datetime.now())
+d1.wasGeneratedBy(e_datapreparation, a_setdatapreparation, None, {'packages:fct': 'set'})
+d1.used(a_setdatapreparation, e_dataingestion)
+d1.wasInformedBy(a_splitlines, a_getlength)
+d1.wasInformedBy(a_setdatapreparation, a_splitlines)
+{% else %}
 ### Preprocessing
 def preprocess(data, name):
     if data is None:  # val/test can be empty

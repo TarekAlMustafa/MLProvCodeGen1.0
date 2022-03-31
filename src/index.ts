@@ -372,29 +372,55 @@ switch (problemSubmit) {
 // ------------------------------------------------------------------------------------------------------------------------------- //
             const objBody = {
 				exercise: exerciseValue,
-				'data_ingestion': {
-					'data_format': dataValue,
-					'dataset_id': dataSelectionValue
-				},
-				'model_parameters': {
-					'model_name': modelValue,
-					'pretrained': preTrainedModelValue,
-					'gpu_enable': useGPUValue,
-					'num_classes': quantityValue, 
-					'save_checkpoint': modelCheckpointValue,
-					'loss_function': lossFuncValue,
-					'optimizer': optimizerValue,
-					'optimizer_learning_rate': rateValue
-				},
-				'training': {
-					'batch_size': batchesValue,
-					'epochs': epochsValue,
-					'print_progress': printProgressValue
-				},
-				'visualization_tool':{
-					'tool' : logsValue
-				},
-            };
+				'entity':{
+					'data_ingestion': {
+						'dataingestion:data_format': dataValue,
+						'dataingestion:dataset_id': dataSelectionValue
+					},
+					'model_parameters': {
+						'modelparameters:model_name': modelValue,
+						'modelparameters:pretrained': {
+							'$': preTrainedModelValue,
+							'type': typeof(preTrainedModelValue),
+						},
+						'modelparameters:gpu_enable': {
+							'$': useGPUValue,
+							'type': typeof(useGPUValue),
+						},
+						'modelparameters:num_classes': {
+							'$': quantityValue, 
+							'type': typeof(quantityValue),
+						},
+						'modelparameters:save_checkpoint': {
+							'$': modelCheckpointValue,
+							'type': typeof(modelCheckpointValue),
+						},
+						'modelparameters:loss_function': lossFuncValue,
+						'modelparameters:optimizer': optimizerValue,
+						'modelparameters:optimizer_learning_rate': {
+							'$': rateValue,
+							'type': typeof(rateValue)
+						},
+					},
+					'training': {
+						'training:batch_size': {
+							'$': batchesValue,
+							'type': typeof(batchesValue),
+						},
+						'training:epochs': {
+							'$': epochsValue,
+							'type': typeof(epochsValue),
+						},
+						'training:print_progress': {
+							'$': printProgressValue,
+							'type': typeof(printProgressValue)
+						},
+					},
+					'visualization_tool':{
+						'tool' : logsValue
+					},
+				}
+			};
 // ------------------------------------------------------------------------------------------------------------------------------- //
             // Post request with input data
             try {

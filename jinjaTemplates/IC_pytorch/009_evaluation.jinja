@@ -1,8 +1,10 @@
-def set_evaluation():
-    evaluation = {
-		"report" : evaluator.state.metrics['report'],
-        "accuracy" : evaluator.state.metrics['accuracy'],
-        "loss" : evaluator.state.metrics['loss']
-    }
-    
-    return evaluation
+#set_evaluation
+d1.add_namespace('evaluation', 'evaluation.org')
+
+e_evaluation = d1.entity('evaluation', (
+    ('evaluation:accuracy', evaluator.state.metrics['accuracy']),
+    ('evaluation:loss', evaluator.state.metrics['loss']),
+))
+a_settraining = d1.activity('set_evaluation()', datetime.datetime.now())
+d1.wasGeneratedBy(e_evaluation, a_settraining, None, {'packages:fct': 'set'})
+d1.used(a_settraining, e_training)
