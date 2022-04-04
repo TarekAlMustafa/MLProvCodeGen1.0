@@ -29,10 +29,10 @@ optimizer = {{ optimizer}}model.parameters(), lr = 1)
 optimizer = {{ optimizer }}model.parameters())
 {% else %}
 lr={{ lr }} 
-if lr = 0:
-	optimizer = {{ optimizer }}model.parameters())
-else: 
-	optimizer = {{ optimizer }}model.parameters(), lr=lr)
+{% if lr == 0 %}
+optimizer = {{ optimizer }}model.parameters())
+{% else %}
+optimizer = {{ optimizer }}model.parameters(), lr=lr) {% endif %}
 {% endif %}
 loss_fn   = {{ loss_func }}
 
