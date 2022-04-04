@@ -20,3 +20,22 @@ dependencies:
   # additional packages for demos
   # - ipywidgets
   - graphviz
+  #Multiclass Classification
+  -pandas===1.3.3
+  -matplotlib===3.5.1
+  -sklearn==0.0
+  -tqdm===4.60.0
+  -pytorch-model-summary===0.1.2
+  -ipython===7.31.1
+  #IC_PyTorch
+  -torchvision===0.11.3
+  -pytorch-ignite===0.4.6
+  #Shared
+  -gputil===1.4.0
+  -psutil===5.9.0
+  -py-cpuinfo===8.0.0
+  -prov===2.0.0
+  -pydot===1.4.2
+  -numpy===1.22.2
+  -torch===1.10.2
+  -ipywidgets===7.6.5
