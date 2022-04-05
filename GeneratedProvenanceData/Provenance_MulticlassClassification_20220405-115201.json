@@ -1,5 +1,6 @@
 {
   "prefix": {
+    "prov_1": "http://www.w3.org/ns/prov",
     "experimentinfo": "experimentinfo.org",
     "hardwareinfo": "hardwareinfo.org",
     "packages": "packages.org",
@@ -11,12 +12,27 @@
     "evaluation": "evaluation.org",
     "default": "provenanceexample.org"
   },
+  "agent": {
+    "Tarek Al Mustafa": [
+      {
+        "prov:email": "tarek.almustafa@uni-jena.de"
+      },
+      {}
+    ]
+  },
   "entity": {
+    "Notebook": {
+      "prov:programming_language": "Python",
+      "prov:programming_language_version": "3.9.7.final.0 (64 bit)",
+      "prov:kernel": "python3",
+      "prov:type": [
+        "prov:Plan",
+        "prov:Collection"
+      ]
+    },
     "experiment_info": {
-      "experimentinfo:author": "Tarek Al Mustafa",
-      "experimentinfo:email": "tarek.almustafa@uni-jena.de",
       "experimentinfo:title": "Multiclass Classification",
-      "experimentinfo:creation_date": "2022-04-04",
+      "experimentinfo:creation_date": "2022-04-05",
       "experimentinfo:task_type": "MulticlassClassification"
     },
     "hardware_info": {
@@ -84,7 +100,7 @@
         "$": 1,
         "type": "xsd:int"
       },
-      "modelparameters:modelParameters": "Model(\n  (layer1): Linear(in_features=4, out_features=50, bias=True)\n  (layer2): Linear(in_features=50, out_features=50, bias=True)\n  (layer3): Linear(in_features=50, out_features=3, bias=True)\n)",
+      "modelparameters:modelParameters": "str(model)TODO",
       "modelparameters:neuron_number": {
         "$": 50,
         "type": "xsd:int"
@@ -92,10 +108,10 @@
       "modelparameters:loss_function": "nn.CrossEntropyLoss()",
       "modelparameters:optimizer": "torch.optim.Adam(",
       "modelparameters:optimizer_default_learning_rate": {
-        "$": 0,
+        "$": 1,
         "type": "xsd:int"
       },
-      "modelparameters:optimizer_learning_rate": "0",
+      "modelparameters:optimizer_learning_rate": "None",
       "modelparameters:activation_function": "F.softmax(self.layer3(x), dim=1)"
     },
     "training": {
@@ -109,25 +125,31 @@
       }
     },
     "evaluation": {
-      "evaluation:Accuracy": 0.10000000149011612,
-      "evaluation:Loss": 1.1064139604568481,
-      "evaluation:Confusion Matrix": "[[3 2 9]\n [8 0 0]\n [8 0 0]]",
+      "evaluation:Accuracy": 0.8999999761581421,
+      "evaluation:Loss": 0.6768864393234253,
+      "evaluation:Confusion Matrix": "[[13  1  0]\n [ 0  6  2]\n [ 0  0  8]]",
       "evaluation:AUC": {
-        "$": 0.33944,
+        "$": 0.98333,
         "type": "xsd:double"
       },
-      "evaluation:F1 Score": "[0.18181818 0.         0.        ]",
-      "evaluation:Mean Absolute Error": 1.4666666666666666,
-      "evaluation:Mean Squared Error": 2.6
+      "evaluation:F1 Score": "[0.96296296 0.8        0.88888889]",
+      "evaluation:Mean Absolute Error": 0.1,
+      "evaluation:Mean Squared Error": 0.1
+    }
+  },
+  "wasAttributedTo": {
+    "_:id1": {
+      "prov:entity": "Notebook",
+      "prov:agent": "Tarek Al Mustafa"
     }
   },
   "activity": {
     "set_experiment_info()": {
-      "prov:startTime": "2022-04-04T09:51:00.655295"
+      "prov:startTime": "2022-04-05T11:51:56.051463"
     },
     "date.today()": {},
     "set_hardware_info()": {
-      "prov:startTime": "2022-04-04T09:51:03.449834"
+      "prov:startTime": "2022-04-05T11:51:58.727900"
     },
     "platform.uname()": {},
     "cpuinfo.get_cpu_info()": {},
@@ -135,142 +157,214 @@
     "get_size(svmem.total)": {},
     "GPUtil.getGPUs()": {},
     "set_packages()": {
-      "prov:startTime": "2022-04-04T09:51:05.270488"
+      "prov:startTime": "2022-04-05T11:52:00.487492"
     },
     "{package_name}.__version__": {},
     "!pip list | grep -i py-cpuinfo": {},
     "!pip list | grep -i pytorch-model-summary": {},
     "set_data_ingestion()": {
-      "prov:startTime": "2022-04-04T09:51:05.289505"
+      "prov:startTime": "2022-04-05T11:52:00.507854"
     },
     "set_data_preparation()": {
-      "prov:startTime": "2022-04-04T09:51:05.304519"
+      "prov:startTime": "2022-04-05T11:52:00.521188"
     },
     "set_data_segregation()": {
-      "prov:startTime": "2022-04-04T09:51:05.320534"
+      "prov:startTime": "2022-04-05T11:52:00.536203"
     },
     "set_model_parameters()": {
-      "prov:startTime": "2022-04-04T09:51:05.579770"
+      "prov:startTime": "2022-04-05T11:52:00.792442"
     },
     "set_training()": {
-      "prov:startTime": "2022-04-04T09:51:05.696876"
+      "prov:startTime": "2022-04-05T11:52:00.895913"
     },
     "hierarchical_summary(model, print_summary = False)[1]": {},
     "set_evaluation()": {
-      "prov:startTime": "2022-04-04T09:51:05.895056"
-    }
-  },
-  "wasGeneratedBy": {
-    "_:id1": {
-      "prov:entity": "experiment_info",
-      "prov:activity": "set_experiment_info()"
-    },
-    "_:id4": {
-      "prov:entity": "hardware_info",
-      "prov:activity": "set_hardware_info()"
-    },
-    "_:id10": {
-      "prov:entity": "packages",
-      "prov:activity": "set_packages()"
-    },
-    "_:id14": {
-      "prov:entity": "data_ingestion",
-      "prov:activity": "set_data_ingestion()"
-    },
-    "_:id15": {
-      "prov:entity": "data_preparation",
-      "prov:activity": "set_data_preparation()"
-    },
-    "_:id17": {
-      "prov:entity": "data_segregation",
-      "prov:activity": "set_data_segregation()"
-    },
-    "_:id19": {
-      "prov:entity": "model_parameters",
-      "prov:activity": "set_model_parameters()"
-    },
-    "_:id21": {
-      "prov:entity": "training",
-      "prov:activity": "set_training()"
-    },
-    "_:id25": {
-      "prov:entity": "evaluation",
-      "prov:activity": "set_evaluation()"
+      "prov:startTime": "2022-04-05T11:52:01.121116"
     }
   },
   "wasAssociatedWith": {
     "_:id2": {
-      "prov:activity": "experiment_info",
-      "prov:agent": "Tarek Al Mustafa"
+      "prov:activity": "set_experiment_info()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id13": {
+      "prov:activity": "set_hardware_info()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id19": {
+      "prov:activity": "set_packages()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id22": {
+      "prov:activity": "set_data_ingestion()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id26": {
+      "prov:activity": "set_data_preparation()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id30": {
+      "prov:activity": "set_data_segregation()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id34": {
+      "prov:activity": "set_model_parameters()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id39": {
+      "prov:activity": "set_training()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
+    },
+    "_:id43": {
+      "prov:activity": "set_evaluation()",
+      "prov:agent": "Tarek Al Mustafa",
+      "prov:plan": "Notebook"
     }
   },
-  "agent": {
-    "Tarek Al Mustafa": {}
+  "wasGeneratedBy": {
+    "_:id3": {
+      "prov:entity": "experiment_info",
+      "prov:activity": "set_experiment_info()"
+    },
+    "_:id6": {
+      "prov:entity": "hardware_info",
+      "prov:activity": "set_hardware_info()"
+    },
+    "_:id14": {
+      "prov:entity": "packages",
+      "prov:activity": "set_packages()"
+    },
+    "_:id20": {
+      "prov:entity": "data_ingestion",
+      "prov:activity": "set_data_ingestion()"
+    },
+    "_:id23": {
+      "prov:entity": "data_preparation",
+      "prov:activity": "set_data_preparation()"
+    },
+    "_:id27": {
+      "prov:entity": "data_segregation",
+      "prov:activity": "set_data_segregation()"
+    },
+    "_:id31": {
+      "prov:entity": "model_parameters",
+      "prov:activity": "set_model_parameters()"
+    },
+    "_:id35": {
+      "prov:entity": "training",
+      "prov:activity": "set_training()"
+    },
+    "_:id40": {
+      "prov:entity": "evaluation",
+      "prov:activity": "set_evaluation()"
+    }
   },
   "wasInformedBy": {
-    "_:id3": {
+    "_:id4": {
       "prov:informed": "set_experiment_info()",
       "prov:informant": "date.today()"
     },
-    "_:id5": {
+    "_:id7": {
       "prov:informed": "set_hardware_info()",
       "prov:informant": "platform.uname()"
     },
-    "_:id6": {
+    "_:id8": {
       "prov:informed": "set_hardware_info()",
       "prov:informant": "cpuinfo.get_cpu_info()"
     },
-    "_:id7": {
+    "_:id9": {
       "prov:informed": "set_hardware_info()",
       "prov:informant": "svmem.total"
     },
-    "_:id8": {
+    "_:id10": {
       "prov:informed": "svmem.total",
       "prov:informant": "get_size(svmem.total)"
     },
-    "_:id9": {
+    "_:id11": {
       "prov:informed": "set_hardware_info()",
       "prov:informant": "GPUtil.getGPUs()"
     },
-    "_:id11": {
+    "_:id15": {
       "prov:informed": "set_packages()",
       "prov:informant": "{package_name}.__version__"
     },
-    "_:id12": {
+    "_:id16": {
       "prov:informed": "set_packages()",
       "prov:informant": "!pip list | grep -i py-cpuinfo"
     },
-    "_:id13": {
+    "_:id17": {
       "prov:informed": "set_packages()",
       "prov:informant": "!pip list | grep -i pytorch-model-summary"
     },
-    "_:id22": {
+    "_:id36": {
       "prov:informed": "set_training()",
       "prov:informant": "hierarchical_summary(model, print_summary = False)[1]"
     }
   },
+  "hadMember": {
+    "_:id5": {
+      "prov:collection": "Notebook",
+      "prov:entity": "experiment_info"
+    },
+    "_:id12": {
+      "prov:collection": "Notebook",
+      "prov:entity": "hardware_info"
+    },
+    "_:id18": {
+      "prov:collection": "Notebook",
+      "prov:entity": "packages"
+    },
+    "_:id21": {
+      "prov:collection": "Notebook",
+      "prov:entity": "data_ingestion"
+    },
+    "_:id25": {
+      "prov:collection": "Notebook",
+      "prov:entity": "data_preparation"
+    },
+    "_:id29": {
+      "prov:collection": "Notebook",
+      "prov:entity": "data_segregation"
+    },
+    "_:id33": {
+      "prov:collection": "Notebook",
+      "prov:entity": "model_parameters"
+    },
+    "_:id38": {
+      "prov:collection": "Notebook",
+      "prov:entity": "training"
+    },
+    "_:id42": {
+      "prov:collection": "Notebook",
+      "prov:entity": "evaluation"
+    }
+  },
   "used": {
-    "_:id16": {
+    "_:id24": {
       "prov:activity": "set_data_preparation()",
       "prov:entity": "data_ingestion"
     },
-    "_:id18": {
+    "_:id28": {
       "prov:activity": "set_data_segregation()",
       "prov:entity": "data_preparation"
     },
-    "_:id20": {
+    "_:id32": {
       "prov:activity": "set_model_parameters()",
-      "prov:entity": "data_ingestion"
+      "prov:entity": "data_segregation"
     },
-    "_:id23": {
+    "_:id37": {
       "prov:activity": "set_training()",
       "prov:entity": "model_parameters"
     },
-    "_:id24": {
-      "prov:activity": "set_training()",
-      "prov:entity": "data_segregation"
-    },
-    "_:id26": {
+    "_:id41": {
       "prov:activity": "set_evaluation()",
       "prov:entity": "training"
     }
