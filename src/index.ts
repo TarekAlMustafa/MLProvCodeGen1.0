@@ -99,7 +99,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				console.log(provenanceDataObj); 
 				console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
 				var taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
-				var notebookPath = "('http://localhost:8888/lab/tree/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
+				var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
 // ------------------------------------------------------------------------------------------------------------------------------- //				
@@ -442,7 +442,7 @@ switch (problemSubmit) {
 					const notebook_open = document.createElement('div');
 					content.node.appendChild(notebook_open);
 					notebook_open.innerHTML = `
-											<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/GeneratedNotebooks/ImageClassification_PyTorch.ipynb', 'JupyterLab')"> Open Notebook </button>  
+											<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb', 'JupyterLab')"> Open Notebook </button>  
 											`;
 				}
 // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -703,7 +703,7 @@ case 'MulticlassClassification':
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
 				notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
 										`;
 				}
 // ------------------------------------------------------------------------------------------------------------------------------- //

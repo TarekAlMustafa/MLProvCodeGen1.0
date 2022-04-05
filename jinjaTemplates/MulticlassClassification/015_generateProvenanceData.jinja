@@ -13,7 +13,7 @@ provenanceImage_open = widgets.Button(description = 'Open Image File')
 display(provenanceImage_open)
 
 def on_button_clicked(b):
-    provenanceImage_open.on_click = webbrowser.open('http://localhost:8888/lab/tree/GeneratedProvenanceData/'+ProvenanceNameImage)
+    provenanceImage_open.on_click = webbrowser.open('http://localhost:8888/lab/tree/extension/GeneratedProvenanceData/'+ProvenanceNameImage)
 
 provenanceImage_open.on_click(on_button_clicked)
 Image('../GeneratedProvenanceData/'+ProvenanceNameImage)
