@@ -23,7 +23,7 @@ def app(code):
 
 
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/userInputNotebook.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/userInputNotebook.ipynb')
 
     return code
 
@@ -44,7 +44,7 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
 """
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('extension/jinjaTemplates/IC_pytorch')
+    file_loader = FileSystemLoader('jinjaTemplates/IC_pytorch')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
 # GET VARIABLES
     #TODOvisualization_tool = user_inputs['visualization_tool']['tool']
@@ -138,7 +138,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/ImageClassification_PyTorch.ipynb')
     reply = {"greetings": "success"}
     return reply
 
@@ -163,7 +163,7 @@ Original author: N. Janakiev https://github.com/njanakiev Twitter: https://twitt
 
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('extension/jinjaTemplates/MulticlassClassification')
+    file_loader = FileSystemLoader('jinjaTemplates/MulticlassClassification')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
     dataset = user_inputs['entity']['data_ingestion']['dataingestion:dataset_id']
     random_seed = user_inputs['entity']['data_segregation']['datasegregation:random_state']['$']
@@ -286,7 +286,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'extension/GeneratedNotebooks/MulticlassClassification.ipynb')
+    nbf.write(nb, 'GeneratedNotebooks/MulticlassClassification.ipynb')
 
     reply = {"greetings": "success"}
     return reply
