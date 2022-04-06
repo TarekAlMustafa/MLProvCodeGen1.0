@@ -701,10 +701,11 @@ case 'MulticlassClassification':
 					'Your Code has been generated successfully. Press the button below to open it.';
 
 				const notebook_open = document.createElement('div');
-				content.node.appendChild(notebook_open);
+				//content.node.appendChild(notebook_open);
 				notebook_open.innerHTML = `
 										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
 										`;
+				return notebook_open
 				}
 // ------------------------------------------------------------------------------------------------------------------------------- //
 			} catch (reason) { 
@@ -712,6 +713,10 @@ case 'MulticlassClassification':
 				`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
 				);
 			}
+			// @ts-ignore
+			content.node.appendChild(notebook_open);
+			
+			
         }); // end of SubmitButton event listener
     break;
 	} // end switch
