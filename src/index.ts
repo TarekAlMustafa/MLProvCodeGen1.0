@@ -693,20 +693,9 @@ case 'MulticlassClassification':
 					method: 'POST'
 				});
 				console.log(reply);
+				const replytest = reply['greetings']
+				return replytest
 // ------------------------------------------------------------------------------------------------------------------------------- //
-				if (reply['greetings'] === 'success') {
-				const success_message = document.createElement('text');
-				content.node.appendChild(success_message);
-				success_message.textContent =
-					'Your Code has been generated successfully. Press the button below to open it.';
-
-				const notebook_open = document.createElement('div');
-				//content.node.appendChild(notebook_open);
-				notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
-										`;
-				return notebook_open
-				}
 // ------------------------------------------------------------------------------------------------------------------------------- //
 			} catch (reason) { 
 				console.error(
@@ -714,9 +703,18 @@ case 'MulticlassClassification':
 				);
 			}
 			// @ts-ignore
-			content.node.appendChild(notebook_open);
-			
-			
+			if (replytest === 'success') {
+				const success_message = document.createElement('text');
+				content.node.appendChild(success_message);
+				success_message.textContent =
+					'Your Code has been generated successfully. Press the button below to open it.';
+
+				const notebook_open = document.createElement('div');
+				content.node.appendChild(notebook_open);
+				notebook_open.innerHTML = `
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+										`;
+			}
         }); // end of SubmitButton event listener
     break;
 	} // end switch
