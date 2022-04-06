@@ -693,8 +693,7 @@ case 'MulticlassClassification':
 					method: 'POST'
 				});
 				console.log(reply);
-				const replytest = reply['greetings']
-				return replytest
+				//const replytest = reply['greetings']
 // ------------------------------------------------------------------------------------------------------------------------------- //
 // ------------------------------------------------------------------------------------------------------------------------------- //
 			} catch (reason) { 
@@ -703,7 +702,6 @@ case 'MulticlassClassification':
 				);
 			}
 			// @ts-ignore
-			if (replytest === 'success') {
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
 				success_message.textContent =
@@ -714,7 +712,6 @@ case 'MulticlassClassification':
 				notebook_open.innerHTML = `
 										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
 										`;
-			}
         }); // end of SubmitButton event listener
     break;
 	} // end switch
