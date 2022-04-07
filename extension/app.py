@@ -292,10 +292,7 @@ Install required packages before running"""))
     reply = {"greetings": "success"}
     return reply
     
-def openNotebook(user_inputs):    
-    notebookName = user_inputs['notebookName']
-    webbrowser.open_new_tab('http://www.google.com')
-    webbrowser.open(notebookName, new = 2)
+def openNotebook(user_inputs):
     
     reply ={"greetings": "success"}
     return reply

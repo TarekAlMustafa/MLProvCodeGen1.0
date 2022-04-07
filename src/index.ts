@@ -699,12 +699,6 @@ case 'MulticlassClassification':
 				content.node.appendChild(success_message);
 				success_message.textContent =
 					'Your Code has been generated successfully. Press the button below to open it.';
-
-				const notebook_open = document.createElement('div');
-				content.node.appendChild(notebook_open);
-				notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
-										`;
 				}
 // ------------------------------------------------------------------------------------------------------------------------------- //
 			} catch (reason) { 
@@ -725,7 +719,11 @@ case 'MulticlassClassification':
 				});
 				console.log(reply);
 				if (reply['greetings'] === 'success') {
-					window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')
+					const notebook_open = document.createElement('div');
+					content.node.appendChild(notebook_open);
+					notebook_open.innerHTML = `
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+										`;
 				}
 			} catch (reason) { 
 				console.error(
