@@ -714,7 +714,7 @@ case 'MulticlassClassification':
 			}
 			
 			// IDEA: New server request do open notebook
-			const name = 'http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
+			const name = 'http://localhost:8888/lab/workspaces/auto-8/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
 			const objName = {
 				'notebookName': name
 			}
