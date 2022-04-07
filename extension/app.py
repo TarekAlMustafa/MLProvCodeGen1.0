@@ -290,3 +290,11 @@ Install required packages before running"""))
 
     reply = {"greetings": "success"}
     return reply
+    
+def openNotebook(user_inputs):
+    import webbrowser
+    
+    webbrowser.open(user_inputs[notebookName])
+    
+    reply ={"greetings": "success"}
+    return reply

@@ -712,6 +712,24 @@ case 'MulticlassClassification':
 				`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
 				);
 			}
+			
+			// IDEA: New server request do open notebook
+			const name = 'http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
+			const objName = {
+				notebookName: name 
+			}
+			try {
+				const reply = await requestAPI<any>('openNotebook', {
+					body: JSON.stringify(objName),
+					method: 'POST'
+				});
+				console.log(reply);
+			} catch (reason) { 
+				console.error(
+				`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
+				);
+			}
+			
         }); // end of SubmitButton event listener
     break;
 	} // end switch
