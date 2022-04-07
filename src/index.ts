@@ -724,6 +724,9 @@ case 'MulticlassClassification':
 					method: 'POST'
 				});
 				console.log(reply);
+				if (reply['greetings'] === 'success') {
+					window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')
+				}
 			} catch (reason) { 
 				console.error(
 				`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
