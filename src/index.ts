@@ -116,19 +116,36 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 						success_message.id = 'successTextRight';
 						success_message.textContent =
 							'Your code has been generated successfully.';
-
-						const notebook_open = document.createElement('div');
-						content.node.appendChild(notebook_open);
-						notebook_open.innerHTML = `
-										<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
-										`;
 					}
 // ------------------------------------------------------------------------------------------------------------------------------- //
-				} catch (reason) { 
-					console.error(
-						`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
+					} catch (reason) { 
+						console.error(
+							`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
+							);
+					}
+				
+					const name = 'http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
+					const objName = {
+						'notebookName': name
+					}
+					try {
+						const reply = await requestAPI<any>('openNotebook', {
+							body: JSON.stringify(objName),
+							method: 'POST'
+						});
+						console.log(reply);
+						if (reply['greetings'] === 'success') {
+							const notebook_open = document.createElement('div');
+							content.node.appendChild(notebook_open);
+							notebook_open.innerHTML = `
+										<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
+										`;
+						}
+					} catch (reason) { 
+						console.error(
+						`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
 						);
-				}
+					}
 			};
 		}); // end of submitProvenanceFile event listener	
 	}); // end of provenanceInput event listener
@@ -438,12 +455,6 @@ switch (problemSubmit) {
 					content.node.appendChild(success_message);
 					success_message.textContent =
 					'Your Code has been generated successfully. Press the button below to open it.';
-
-					const notebook_open = document.createElement('div');
-					content.node.appendChild(notebook_open);
-					notebook_open.innerHTML = `
-											<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb', 'JupyterLab')"> Open Notebook </button>  
-											`;
 				}
 // ------------------------------------------------------------------------------------------------------------------------------- //
             } catch (reason) {
@@ -451,6 +462,29 @@ switch (problemSubmit) {
 					`Error on POST /extension/ImageClassification_pytorch ${dataToSend}.\n${reason}`
 				);
             }
+			
+			const name = 'http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
+			const objName = {
+				'notebookName': name
+			}
+			try {
+				const reply = await requestAPI<any>('openNotebook', {
+					body: JSON.stringify(objName),
+					method: 'POST'
+				});
+				console.log(reply);
+				if (reply['greetings'] === 'success') {
+					const notebook_open = document.createElement('div');
+					content.node.appendChild(notebook_open);
+					notebook_open.innerHTML = `
+										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+										`;
+				}
+			} catch (reason) { 
+				console.error(
+				`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
+				);
+			}
         }); // end of submitButton event listener
 	break;
 case 'MulticlassClassification':
@@ -707,7 +741,6 @@ case 'MulticlassClassification':
 				);
 			}
 			
-			// IDEA: New server request do open notebook
 			const name = 'http://localhost:8888/lab/workspaces/auto-8/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
 			const objName = {
 				'notebookName': name
