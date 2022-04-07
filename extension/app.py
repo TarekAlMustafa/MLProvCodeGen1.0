@@ -2,6 +2,7 @@ import nbformat as nbf
 import json
 import sys
 from jinja2 import Environment, FileSystemLoader
+import webbrowser
 
 def app(code):
     nb = nbf.v4.new_notebook()
@@ -291,12 +292,10 @@ Install required packages before running"""))
     reply = {"greetings": "success"}
     return reply
     
-def openNotebook(user_inputs):
-    import webbrowser
-    
+def openNotebook(user_inputs):    
     notebookName = user_inputs['notebookName']
-    
-    webbrowser.open(notebookName)
+    webbrowser.open_new_tab('http://www.google.com')
+    webbrowser.open(notebookName, new = 2)
     
     reply ={"greetings": "success"}
     return reply
