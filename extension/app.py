@@ -294,7 +294,9 @@ Install required packages before running"""))
 def openNotebook(user_inputs):
     import webbrowser
     
-    webbrowser.open(user_inputs[notebookName])
+    notebookName = user_inputs['notebookName']
+    
+    webbrowser.open(notebookName)
     
     reply ={"greetings": "success"}
     return reply
