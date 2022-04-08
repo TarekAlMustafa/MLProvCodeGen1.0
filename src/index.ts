@@ -118,9 +118,14 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				console.log(provenanceDataObj); 
 				console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
 				var taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
-				var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
+				var path = window.location.href + '/tree/GeneratedNotebooks/'
+				var notebookPath = "('"+path+ +provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
+				//var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
+				
+				
+				
 				
 				const reply = await generateNotebook(taskName, provenanceDataObj, content)
 				console.log(reply)
@@ -449,6 +454,8 @@ switch (problemSubmit) {
 			console.log(reply);
 			
 			if (reply['greetings'] === 'success') {
+				var path = window.location.href + '/tree/GeneratedNotebooks/MulticlassClassification.ipynb'
+				console.log(path)
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
 				success_message.textContent =
@@ -457,8 +464,8 @@ switch (problemSubmit) {
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
 				notebook_open.innerHTML = `
-					<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
-					`;
+									<button id="inputButton" type="button" onclick="window.open('`+path+`', 'MLProvCodeGen')"> Open Notebook </button>  
+									`;
 			}
         }); // end of submitButton event listener
 	break;
@@ -707,9 +714,6 @@ case 'MulticlassClassification':
 
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
-				/*notebook_open.innerHTML = `
-									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
-									`;*/
 				notebook_open.innerHTML = `
 									<button id="inputButton" type="button" onclick="window.open('`+path+`', 'MLProvCodeGen')"> Open Notebook </button>  
 									`;
