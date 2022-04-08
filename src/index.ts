@@ -711,8 +711,8 @@ case 'MulticlassClassification':
 									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
 									`;*/
 				notebook_open.innerHTML = `
-									<button id="inputButton" type="button" onclick="window.open(`+path+`, 'MLProvCodeGen')"> Open Notebook </button>  
-									`;					
+									<button id="inputButton" type="button" onclick="window.open('`+path+`', 'MLProvCodeGen')"> Open Notebook </button>  
+									`;
 			}
         }); // end of SubmitButton event listener
 		console.log(window.location.href)
