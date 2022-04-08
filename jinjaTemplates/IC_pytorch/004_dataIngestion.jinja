@@ -75,8 +75,8 @@ dataInfo = training_dataset.__len__
 root_location =  str(dataInfo).splitlines()[2]
 
 e_dataingestion = d1.entity('data_ingestion', (
-    ('dataingestion:data_format', 'Public dataset'),
-    ('dataingestion:dataset_id', 'MNIST'),
+    ('dataingestion:data_format', '{{ data_format }}'),
+    ('dataingestion:dataset_id', '{{ dataset }}'),
     ('dataingestion:feature_classes', 10),
     ('dataingestion:training_samples',  training_dataset.__len__()),
     ('dataingestion:testing_samples', testing_dataset.__len__()),

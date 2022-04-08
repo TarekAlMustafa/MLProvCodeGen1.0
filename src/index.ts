@@ -26,7 +26,7 @@ async function generateNotebook(requestname: string, objBody: object, content: W
 		console.error(
 			`Error on POST /extension/`+requestname+` ${objBody}.\n${reason}`
 		);
-    }
+    } 
 }
 
 async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launcher: ILauncher, settingRegistry: ISettingRegistry | null) {
@@ -121,33 +121,9 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
-// ------------------------------------------------------------------------------------------------------------------------------- //
-				/*try {
-					const reply = await requestAPI<any>(taskName, {
-						body: JSON.stringify(provenanceDataObj),
-						method: 'POST'
-					});
-					console.log(reply);
-// ------------------------------------------------------------------------------------------------------------------------------- //
-					if (reply['greetings'] === 'success') {
-						const success_message = document.createElement('text');
-						content.node.appendChild(success_message);
-						success_message.id = 'successTextRight';
-						success_message.textContent =
-							'Your code has been generated successfully.';
-					}
-// ------------------------------------------------------------------------------------------------------------------------------- //
-				} catch (reason) { 
-					console.error(
-							`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
-							);
-				} finally {
-					return reply
-				}*/
 				
-				let reply:any = generateNotebook(taskName, provenanceDataObj, content)
-				console.log(reply);
-				
+				const reply = await generateNotebook(taskName, provenanceDataObj, content)
+				console.log(reply)
 				if (reply['greetings'] === 'success') {
 					const success_message = document.createElement('text');
 					content.node.appendChild(success_message);
@@ -453,34 +429,8 @@ switch (problemSubmit) {
 					},
 				}
 			};
-// ------------------------------------------------------------------------------------------------------------------------------- //
-            // Post request with input data
-			/*try {
-				const reply = await requestAPI<any>(
-					'ImageClassification_pytorch',
-					{
-					body: JSON.stringify(objBody),
-					method: 'POST'
-					}
-				);
-				console.log(reply);
-// ------------------------------------------------------------------------------------------------------------------------------- //
-				if (reply['greetings'] === 'success') {
-					const success_message = document.createElement('text');
-					content.node.appendChild(success_message);
-					success_message.textContent =
-					'Your Code has been generated successfully. Press the button below to open it.';
-				}
-// ------------------------------------------------------------------------------------------------------------------------------- //
-            } catch (reason) {
-				console.error(
-					`Error on POST /extension/ImageClassification_pytorch ${dataToSend}.\n${reason}`
-				);
-            } finally {
-				return reply
-			} */
 			var method = 'ImageClassification_pytorch'
-			let reply:any = generateNotebook(method, objBody, content)
+			const reply = await generateNotebook(method, objBody, content)
 			console.log(reply);
 			
 			if (reply['greetings'] === 'success') {
@@ -729,36 +679,10 @@ case 'MulticlassClassification':
 					},
 				}
 			};
-// ------------------------------------------------------------------------------------------------------------------------------- //		  
-			/*// Post request with input data
-			var reply 
-			try {
-				const reply = await requestAPI<any>('MulticlassClassification', {
-					body: JSON.stringify(objBody),
-					method: 'POST'
-				});
-				console.log(reply);
-// ------------------------------------------------------------------------------------------------------------------------------- //
-				if (reply['greetings'] === 'success') {
-				const success_message = document.createElement('text');
-				content.node.appendChild(success_message);
-				success_message.textContent =
-					'Your Code has been generated successfully. Press the button below to open it.';
-				}
-// ------------------------------------------------------------------------------------------------------------------------------- //
-			} catch (reason) { 
-				console.error(
-				`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
-				);
-			} finally {
-				return reply
-			}
-			*/
 			var method = 'MulticlassClassification'
-			let reply:any = generateNotebook(method, objBody, content)
+			const reply = await generateNotebook(method, objBody, content)
 			console.log(reply);
-			
-			if (reply['greetings'] === 'success') {
+			if (reply["greetings"] === 'success') {
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
 				success_message.textContent =

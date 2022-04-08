@@ -210,7 +210,7 @@ Install required packages before running"""))
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #datapreparation
-    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data preparation"""))
+    nb['cells'].append(nbf.v4.new_markdown_cell("""### Data Preparation"""))
     template = env.get_template('005_dataPreparation.jinja')
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
