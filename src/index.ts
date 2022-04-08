@@ -721,6 +721,7 @@ case 'MulticlassClassification':
 			};
 // ------------------------------------------------------------------------------------------------------------------------------- //		  
 			// Post request with input data
+			var reply 
 			try {
 				const reply = await requestAPI<any>('MulticlassClassification', {
 					body: JSON.stringify(objBody),
@@ -739,8 +740,10 @@ case 'MulticlassClassification':
 				console.error(
 				`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
 				);
+			} finally {
+				return reply
 			}
-			
+			console.log(reply);
 			const name = 'http://localhost:8888/lab/workspaces/auto-8/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
 			const objName = {
 				'notebookName': name
@@ -762,7 +765,7 @@ case 'MulticlassClassification':
 				console.error(
 				`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
 				);
-			}
+			} 
 			
         }); // end of SubmitButton event listener
     break;
