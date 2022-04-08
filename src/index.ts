@@ -19,6 +19,7 @@ async function generateNotebook(requestname: string, objBody: object, content: W
 			method: 'POST'
 			}
 		);
+		console.log(reply)
 		return reply
 // ------------------------------------------------------------------------------------------------------------------------------- //
     } catch (reason) {
@@ -27,13 +28,6 @@ async function generateNotebook(requestname: string, objBody: object, content: W
 		);
     }
 }
-
-
-
-
-
-
-
 
 async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launcher: ILauncher, settingRegistry: ISettingRegistry | null) {
 	console.log('JupyterLab extension extension is activated!');
@@ -127,9 +121,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
-// ------------------------------------------------------------------------------------------------------------------------------- //				
-				var reply
-				try {
+// ------------------------------------------------------------------------------------------------------------------------------- //
+				/*try {
 					const reply = await requestAPI<any>(taskName, {
 						body: JSON.stringify(provenanceDataObj),
 						method: 'POST'
@@ -150,9 +143,18 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 							);
 				} finally {
 					return reply
-				}
+				}*/
+				
+				let reply:any = generateNotebook(taskName, provenanceDataObj, content)
+				console.log(reply);
 				
 				if (reply['greetings'] === 'success') {
+					const success_message = document.createElement('text');
+					content.node.appendChild(success_message);
+					success_message.id = 'successTextRight';
+					success_message.textContent =
+						'Your code has been generated successfully.';
+							
 					const notebook_open = document.createElement('div');
 					content.node.appendChild(notebook_open);
 					notebook_open.innerHTML = `
@@ -453,8 +455,7 @@ switch (problemSubmit) {
 			};
 // ------------------------------------------------------------------------------------------------------------------------------- //
             // Post request with input data
-            var reply
-			try {
+			/*try {
 				const reply = await requestAPI<any>(
 					'ImageClassification_pytorch',
 					{
@@ -477,9 +478,17 @@ switch (problemSubmit) {
 				);
             } finally {
 				return reply
-			}
+			} */
+			var method = 'ImageClassification_pytorch'
+			let reply:any = generateNotebook(method, objBody, content)
+			console.log(reply);
 			
 			if (reply['greetings'] === 'success') {
+				const success_message = document.createElement('text');
+				content.node.appendChild(success_message);
+				success_message.textContent =
+				'Your Code has been generated successfully. Press the button below to open it.';
+				
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
 				notebook_open.innerHTML = `
@@ -750,6 +759,11 @@ case 'MulticlassClassification':
 			console.log(reply);
 			
 			if (reply['greetings'] === 'success') {
+				const success_message = document.createElement('text');
+				content.node.appendChild(success_message);
+				success_message.textContent =
+					'Your Code has been generated successfully. Press the button below to open it.';
+
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
 				notebook_open.innerHTML = `
