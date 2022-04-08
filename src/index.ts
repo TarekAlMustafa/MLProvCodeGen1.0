@@ -10,6 +10,31 @@ import { ILauncher } from '@jupyterlab/launcher';
 
 /* eslint-disable no-useless-escape */
 
+async function generateNotebook(requestname: string, objBody: object, content: Widget) {
+	try {
+		const reply = await requestAPI<any>(
+			requestname,
+			{
+			body: JSON.stringify(objBody),
+			method: 'POST'
+			}
+		);
+		return reply
+// ------------------------------------------------------------------------------------------------------------------------------- //
+    } catch (reason) {
+		console.error(
+			`Error on POST /extension/`+requestname+` ${objBody}.\n${reason}`
+		);
+    }
+}
+
+
+
+
+
+
+
+
 async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launcher: ILauncher, settingRegistry: ISettingRegistry | null) {
 	console.log('JupyterLab extension extension is activated!');
 // setup and HTTP Request test; used to check if the server extension is enabled locally/ ob Binder
@@ -103,6 +128,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
 // ------------------------------------------------------------------------------------------------------------------------------- //				
+				var reply
 				try {
 					const reply = await requestAPI<any>(taskName, {
 						body: JSON.stringify(provenanceDataObj),
@@ -118,34 +144,21 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 							'Your code has been generated successfully.';
 					}
 // ------------------------------------------------------------------------------------------------------------------------------- //
-					} catch (reason) { 
-						console.error(
+				} catch (reason) { 
+					console.error(
 							`Error on POST /extension/MulticlassClassification ${dataToSend}.\n${reason}`
 							);
-					}
+				} finally {
+					return reply
+				}
 				
-					const name = 'http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
-					const objName = {
-						'notebookName': name
-					}
-					try {
-						const reply = await requestAPI<any>('openNotebook', {
-							body: JSON.stringify(objName),
-							method: 'POST'
-						});
-						console.log(reply);
-						if (reply['greetings'] === 'success') {
-							const notebook_open = document.createElement('div');
-							content.node.appendChild(notebook_open);
-							notebook_open.innerHTML = `
-										<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
-										`;
-						}
-					} catch (reason) { 
-						console.error(
-						`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
-						);
-					}
+				if (reply['greetings'] === 'success') {
+					const notebook_open = document.createElement('div');
+					content.node.appendChild(notebook_open);
+					notebook_open.innerHTML = `
+						<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
+					`;
+				}
 			};
 		}); // end of submitProvenanceFile event listener	
 	}); // end of provenanceInput event listener
@@ -440,7 +453,8 @@ switch (problemSubmit) {
 			};
 // ------------------------------------------------------------------------------------------------------------------------------- //
             // Post request with input data
-            try {
+            var reply
+			try {
 				const reply = await requestAPI<any>(
 					'ImageClassification_pytorch',
 					{
@@ -461,29 +475,16 @@ switch (problemSubmit) {
 				console.error(
 					`Error on POST /extension/ImageClassification_pytorch ${dataToSend}.\n${reason}`
 				);
-            }
-			
-			const name = 'http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
-			const objName = {
-				'notebookName': name
+            } finally {
+				return reply
 			}
-			try {
-				const reply = await requestAPI<any>('openNotebook', {
-					body: JSON.stringify(objName),
-					method: 'POST'
-				});
-				console.log(reply);
-				if (reply['greetings'] === 'success') {
-					const notebook_open = document.createElement('div');
-					content.node.appendChild(notebook_open);
-					notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
-										`;
-				}
-			} catch (reason) { 
-				console.error(
-				`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
-				);
+			
+			if (reply['greetings'] === 'success') {
+				const notebook_open = document.createElement('div');
+				content.node.appendChild(notebook_open);
+				notebook_open.innerHTML = `
+					<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/workspaces/auto-y/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+					`;
 			}
         }); // end of submitButton event listener
 	break;
@@ -720,7 +721,7 @@ case 'MulticlassClassification':
 				}
 			};
 // ------------------------------------------------------------------------------------------------------------------------------- //		  
-			// Post request with input data
+			/*// Post request with input data
 			var reply 
 			try {
 				const reply = await requestAPI<any>('MulticlassClassification', {
@@ -743,30 +744,18 @@ case 'MulticlassClassification':
 			} finally {
 				return reply
 			}
+			*/
+			var method = 'MulticlassClassification'
+			let reply:any = generateNotebook(method, objBody, content)
 			console.log(reply);
-			const name = 'http://localhost:8888/lab/workspaces/auto-8/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
-			const objName = {
-				'notebookName': name
-			}
-			try {
-				const reply = await requestAPI<any>('openNotebook', {
-					body: JSON.stringify(objName),
-					method: 'POST'
-				});
-				console.log(reply);
-				if (reply['greetings'] === 'success') {
-					const notebook_open = document.createElement('div');
-					content.node.appendChild(notebook_open);
-					notebook_open.innerHTML = `
-										<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
-										`;
-				}
-			} catch (reason) { 
-				console.error(
-				`Error on POST /extension/openNotebook ${dataToSend}.\n${reason}`
-				);
-			} 
 			
+			if (reply['greetings'] === 'success') {
+				const notebook_open = document.createElement('div');
+				content.node.appendChild(notebook_open);
+				notebook_open.innerHTML = `
+									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
+									`;
+			}
         }); // end of SubmitButton event listener
     break;
 	} // end switch
