@@ -12,6 +12,8 @@ from torchvision import models, datasets, transforms
 import ignite as pytorch_ignite
 from ignite.engine import Events, create_supervised_trainer, create_supervised_evaluator
 from ignite.metrics import Accuracy, Loss, ClassificationReport
+import pytorch_lightning
+from pytorch_lightning import seed_everything
 {% if data_format == "Image files" %}
 import urllib
 import zipfile

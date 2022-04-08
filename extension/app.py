@@ -64,6 +64,7 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
     batch_size = user_inputs['entity']['training']['training:batch_size']['$']
     num_epochs = user_inputs['entity']['training']['training:epochs']['$']
     print_every = user_inputs['entity']['training']['training:print_progress']['$']
+    seed = user_inputs['entity']['training']['training:seed']['$']
     
 #-----------------------------------------------------------------------------
     # installs
@@ -112,7 +113,7 @@ Install required packages before running"""))
     #Training
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Training"""))
     template = env.get_template('008_training.jinja')
-    output = template.render(visualization_tool = visualization_tool, lr = lr, num_epochs = num_epochs, data_format = data_format, print_every = print_every)
+    output = template.render(visualization_tool = visualization_tool, lr = lr, num_epochs = num_epochs, data_format = data_format, print_every = print_every, seed=seed)
     nb['cells'].append(nbf.v4.new_code_cell(output))
     
     #Evaluation

@@ -228,6 +228,14 @@ switch (problemSubmit) {
 							<label for="useGPU"> Use GPU if available? </label><br>
 						</form>
 						`;
+		const seed = document.createElement('div');
+		content.node.appendChild(seed);
+		seed.innerHTML = `
+						<form action="/action_page.php">
+							<label for="seed"> Random Seed</label>
+							<input type="number" id="seed" name="seed" value="2">
+						</form>
+						`; 
 		const IC_checkpoint = document.createElement('div');
 		content.node.appendChild(IC_checkpoint);
 		IC_checkpoint.innerHTML = `
@@ -351,6 +359,9 @@ switch (problemSubmit) {
             const printProgressValue = (<HTMLInputElement>(
               document.getElementById('printProgress')
             )).value;
+			const seedValue = (<HTMLInputElement>(
+              document.getElementById('seed')
+            )).value;
             let preTrainedModelValue = 3;
             let useGPUValue = 3;
             let modelCheckpointValue = 3;
@@ -421,8 +432,12 @@ switch (problemSubmit) {
 						},
 						'training:print_progress': {
 							'$': printProgressValue,
-							'type': typeof(printProgressValue)
+							'type': typeof(printProgressValue),
 						},
+						'training:seed': {
+							'$': seedValue,
+							'type': typeof(seedValue)
+						}
 					},
 					'visualization_tool':{
 						'tool' : logsValue
@@ -695,6 +710,7 @@ case 'MulticlassClassification':
 									`;
 			}
         }); // end of SubmitButton event listener
+		console.log(window.location.href)
     break;
 	} // end switch
 	});// end on the problemSelectionButton event listener
