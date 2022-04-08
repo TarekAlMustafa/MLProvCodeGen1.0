@@ -698,6 +698,8 @@ case 'MulticlassClassification':
 			const reply = await generateNotebook(method, objBody, content)
 			console.log(reply);
 			if (reply["greetings"] === 'success') {
+				var path = window.location.href + '/tree/GeneratedNotebooks/MulticlassClassification.ipynb'
+				console.log(path)
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
 				success_message.textContent =
@@ -705,9 +707,12 @@ case 'MulticlassClassification':
 
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
-				notebook_open.innerHTML = `
+				/*notebook_open.innerHTML = `
 									<button id="inputButton" type="button" onclick="window.open('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb', 'MLProvCodeGen')"> Open Notebook </button>  
-									`;
+									`;*/
+				notebook_open.innerHTML = `
+									<button id="inputButton" type="button" onclick="window.open(`+path+`, 'MLProvCodeGen')"> Open Notebook </button>  
+									`;					
 			}
         }); // end of SubmitButton event listener
 		console.log(window.location.href)
