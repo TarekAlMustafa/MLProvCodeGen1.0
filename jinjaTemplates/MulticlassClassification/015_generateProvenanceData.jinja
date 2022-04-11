@@ -1,7 +1,7 @@
 #get binder URL
 servers = list(notebookapp.list_running_servers())
 url = servers[0]['base_url']
-urlcombined = 'https://notebooks.gesis.org/'+url+'/tree/GeneratedProvenanceData/'
+urlcombined = 'https://notebooks.gesis.org/'+url+'lab/tree/GeneratedProvenanceData/'
 
 #add visualization to PATH
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
