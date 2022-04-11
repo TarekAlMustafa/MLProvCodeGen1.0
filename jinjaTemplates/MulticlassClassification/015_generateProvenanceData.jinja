@@ -14,12 +14,5 @@ ProvenanceNameImage = ('Provenance_MulticlassClassification_' + timestring + '.p
 dot = prov_to_dot(d1)
 dot.write_png('../GeneratedProvenanceData/'+ProvenanceNameImage)
 
-provenanceImage_open = widgets.Button(description = 'Open Image File')
-display(provenanceImage_open)
-
-def on_button_clicked(b):
-    #provenanceImage_open.on_click = webbrowser.open('http://localhost:8888/lab/tree/extension/GeneratedProvenanceData/'+ProvenanceNameImage)
-	provenanceImage_open.on_click = webbrowser.open(urlcombined+ProvenanceNameImage)
-
-provenanceImage_open.on_click(on_button_clicked)
+print(urlcombined+ProvenanceNameImage)
 Image('../GeneratedProvenanceData/'+ProvenanceNameImage)
