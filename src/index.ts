@@ -454,7 +454,7 @@ switch (problemSubmit) {
 			console.log(reply);
 			
 			if (reply['greetings'] === 'success') {
-				var path = window.location.href + '/tree/GeneratedNotebooks/ImageClassification_pytorch.ipynb'
+				var path = window.location.href + '/tree/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
 				console.log(path)
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
