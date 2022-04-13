@@ -195,9 +195,10 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 					`;*/
 					
 					const successInput = document.createElement('div');
-					content.node.appendChild(successInput);
+					//content.node.appendChild(successInput);
+					content.node.insertBefore(successInput, problemSelection)
 					successInput.innerHTML = `
-						<div class="flex-container">
+						<div class="flex-container3">
 							<div><p>Your code has been generated successfully.</div>
 							<div><button id="openButtonRight" type="button" `+openCall+` Open Notebook </button> </div>
 						</div>
