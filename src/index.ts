@@ -73,26 +73,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   widget.title.label = 'MLProvCodeGen';
   widget.title.closable = true;
 // ------------------------------------------------------------------------------------------------------------------------------- //
-	/*// Header
-	const mainHeader = document.createElement('h2');
-    content.node.appendChild(mainHeader);
-    mainHeader.innerHTML = `
-				<p><u>MLProvCodeGen</u></p>
-				`;
-					
-	const mainHeader2 = document.createElement('h3');
-    content.node.appendChild(mainHeader2);
-    mainHeader2.innerHTML = `
-				<p>Generate machine learning scripts using provenance data</p>
-				`;
-					
-	/*const instructions = document.createElement('div');
-	content.node.appendChild(instructions);
-	instructions.id = 'instructions'
-	instructions.innerHTML = `
-				<p>Use the input elements below <u>or</u></p>
-				<p>Input a MLProvCodeGen provenance data file on the right</p>
-	` */
+	// Header
 	const headerFlex = document.createElement('div');
 	content.node.appendChild(headerFlex);
 	headerFlex.id = 'headerFlex'
@@ -102,7 +83,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 			<div><h3>Generate machine learning scripts using provenance data</h3></div>
 			<div>Use the input elements below <u>or</u></div>
 			<div>Input a MLProvCodeGen provenance data file on the right</div>
-			<div>Hover over input elements for explainations</div>
+			<div>Hover over input elements for explanations</div>
 		</div>
 	`
 	
@@ -125,18 +106,6 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
     }
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //
-	/*const provenanceInputText = document.createElement('div');
-	content.node.appendChild(provenanceInputText);
-	provenanceInputText.id = 'provenanceInputText';
-	provenanceInputText.innerHTML = `
-									<b>Insert a MLProvCodeGen Provenance File:</b>`;
-	
-	const provenanceInput = document.createElement('div');
-	content.node.appendChild(provenanceInput);
-	provenanceInput.innerHTML = `
-		<input type="file" id="provenanceFileInput">
-	`; */
-	
 	const provInputFlex = document.createElement('div');
 	content.node.appendChild(provInputFlex);
 	provInputFlex.id = 'provInputFlex';
@@ -148,20 +117,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 		</div>
 	`
 	
-	//provenanceInput.addEventListener('change', event => {
-	//document.getElementById('provenanceFileInput')!.addEventListener('change', event => {
 	provInputFlex.addEventListener('change', event => {
 		let file = (<HTMLInputElement>event.target).files![0];
-		/*const submitProvenanceFile = document.createElement('div');
-        content.node.appendChild(submitProvenanceFile);
-		submitProvenanceFile.id = 'provInputFlex'
-        submitProvenanceFile.innerHTML = `
-						<div class="flex-container">
-							<div><button id="provenanceSubmit" type="button"> Submit Provenance File </button>  </div>
-						</div>
-						`; */
-		
-		//submitProvenanceFile.addEventListener('click', async event => {
 		document.getElementById('provenanceSubmit')!.addEventListener('click', async event => {
 			console.log(file);
 			
@@ -182,21 +139,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				const reply = await generateNotebook(taskName, provenanceDataObj, content)
 				console.log(reply)
 				if (reply['greetings'] === 'success') {
-					/*const success_message = document.createElement('text');
-					content.node.appendChild(success_message);
-					success_message.id = 'successTextRight';
-					success_message.textContent =
-						'Your code has been generated successfully.';
-							
-					const notebook_open = document.createElement('div');
-					content.node.appendChild(notebook_open);
-					notebook_open.innerHTML = `
-						<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
-					`;*/
-					
 					const successInput = document.createElement('div');
-					//content.node.appendChild(successInput);
-					content.node.insertBefore(successInput, problemSelection)
+					content.node.insertBefore(successInput, problemSelectionFlex)
 					successInput.innerHTML = `
 						<div class="flex-container3">
 							<div><p>Your code has been generated successfully.</div>
@@ -208,7 +152,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 		}); // end of submitProvenanceFile event listener	
 	}); // end of provenanceInput event listener
 // ------------------------------------------------------------------------------------------------------------------------------- //
-  const problemSelection = document.createElement('div');
+  /*const problemSelection = document.createElement('div');
   content.node.appendChild(problemSelection);
   problemSelection.innerHTML = `
 	<form id="problemSelectionID" onsubmit="return false">
@@ -219,7 +163,23 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 			<option value="ImageClassification"> Image Classification </option>
 		</select>
 	</form>	
-  `;
+  `; */
+  
+  const problemSelectionFlex = document.createElement('div');
+  content.node.appendChild(problemSelectionFlex);
+  problemSelectionFlex.id = "problemSelectionFlex"
+  problemSelectionFlex.innerHTML = `
+		<div class="flex-container2">
+			<div><b>Submit data through input elements:</b></div>
+			<div>
+				<label for="exercise">Choose a machine learning exercise:</label>
+				<select name="exercise" id="exercise">
+					<option value="MulticlassClassification"> Multiclass Classification</option>
+					<option value="ImageClassification"> Image Classification </option>
+				</select>
+			</div>
+		</div>
+  `
   // ------------------------------------------------------------------------------------------------------------------------------- //
   // submit button for problem selection
   const problemSelectionButton = document.createElement('div');

@@ -41,6 +41,7 @@
 			flex-direction: column;
 			flex-wrap: wrap;
 			align-content: flex-start;
+			align-items: flex-start;
 		}
 		
 		.flex-container3 {
