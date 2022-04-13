@@ -16,51 +16,6 @@
             width: 300px;
             vertical-align: top;
         }
-
-        input{
-			padding: 3px 6px;
-			align: left;
-        }
-		
-		#file-upload-button {
-			border: 2px solid black;
-		}
-		
-		#reset {
-			position: static;
-			left: 0px;
-			top: 0px;
-		}
-
-		#provenanceInputText {
-			position: absolute;
-			left: 500px;
-			top: 0px;
-		}
-
-		#provenanceFileInput {
-			position: absolute;
-			left: 494px;
-			top: 18px;
-		}
-
-		#provenanceSubmit {
-			position: absolute;
-			left: 500px;
-			top: 44px;
-		}
-		
-		#successTextRight {
-			position: absolute;
-			left: 500px;
-			top: 67px;
-		}
-		
-		#openButtonRight {
-			position: absolute;
-			left: 500px;
-			top: 88px;
-		}
 		
 		h2 {
 			padding: 0px 0px 0px 0px;
@@ -73,21 +28,18 @@
 			margin-top: 0px;
 		}
 		
-		#mainHeader {
-			margin: 0px 0px 0px 0px; 
-			padding: 0px 0px 0px 0px;
-		}
-		
-		#testheader {
-			margin: 0px 0px 0px 0px; 
-			padding: 0px 0px 0px 0px;
-		}
-		
 		.flex-container {
 			display:flex;
 			flex-direction: column;
 			flex-wrap: wrap;
 			align-items: center;
+		}
+		
+		.flex-container2 {
+			display:flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			align-contents: flex-start;
 		}
 		
 		

@@ -108,17 +108,20 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 	
 // ------------------------------------------------------------------------------------------------------------------------------- //  
   // Button to reset widget
-  const reset = document.createElement('div');
-  content.node.appendChild(reset);
-  reset.innerHTML = `
-		<button id="reset" type="Button"> Reset this tab </button>  
+  const resetFlex = document.createElement('div');
+  content.node.appendChild(resetFlex);
+  resetFlex.id = 'resetFlex'
+  resetFlex.innerHTML = `
+		<div class="flex-container">
+			<div><button id="reset" type="Button"> Reset this tab </button></div>
+		</div>
 		`;
 
-  reset.addEventListener('click', event => {
+  resetFlex.addEventListener('click', event => {
     const nodeList = content.node.childNodes;
     console.log(nodeList);
-    while (nodeList.length > 8) {
-      nodeList[8].remove();
+    while (nodeList.length > 5) {
+      nodeList[5].remove();
     }
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //
@@ -138,7 +141,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 	content.node.appendChild(provInputFlex);
 	provInputFlex.id = 'provInputFlex';
 	provInputFlex.innerHTML = `
-		<div class="flex-container">
+		<div class="flex-container2">
 			<div><b>Insert a MLProvCodeGen Provenance File:</b></div>
 			<div><input type="file"</div>
 			<div><button id="provenanceSubmit" type="button"> Submit Provenance File </button>  </div>
@@ -208,6 +211,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   content.node.appendChild(problemSelection);
   problemSelection.innerHTML = `
 	<form id="problemSelectionID" onsubmit="return false">
+	<div><b>Submit data through input elements:</b></div>
 		<label for="exercise">Choose a machine learning exercise:</label>
 		<select name="exercise" id="exercise">
 			<option value="MulticlassClassification"> Multiclass Classification</option>
