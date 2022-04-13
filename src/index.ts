@@ -141,6 +141,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 		<div class="flex-container">
 			<div><b>Insert a MLProvCodeGen Provenance File:</b></div>
 			<div><input type="file"</div>
+			<div><button id="provenanceSubmit" type="button"> Submit Provenance File </button>  </div>
 		</div>
 	`
 	
@@ -148,16 +149,17 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 	//document.getElementById('provenanceFileInput')!.addEventListener('change', event => {
 	provInputFlex.addEventListener('change', event => {
 		let file = (<HTMLInputElement>event.target).files![0];
-		const submitProvenanceFile = document.createElement('div');
+		/*const submitProvenanceFile = document.createElement('div');
         content.node.appendChild(submitProvenanceFile);
-		submitProvenanceFile.id = 'submitProvenanceFile'
+		submitProvenanceFile.id = 'provInputFlex'
         submitProvenanceFile.innerHTML = `
 						<div class="flex-container">
 							<div><button id="provenanceSubmit" type="button"> Submit Provenance File </button>  </div>
 						</div>
-						`;
+						`; */
 		
-		submitProvenanceFile.addEventListener('click', async event => {
+		//submitProvenanceFile.addEventListener('click', async event => {
+		document.getElementById('provenanceSubmit')!.addEventListener('click', async event => {
 			console.log(file);
 			
 			let reader = new FileReader();
@@ -173,9 +175,6 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				//var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
-				
-				
-				
 				
 				const reply = await generateNotebook(taskName, provenanceDataObj, content)
 				console.log(reply)
