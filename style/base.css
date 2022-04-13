@@ -62,4 +62,32 @@
 			top: 88px;
 		}
 		
+		h2 {
+			padding: 0px 0px 0px 0px;
+			margin-top: 0px;
+			margin-bottom: 1px;
+		}
+
+		h3 { 
+			padding: 0px 0px 0px 0px;
+			margin-top: 0px;
+		}
+		
+		#mainHeader {
+			margin: 0px 0px 0px 0px; 
+			padding: 0px 0px 0px 0px;
+		}
+		
+		#testheader {
+			margin: 0px 0px 0px 0px; 
+			padding: 0px 0px 0px 0px;
+		}
+		
+		.flex-container {
+			display:flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			align-items: center;
+		}
+		
 		

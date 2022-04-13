@@ -73,6 +73,40 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   widget.title.label = 'MLProvCodeGen';
   widget.title.closable = true;
 // ------------------------------------------------------------------------------------------------------------------------------- //
+	/*// Header
+	const mainHeader = document.createElement('h2');
+    content.node.appendChild(mainHeader);
+    mainHeader.innerHTML = `
+				<p><u>MLProvCodeGen</u></p>
+				`;
+					
+	const mainHeader2 = document.createElement('h3');
+    content.node.appendChild(mainHeader2);
+    mainHeader2.innerHTML = `
+				<p>Generate machine learning scripts using provenance data</p>
+				`;
+					
+	/*const instructions = document.createElement('div');
+	content.node.appendChild(instructions);
+	instructions.id = 'instructions'
+	instructions.innerHTML = `
+				<p>Use the input elements below <u>or</u></p>
+				<p>Input a MLProvCodeGen provenance data file on the right</p>
+	` */
+	const headerFlex = document.createElement('div');
+	content.node.appendChild(headerFlex);
+	headerFlex.id = 'headerFlex'
+	headerFlex.innerHTML = `
+		<div class="flex-container">
+			<div><h2>MLProvCodeGen</h2></div>
+			<div><h3>Generate machine learning scripts using provenance data</h3></div>
+			<div>Use the input elements below <u>or</u></div>
+			<div>Input a MLProvCodeGen provenance data file on the right</div>
+			<div>Hover over input elements for explainations</div>
+		</div>
+	`
+	
+// ------------------------------------------------------------------------------------------------------------------------------- //  
   // Button to reset widget
   const reset = document.createElement('div');
   content.node.appendChild(reset);
@@ -83,28 +117,44 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   reset.addEventListener('click', event => {
     const nodeList = content.node.childNodes;
     console.log(nodeList);
-    while (nodeList.length > 5) {
-      nodeList[5].remove();
+    while (nodeList.length > 8) {
+      nodeList[8].remove();
     }
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //
-	const provenanceInputText = document.createElement('div');
+	/*const provenanceInputText = document.createElement('div');
 	content.node.appendChild(provenanceInputText);
 	provenanceInputText.id = 'provenanceInputText';
-	provenanceInputText.innerHTML = '<b>Insert a MLProvCodeGen Provenance File:</b>';
+	provenanceInputText.innerHTML = `
+									<b>Insert a MLProvCodeGen Provenance File:</b>`;
 	
 	const provenanceInput = document.createElement('div');
 	content.node.appendChild(provenanceInput);
 	provenanceInput.innerHTML = `
 		<input type="file" id="provenanceFileInput">
-	`;
+	`; */
 	
-	provenanceInput.addEventListener('change', event => {
+	const provInputFlex = document.createElement('div');
+	content.node.appendChild(provInputFlex);
+	provInputFlex.id = 'provInputFlex';
+	provInputFlex.innerHTML = `
+		<div class="flex-container">
+			<div><b>Insert a MLProvCodeGen Provenance File:</b></div>
+			<div><input type="file"</div>
+		</div>
+	`
+	
+	//provenanceInput.addEventListener('change', event => {
+	//document.getElementById('provenanceFileInput')!.addEventListener('change', event => {
+	provInputFlex.addEventListener('change', event => {
 		let file = (<HTMLInputElement>event.target).files![0];
 		const submitProvenanceFile = document.createElement('div');
         content.node.appendChild(submitProvenanceFile);
+		submitProvenanceFile.id = 'submitProvenanceFile'
         submitProvenanceFile.innerHTML = `
-						<button id="provenanceSubmit" name"provenanceSubmit" type="button"> Submit Provenance File </button>  
+						<div class="flex-container">
+							<div><button id="provenanceSubmit" type="button"> Submit Provenance File </button>  </div>
+						</div>
 						`;
 		
 		submitProvenanceFile.addEventListener('click', async event => {
@@ -130,7 +180,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				const reply = await generateNotebook(taskName, provenanceDataObj, content)
 				console.log(reply)
 				if (reply['greetings'] === 'success') {
-					const success_message = document.createElement('text');
+					/*const success_message = document.createElement('text');
 					content.node.appendChild(success_message);
 					success_message.id = 'successTextRight';
 					success_message.textContent =
@@ -140,7 +190,16 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 					content.node.appendChild(notebook_open);
 					notebook_open.innerHTML = `
 						<button id="openButtonRight" type="button" `+openCall+` Open Notebook </button>  
-					`;
+					`;*/
+					
+					const successInput = document.createElement('div');
+					content.node.appendChild(successInput);
+					successInput.innerHTML = `
+						<div class="flex-container">
+							<div><p>Your code has been generated successfully.</div>
+							<div><button id="openButtonRight" type="button" `+openCall+` Open Notebook </button> </div>
+						</div>
+					`
 				}
 			};
 		}); // end of submitProvenanceFile event listener	
@@ -150,7 +209,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   content.node.appendChild(problemSelection);
   problemSelection.innerHTML = `
 	<form id="problemSelectionID" onsubmit="return false">
-		<label for="exercise">Choose a problem to solve:</label>
+		<label for="exercise">Choose a machine learning exercise:</label>
 		<select name="exercise" id="exercise">
 			<option value="MulticlassClassification"> Multiclass Classification</option>
 			<option value="ImageClassification"> Image Classification </option>
@@ -175,95 +234,95 @@ switch (problemSubmit) {
         const IC_model = document.createElement('div');
         content.node.appendChild(IC_model);
         IC_model.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="model">Which model do you want to use?</label>
 							<select name="model" id="model">
 								<option value="resnet18"> resnet18 </option>
 								<option value="densenet161"> densenet161 </option>
 								<option value="vgg16"> vgg16 </option>
 							</select>
-						</form>	
+						</div>	
 						`;
         const IC_classes = document.createElement('div');
         content.node.appendChild(IC_classes);
 		IC_classes.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="quantity">How many classes/output units?</label>
 							<input type="number" id="quantity" name="quantity" value="1000"> 
 							Default: 1000 classes for training on ImageNet
-						</form>
+						</div>
 						`;
 		const IC_pretrained = document.createElement('div');
 		content.node.appendChild(IC_pretrained);
 		IC_pretrained.innerHTML = `
-						<form>
+						<div title="Select your dataset here!">
 							<input type="checkbox" id="preTrainedModel" name="preTrainedModel" value="preTrainedModel">
 							<label for="preTrainedModel"> Do you want to use a pre trained model?</label><br>
-						</form>
+						</div>
 						`;
 		const IC_dataFormat = document.createElement('div');
 		content.node.appendChild(IC_dataFormat);
 		IC_dataFormat.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="data">Which data do you want to use?</label>
 							<select name="data" id="data">
 								<option value="Public dataset"> Public dataset </option>
 								<option value="Numpy arrays"> Numpy arrays </option>
 								<option value="Image files"> Image files </option>
 							</select>
-						</form>	
+						</div>	
 						`;
 		const IC_dataset = document.createElement('div');
 		content.node.appendChild(IC_dataset);
 		IC_dataset.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 						<label for="dataSelection">Which one?:</label>
 						<select name="dataSelection" id="dataSelection">
 							<option value="MNIST"> MNIST </option>
 							<option value="FashionMNIST"> FashionMNIST </option>
 							<option value="CIFAR10"> CIFAR10 </option>
 						</select>
-						</form>	
+						</div>	
 						`;
 		const IC_useGPU = document.createElement('div');
 		content.node.appendChild(IC_useGPU);
 		IC_useGPU.innerHTML = `
-						<form>
+						<div title="Select your dataset here!">
 							<input type="checkbox" id="useGPU" name="useGPU" value="useGPU" checked>
 							<label for="useGPU"> Use GPU if available? </label><br>
-						</form>
+						</div>
 						`;
 		const seed = document.createElement('div');
 		content.node.appendChild(seed);
 		seed.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="seed"> Random Seed</label>
 							<input type="number" id="seed" name="seed" value="2">
-						</form>
+						</div>
 						`; 
 		const IC_checkpoint = document.createElement('div');
 		content.node.appendChild(IC_checkpoint);
 		IC_checkpoint.innerHTML = `
-						<form>
+						<div title="Select your dataset here!">
 							<input type="checkbox" id="modelCheckpoint" name="modelCheckpoint" value="modelCheckpoint">
 							<label for="modelCheckpoint"> Save model checkpoint each epoch?</label><br>
-						</form>
+						</div>
 						`;          
 		const IC_lossFunction = document.createElement('div');
 		content.node.appendChild(IC_lossFunction);
 		IC_lossFunction.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="lossFunc"> Loss function</label>
 							<select name="lossFunc" id="lossFunc">
 								<option value="CrossEntropyLoss"> CrossEntropyLoss </option>
 								<option value="BCEWithLogitsLoss"> BCEWithLogitsLoss </option>
 							</select>
-						</form>	
+						</div>	
 						`;
 		const IC_optimizer = document.createElement('div');
 		content.node.appendChild(IC_optimizer);
 		IC_optimizer.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="optimizer"> Optimizer </label>
 							<select name="optimizer" id="optimizer">
 								<option value="Adam"> Adam </option>
@@ -273,44 +332,44 @@ switch (problemSubmit) {
 								<option value="RMSprop"> RMSprop </option>
 								<option value="SGD"> SGD </option>
 							</select>
-						</form>	
+						</div>	
 						`;
 		const IC_learningRate = document.createElement('div');
 		content.node.appendChild(IC_learningRate);
 		IC_learningRate.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="rate"> Learning rate</label>
 							<input type="number" id="rate" name="rate" value="0.001">
-						</form>
+						</div>
 						`;
 		const IC_batchSize = document.createElement('div');
 		content.node.appendChild(IC_batchSize);
 		IC_batchSize.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="batches"> Batch Size</label>
 							<input type="number" id="batches" name="batches" value="128">
-						</form>
+						</div>
 						`;
 		const IC_epochs = document.createElement('div');
 		content.node.appendChild(IC_epochs);
 		IC_epochs.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="epochs">How many epochs?</label>
 							<input type="number" id="epochs" name="epochs" value="3">
-						</form>
+						</div>
 						`;
 		const IC_printProgress = document.createElement('div');
 		content.node.appendChild(IC_printProgress);
 		IC_printProgress.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="printProgress"> Print progress every ... batches</label>
 							<input type="number" id="printProgress" name="printProgress" value="1">
-						</form>
+						</div>
 						`;
 		const IC_logging = document.createElement('div');
 		content.node.appendChild(IC_logging);
 		IC_logging.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="logs"> How to log metrics </label>
 							<select name="logs" id="logs">
 								<option value="notAtAll"> Not at all </option>
@@ -319,7 +378,7 @@ switch (problemSubmit) {
 								<option value="Weights & Biases"> weightsAndBiases </option>
 								<option value="comet.ml"> comet.ml </option>
 							</select>
-						</form>	
+						</div>	
 						`;
 		const submitButtonIC = document.createElement('div');
 		content.node.appendChild(submitButtonIC);
@@ -476,11 +535,11 @@ case 'MulticlassClassification':
         MC_data_header.innerHTML = `
 						<b><u> Data Settings</u></b>
 					`;
-
+					
         const MC_dataset = document.createElement('div');
         content.node.appendChild(MC_dataset);
         MC_dataset.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="dataset">Which dataset do you want to use?</label>
 							<select name="dataset" id="dataset">
 								<option value="Iris"> Iris </option>
@@ -489,30 +548,32 @@ case 'MulticlassClassification':
 								<option value="R15"> R15 </option>
 								<option value="User"> Use your own Data (.csv) </option>
 							</select>
-						</form>	
+						</div>
 						`;
         const MC_random_seed = document.createElement('div');
         content.node.appendChild(MC_random_seed);
         MC_random_seed.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="random_seed">Random Seed for data Segregation (default: 2)</label>
 							<input type="number" id="random_seed" name="random_seed" value="2">
-						</form>
+						</div>
 						`;
 
         const MC_test_split = document.createElement('div');
         content.node.appendChild(MC_test_split);
         MC_test_split.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="test_split">Testing data split (default: 0.2)</label>
 							<input type="number" id="test_split" name="test_split" value="0.2">
-						</form>
+						</div>
 						`;
 
         const MC_preprocessing_text = document.createElement('div');
         content.node.appendChild(MC_preprocessing_text);
         MC_preprocessing_text.innerHTML = `
-						<label> <i>preprocessing: MinMaxScaler</i></label>
+						<div title="Select your dataset here!">
+							<label> <i>preprocessing: MinMaxScaler</i></label>
+						</div>
 					`;
 
         const MC_model_header = document.createElement('div');
@@ -524,38 +585,38 @@ case 'MulticlassClassification':
         const MC_activation_func = document.createElement('div');
         content.node.appendChild(MC_activation_func);
         MC_activation_func.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="activation_func">Activation function:</label>
 							<select name="activation_func" id="activation_func">
 								<option value="F.softmax(self.layer3(x), dim=1)"> Softmax </option>
 								<option value="torch.sigmoid(self.layer3(x))"> Sigmoid </option>
 								<option value="torch.tanh(self.layer3(x))"> Tanh </option>
 							</select>
-						</form>	
+						</div>
 						`;
 
         const MC_neuron_number = document.createElement('div');
         content.node.appendChild(MC_neuron_number);
         MC_neuron_number.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="neuron_number">How many Neurons per linear layer? (Input and output neurons are separate) </label>
 							<input type="number" id="neuron_number" name="neuron_number" value="50">
-						</form>
+						</div>
 						`;
 
         const MC_epochs = document.createElement('div');
         content.node.appendChild(MC_epochs);
         MC_epochs.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="epochs">How many Epochs?</label>
 							<input type="number" id="epochs" name="epochs" value="100">
-						</form>
+						</div>
 						`;
 
         const MC_optimizer = document.createElement('div');
         content.node.appendChild(MC_optimizer);
         MC_optimizer.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="optimizer"> Optimizer </label>
 							<select name="optimizer" id="optimizer">
 								<option value="torch.optim.Adam("> Adam </option>
@@ -565,44 +626,44 @@ case 'MulticlassClassification':
 								<option value="torch.optim.RMSprop("> RMSprop </option>
 								<option value="torch.optim.SGD("> SGD </option>
 							</select>
-						</form>	
+						</div>	
 						`;
         const MC_default_lr = document.createElement('div');
         content.node.appendChild(MC_default_lr);
         MC_default_lr.innerHTML = `
-						<form>
+						<div title="Select your dataset here!">
 							<input type="checkbox" id="default" name="default" value="default" checked>
 							<label for="default"> Use optimizers default learning rate? </label><br>
-						</form>
+						</div>
 						`;
 
         const MC_lr = document.createElement('div');
         content.node.appendChild(MC_lr);
         MC_lr.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="rate"> Learning rate</label>
 							<input type="number" id="rate" name="rate" value="0.001">
-						</form>
+						</div>
 						`;
         const MC_loss = document.createElement('div');
         content.node.appendChild(MC_loss);
         MC_loss.innerHTML = `
-						<form action="/action_page.php">
+						<div title="Select your dataset here!">
 							<label for="lossFunc"> Loss function</label>
 							<select name="lossFunc" id="lossFunc">
 								<option value="nn.CrossEntropyLoss()"> CrossEntropyLoss </option>
 								<option value="nn.NLLLoss()"> NLLLoss </option>
 								<option value="nn.MultiMarginLoss()"> MultiMarginLoss </option>
 							</select>
-						</form>	
+						</div>
 						`;
         const MC_use_gpu = document.createElement('div');
         content.node.appendChild(MC_use_gpu);
         MC_use_gpu.innerHTML = `
-						<form>
+						<div title="Select your dataset here!">
 							<input type="checkbox" id="use_gpu" name="use_gpu" value="use_gpu" checked>
 							<label for="use_gpu"> Use GPU if available? </label><br>
-						</form>
+						</div>
 						`;
 
         const MC_submitButton = document.createElement('div');
