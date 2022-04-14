@@ -51,4 +51,30 @@
 			align-content: flex-start;
 		}
 		
+		.flex-containerReverse {
+			display:flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			align-content: flex-start;
+		}
+		
+		select {
+			margin-top: 3px;
+		}
+		
+		input[type=number] {
+			margin-top: 3px;
+		}
+		
+		input[type=checkbox] {
+			margin-top: 5px;
+			float: right;
+		}
+		
+		i {
+			padding-left:6px;
+			padding-right:6px;
+			padding-bottom:3px;
+			padding-top:3px;
+		}
 		
