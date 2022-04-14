@@ -98,12 +98,24 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 		</div>
 		`;
 
-  resetFlex.addEventListener('click', event => {
+  /*resetFlex.addEventListener('click', event => {
     const nodeList = content.node.childNodes;
     console.log(nodeList);
     while (nodeList.length > 5) {
       nodeList[5].remove();
     }
+  });*/
+  resetFlex.addEventListener('click', event => {
+    const nodeList = content.node.childNodes;
+    console.log(nodeList);
+    while (nodeList.length > 0) {
+      nodeList[0].remove();
+    }
+	content.node.appendChild(headerFlex);
+	content.node.appendChild(resetFlex);
+	content.node.appendChild(provInputFlex);
+	content.node.appendChild(problemSelectionFlex);
+	content.node.appendChild(problemSelectionButton);
   });
 // ------------------------------------------------------------------------------------------------------------------------------- //
 	const provInputFlex = document.createElement('div');
@@ -152,19 +164,6 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 		}); // end of submitProvenanceFile event listener	
 	}); // end of provenanceInput event listener
 // ------------------------------------------------------------------------------------------------------------------------------- //
-  /*const problemSelection = document.createElement('div');
-  content.node.appendChild(problemSelection);
-  problemSelection.innerHTML = `
-	<form id="problemSelectionID" onsubmit="return false">
-	<div><b>Submit data through input elements:</b></div>
-		<label for="exercise">Choose a machine learning exercise:</label>
-		<select name="exercise" id="exercise">
-			<option value="MulticlassClassification"> Multiclass Classification</option>
-			<option value="ImageClassification"> Image Classification </option>
-		</select>
-	</form>	
-  `; */
-  
   const problemSelectionFlex = document.createElement('div');
   content.node.appendChild(problemSelectionFlex);
   problemSelectionFlex.id = "problemSelectionFlex"
@@ -184,6 +183,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   // submit button for problem selection
   const problemSelectionButton = document.createElement('div');
   content.node.appendChild(problemSelectionButton);
+  problemSelectionButton.id='problemSelectionButton';
   problemSelectionButton.innerHTML = `
 		<div class="flex-container2">
 			<div><button id="inputButton" type="button"> Submit </button></div>
