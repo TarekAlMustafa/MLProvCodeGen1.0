@@ -133,9 +133,10 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				var provenanceDataObj = JSON.parse(reader.result!.toString());
 				console.log(provenanceDataObj); 
 				console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
-				var taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
+				const taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
 				var path = window.location.href + '/tree/GeneratedNotebooks/'
-				var notebookPath = "('"+path+ +taskName+".ipynb', 'MLProvCodeGen')";
+				var notebookPath = "('"+path+taskName+".ipynb', 'MLProvCodeGen')";
+				console.log('path:' +path);
 				//var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
@@ -194,7 +195,7 @@ switch (problemSubmit) {
 		IC_dataFormat.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Ingestion</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="Select the data format.">
 							<label for="data">Which data format do you want to use?</label>
 							<select name="data" id="data">
 								<option value="Public dataset"> Public dataset </option>
@@ -224,8 +225,8 @@ switch (problemSubmit) {
         IC_preprocessing_text.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Preparation</u></b></div>
-						<div title="Select your dataset here!">
-							<label> <i>preprocessing: Resize(256), CenterCrop(224), ToTensor(), grayscale to RGB</i></label>
+						<div title="Preprocessing changes the input data to fit our model.">
+							<label><i>preprocessing: Resize(256), CenterCrop(224), ToTensor(), grayscale to RGB</i></label>
 						</div>
 					</div>
 					`;
@@ -235,7 +236,7 @@ switch (problemSubmit) {
         IC_segregation_text.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Segregation</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="Data Segregation splits the available data into training data and testing data.">
 							<label> <i>Public datasets use premade testing datasets</i></label>
 						</div>
 					</div>
@@ -245,7 +246,7 @@ switch (problemSubmit) {
 		content.node.appendChild(seed);
 		seed.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="Seeds determine the sequence of numbers that a pseudorandom number generator generates.\nWhen the same seed is used for data segregation on the same dataset multiple times, then the training and testing datasets will always be identical.">
 							<label for="seed"> Random Seed</label>
 							<input type="number" id="seed" name="seed" value="2">
 						</div>
@@ -257,7 +258,7 @@ switch (problemSubmit) {
 		IC_useGPU.innerHTML = `
 					<div class="flex-containerReverse">
 						<div><b><u> Model Parameters</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="Not all GPUs work with the useCuda() function.!">
 							<input type="checkbox" id="useGPU" name="useGPU" value="useGPU" checked>
 							<label for="useGPU"> Use GPU if available? </label><br>
 						</div>
@@ -268,8 +269,8 @@ switch (problemSubmit) {
         content.node.appendChild(IC_model);
         IC_model.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
-							<label for="model">Which model do you want to use?</label>
+						<div title="PyTorch allows us to use machine learning models from research papers.\nCheck the documentation for more information & the original publications!">
+							<label for="model">Select a model:</label>
 							<select name="model" id="model">
 								<option value="resnet18"> resnet18 </option>
 								<option value="densenet161"> densenet161 </option>
@@ -282,7 +283,7 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_pretrained);
 		IC_pretrained.innerHTML = `
 					<div class="flex-containerReverse">
-						<div title="Select your dataset here!">
+						<div title="Models can be initialised with pre-computed parameters.\nThis option has no impact on training time.">
 							<input type="checkbox" id="preTrainedModel" name="preTrainedModel" value="preTrainedModel">
 							<label for="preTrainedModel"> Do you want to use a pre-trained model?</label><br>
 						</div>
@@ -293,7 +294,7 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_optimizer);
 		IC_optimizer.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="An optimizer changes the parameters of a model after each batch.\nDifferent exercises might require different optimizers to maximise performance, so try out multiple ones!">
 							<label for="optimizer"> Optimizer </label>
 							<select name="optimizer" id="optimizer">
 								<option value="Adam"> Adam </option>
@@ -311,7 +312,7 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_learningRate);
 		IC_learningRate.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="The learning rate tells the model how much the model parameters should be changed per batch.">
 							<label for="rate"> Learning rate</label>
 							<input type="number" id="rate" name="rate" value="0.001">
 						</div>
@@ -322,7 +323,7 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_lossFunction);
 		IC_lossFunction.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="Loss functions compute how good a model's predictions are.\nIf a model performs well, then loss will be small.">
 							<label for="lossFunc"> Loss function</label>
 							<select name="lossFunc" id="lossFunc">
 								<option value="CrossEntropyLoss"> CrossEntropyLoss </option>
@@ -337,7 +338,7 @@ switch (problemSubmit) {
 		IC_epochs.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Training</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="For each epoch, the whole dataset will be iterated over once.\nIncreasing the # of epochs such that the model is trained longer might improve performance.">
 							<label for="epochs">How many epochs?</label>
 							<input type="number" id="epochs" name="epochs" value="3">
 						</div>
@@ -348,14 +349,14 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_batchSize);
 		IC_batchSize.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="Batch size defines how much data is input into the model before changing its parameters.">
 							<label for="batches"> Batch Size</label>
 							<input type="number" id="batches" name="batches" value="128">
 						</div>
 					</div>
 				`;
 		
-        const IC_classes = document.createElement('div');
+        /*const IC_classes = document.createElement('div');
         content.node.appendChild(IC_classes);
 		IC_classes.innerHTML = `
 					<div class="flex-container2">
@@ -365,13 +366,13 @@ switch (problemSubmit) {
 							<div><i>Default: 1000 classes for training on ImageNet</i></div>
 						</div>
 					</div>
-				`;
+				`;*/
 		 
 		const IC_checkpoint = document.createElement('div');
 		content.node.appendChild(IC_checkpoint);
 		IC_checkpoint.innerHTML = `
 					<div class="flex-containerReverse">
-						<div title="Select your dataset here!">
+						<div title="This option saves your model to local files.">
 							<input type="checkbox" id="modelCheckpoint" name="modelCheckpoint" value="modelCheckpoint">
 							<label for="modelCheckpoint"> Save model checkpoint each epoch?</label><br>
 						</div>
@@ -383,7 +384,7 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_printProgress);
 		IC_printProgress.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="This option defines how often the console updates during training.">
 							<label for="printProgress"> Print progress every ... batches</label>
 							<input type="number" id="printProgress" name="printProgress" value="1">
 						</div>
@@ -393,7 +394,7 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_logging);
 		IC_logging.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="Logging is currently unavailable.">
 							<label for="logs"> How to log metrics </label>
 							<select name="logs" id="logs">
 								<option value="notAtAll"> Not at all </option>
@@ -435,9 +436,9 @@ switch (problemSubmit) {
             const logsValue = (<HTMLSelectElement>(
               document.getElementById('logs')
             )).value;
-            const quantityValue = (<HTMLInputElement>(
+            /*const quantityValue = (<HTMLInputElement>(
               document.getElementById('quantity')
-            )).value;
+            )).value;*/
             const rateValue = (<HTMLInputElement>(
               document.getElementById('rate')
             )).value;
@@ -497,10 +498,10 @@ switch (problemSubmit) {
 							'$': useGPUValue,
 							'type': typeof(useGPUValue),
 						},
-						'modelparameters:num_classes': {
+						/*'modelparameters:num_classes': {
 							'$': quantityValue, 
 							'type': typeof(quantityValue),
-						},
+						},*/
 						'modelparameters:save_checkpoint': {
 							'$': modelCheckpointValue,
 							'type': typeof(modelCheckpointValue),
@@ -582,7 +583,7 @@ case 'MulticlassClassification':
         MC_preprocessing_text.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Preparation</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="Scale feature range to [0,1]">
 							<label> <i>preprocessing: MinMaxScaler</i></label>
 						</div>
 					</div>
@@ -593,7 +594,7 @@ case 'MulticlassClassification':
         MC_random_seed.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Segregation</u></b></div>
-						<div title="Select your dataset here!">
+<div title="Seeds determine the sequence of numbers that a pseudorandom number generator generates.\nWhen the same seed is used for data segregation on the same dataset multiple times, then the training and testing datasets will always be identical.">
 							<label for="random_seed">Random Seed for data Segregation (default: 2)</label>
 							<input type="number" id="random_seed" name="random_seed" value="2">
 						</div>
@@ -604,7 +605,7 @@ case 'MulticlassClassification':
         content.node.appendChild(MC_test_split);
         MC_test_split.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="The input number describes the % of available datapoints to be used for testing.\nThe default value splits the input data into 20% testing and 80% training data.">
 							<label for="test_split">Testing data split (default: 0.2)</label>
 							<input type="number" id="test_split" name="test_split" value="0.2">
 						</div>
@@ -616,7 +617,7 @@ case 'MulticlassClassification':
         MC_use_gpu.innerHTML = `
 					<div class="flex-containerReverse">
 						<div><b><u> Model Parameters</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="Not all GPUs work with the useCuda() function.">
 							<input type="checkbox" id="use_gpu" name="use_gpu" value="use_gpu" checked>
 							<label for="use_gpu"> Use GPU if available? </label><br>
 						</div>
@@ -627,7 +628,7 @@ case 'MulticlassClassification':
         content.node.appendChild(MC_activation_func);
         MC_activation_func.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="The activation function of a neural network defines how the output of a neuron is computed.\nIf the accuracy of the generated neural network is unsatisfactory, try changing the activation funciton and compare the results!">
 							<label for="activation_func">Activation function:</label>
 							<select name="activation_func" id="activation_func">
 								<option value="F.softmax(self.layer3(x), dim=1)"> Softmax </option>
@@ -642,11 +643,11 @@ case 'MulticlassClassification':
         content.node.appendChild(MC_neuron_number);
         MC_neuron_number.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
-							<label for="neuron_number">How many Neurons per linear layer?</label>
+						<div title="The generated neural network has 3 layers: input, middle, and output.\nThis options defines the # of neurons for the middle layer.">
+							<label for="neuron_number">How many Neurons for middle layer?</label>
 							<input type="number" id="neuron_number" name="neuron_number" value="50">
 						</div>
-						<div><i>(Input and output neurons are separate)</i></div>
+						<div><i>(Input and output neurons are separate.)</i></div>
 					</div>
 						`;
 
@@ -654,7 +655,7 @@ case 'MulticlassClassification':
         content.node.appendChild(MC_optimizer);
         MC_optimizer.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+<div title="An optimizer changes the parameters of a neural network after each batch.\nDifferent exercises might require different optimizers to maximise performance, so try out multiple ones!">
 							<label for="optimizer"> Optimizer </label>
 							<select name="optimizer" id="optimizer">
 								<option value="torch.optim.Adam("> Adam </option>
@@ -671,7 +672,7 @@ case 'MulticlassClassification':
         content.node.appendChild(MC_default_lr);
         MC_default_lr.innerHTML = `
 					<div class="flex-containerReverse">
-						<div title="Select your dataset here!">
+						<div title="The learning rate tells the model how much the model parameters should be changed per batch.">
 							<input type="checkbox" id="default" name="default" value="default" checked>
 							<label for="default"> Use optimizers default learning rate? </label><br>
 						</div>
@@ -682,7 +683,7 @@ case 'MulticlassClassification':
         content.node.appendChild(MC_lr);
         MC_lr.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="The learning rate tells the model how much the model parameters should be changed per batch.">
 							<label for="rate"> Learning rate</label>
 							<input type="number" id="rate" name="rate" value="0.001">
 						</div>
@@ -692,7 +693,7 @@ case 'MulticlassClassification':
         content.node.appendChild(MC_loss);
         MC_loss.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="Loss functions compute how good a model's predictions are.\nIf a model performs well, then loss will be small.">
 							<label for="lossFunc"> Loss function</label>
 							<select name="lossFunc" id="lossFunc">
 								<option value="nn.CrossEntropyLoss()"> CrossEntropyLoss </option>
@@ -708,7 +709,7 @@ case 'MulticlassClassification':
         MC_epochs.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Training</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="For each epoch, the whole dataset will be iterated over once.\nIncreasing the # of epochs such that the model is trained longer might improve performance.">
 							<label for="epochs">How many Epochs?</label>
 							<input type="number" id="epochs" name="epochs" value="100">
 						</div>

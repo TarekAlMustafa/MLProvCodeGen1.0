@@ -58,7 +58,7 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
     gpu = user_inputs['entity']['model_parameters']['modelparameters:gpu_enable']['$']
     model_func = user_inputs['entity']['model_parameters']['modelparameters:model_name']
     pretrained = user_inputs['entity']['model_parameters']['modelparameters:pretrained']['$']
-    num_classes = user_inputs['entity']['model_parameters']['modelparameters:num_classes']['$']
+    #num_classes = user_inputs['entity']['model_parameters']['modelparameters:num_classes']['$']
     loss = user_inputs['entity']['model_parameters']['modelparameters:loss_function']
     optimizer = user_inputs['entity']['model_parameters']['modelparameters:optimizer']
     batch_size = user_inputs['entity']['training']['training:batch_size']['$']
@@ -107,7 +107,7 @@ Install required packages before running"""))
     #Model
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Model"""))
     template = env.get_template('007_model.jinja')
-    output = template.render(model_func = model_func, pretrained = pretrained, num_classes = num_classes, loss = loss, optimizer = optimizer, visualization_tool = visualization_tool, lr = lr, gpu = gpu, checkpoint = checkpoint)
+    output = template.render(model_func = model_func, pretrained = pretrained, loss = loss, optimizer = optimizer, visualization_tool = visualization_tool, lr = lr, gpu = gpu, checkpoint = checkpoint)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #Training
