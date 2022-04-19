@@ -86,7 +86,6 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 			<div>Hover over input elements for explanations</div>
 		</div>
 	`
-	
 // ------------------------------------------------------------------------------------------------------------------------------- //  
   // Button to reset widget
   const resetFlex = document.createElement('div');
@@ -136,7 +135,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
 				var taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
 				var path = window.location.href + '/tree/GeneratedNotebooks/'
-				var notebookPath = "('"+path+ +provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
+				var notebookPath = "('"+path+ +taskName+".ipynb', 'MLProvCodeGen')";
 				//var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
 				var openCall = `onclick="window.open`+notebookPath+`">`;
 				console.log(openCall);
