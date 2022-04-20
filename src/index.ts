@@ -3,7 +3,7 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
-import { Widget, ScrollBar } from '@lumino/widgets';
+import { Widget } from '@lumino/widgets';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { requestAPI } from './handler';
 import { ILauncher } from '@jupyterlab/launcher';
@@ -72,7 +72,6 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   widget.id = 'MLProvCodeGen-jupyterlab';
   widget.title.label = 'MLProvCodeGen';
   widget.title.closable = true;
-  const scrollbar = new ScrollBar();
 	
 // ------------------------------------------------------------------------------------------------------------------------------- //
 	// Header
