@@ -11,11 +11,11 @@ trainer = create_supervised_trainer(
     optimizer,
     loss_func,
     device=device,
-	deterministic=True
+    deterministic=True
 )
 {# TODO: Atm, the train metrics get accumulated, see torch_models.py #}
 metrics = {
-	"report": ClassificationReport(),
+    "report": ClassificationReport(),
     "accuracy": Accuracy(),
     "loss": Loss(loss_func),
 }
@@ -88,10 +88,10 @@ d1.add_namespace('training', 'training.org')
 
 e_training = d1.entity('training', (
     ('training:batch_size', batch_size),    
-	('training:epochs', num_epochs),
+    ('training:epochs', num_epochs),
     ('training:train_metrics', str(train_log)),
     ('training:print_progress', 1),
-	('training:seed', {{ seed }}),
+    ('training:seed', 2),
 ))
 a_settraining = d1.activity('set_training()', datetime.datetime.now())
 d1.wasGeneratedBy(e_training, a_settraining, None, {'packages:fct': 'set'})

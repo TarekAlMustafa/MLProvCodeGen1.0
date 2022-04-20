@@ -3,7 +3,7 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
-import { Widget } from '@lumino/widgets';
+import { Widget, ScrollBar } from '@lumino/widgets';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { requestAPI } from './handler';
 import { ILauncher } from '@jupyterlab/launcher';
@@ -72,6 +72,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   widget.id = 'MLProvCodeGen-jupyterlab';
   widget.title.label = 'MLProvCodeGen';
   widget.title.closable = true;
+  const scrollbar = new ScrollBar();
+	
 // ------------------------------------------------------------------------------------------------------------------------------- //
 	// Header
 	const headerFlex = document.createElement('div');
@@ -226,7 +228,7 @@ switch (problemSubmit) {
 					<div class="flex-container2">
 						<div><b><u> Data Preparation</u></b></div>
 						<div title="Preprocessing changes the input data to fit our model.">
-							<label><i>preprocessing: Resize(256), CenterCrop(224), ToTensor(), grayscale to RGB</i></label>
+							<text><i>preprocessing: Resize(256), CenterCrop(224), ToTensor(), grayscale to RGB</i></text>
 						</div>
 					</div>
 					`;
