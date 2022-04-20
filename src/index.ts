@@ -134,7 +134,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				console.log(provenanceDataObj); 
 				console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
 				const taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
-				var path = window.location.href + '/tree/GeneratedNotebooks/'
+				var path = window.location.href + '/tree/extension/GeneratedNotebooks/'
 				var notebookPath = "('"+path+taskName+".ipynb', 'MLProvCodeGen')";
 				console.log('path:' +path);
 				//var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
@@ -356,7 +356,7 @@ switch (problemSubmit) {
 					</div>
 				`;
 		
-        /*const IC_classes = document.createElement('div');
+        const IC_classes = document.createElement('div');
         content.node.appendChild(IC_classes);
 		IC_classes.innerHTML = `
 					<div class="flex-container2">
@@ -366,7 +366,7 @@ switch (problemSubmit) {
 							<div><i>Default: 1000 classes for training on ImageNet</i></div>
 						</div>
 					</div>
-				`;*/
+				`;
 		 
 		const IC_checkpoint = document.createElement('div');
 		content.node.appendChild(IC_checkpoint);
@@ -436,9 +436,9 @@ switch (problemSubmit) {
             const logsValue = (<HTMLSelectElement>(
               document.getElementById('logs')
             )).value;
-            /*const quantityValue = (<HTMLInputElement>(
+            const quantityValue = (<HTMLInputElement>(
               document.getElementById('quantity')
-            )).value;*/
+            )).value;
             const rateValue = (<HTMLInputElement>(
               document.getElementById('rate')
             )).value;
@@ -498,10 +498,10 @@ switch (problemSubmit) {
 							'$': useGPUValue,
 							'type': typeof(useGPUValue),
 						},
-						/*'modelparameters:num_classes': {
+						'modelparameters:num_classes': {
 							'$': quantityValue, 
 							'type': typeof(quantityValue),
-						},*/
+						},
 						'modelparameters:save_checkpoint': {
 							'$': modelCheckpointValue,
 							'type': typeof(modelCheckpointValue),
@@ -541,7 +541,7 @@ switch (problemSubmit) {
 			console.log(reply);
 			
 			if (reply['greetings'] === 'success') {
-				var path = window.location.href + '/tree/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
+				var path = window.location.href + '/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
 				console.log(path)
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
@@ -818,7 +818,7 @@ case 'MulticlassClassification':
 			const reply = await generateNotebook(method, objBody, content)
 			console.log(reply);
 			if (reply["greetings"] === 'success') {
-				var path = window.location.href + '/tree/GeneratedNotebooks/MulticlassClassification.ipynb'
+				var path = window.location.href + '/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
 				console.log(path)
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);

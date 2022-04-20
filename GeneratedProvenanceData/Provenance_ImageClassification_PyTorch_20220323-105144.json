@@ -1,0 +1,62 @@
+{
+  "experiment_info":{
+    "author": "Tarek Al Mustafa",
+    "email": "tarek.almustafa@uni-jena.de",
+    "title": "Image Classification",
+    "creation_date": "2022-03-23",
+    "task_type": "Image Classification Pytorch"
+},
+
+"hardware_info":{
+    "Python Version": "3.9.7.final.0 (64 bit)",
+    "CPU": "AMD Ryzen 7 3700X 8-Core Processor",
+    "RAM": "15.95GB",
+    "Operating System": "Windows 10 Version: 10.0.19041 Machine: AMD64",
+    "GPUs": "[(0, 'NVIDIA GeForce GTX 1060 6GB')]"
+},
+
+"packages":{
+    "numpy": "1.22.2",
+    "ipywidgets": "7.6.5",
+    "torch": "1.10.2+cpu",
+    "torchvision": "0.11.3+cpu",
+    "pytorch-ignite": "0.4.6",
+    "gputil": "1.4.0",
+    "psutil": "5.9.0",
+    "py-cpuinfo": "py-cpuinfo                    8.0.0"
+},
+
+"data_ingestion":{
+    "dataset_id": "MNIST",
+    "feature_classes": 10,
+    "training_samples": 1000,
+    "testing_samples": 1000,
+    "root_location": "    StandardTransform"
+},
+
+"data_preparation":{
+    "preprocessing": "['               ToTensor()', '           )>']"
+},
+
+"data_segregation":{
+    "training_dataset": "<bound method FakeData.__len__ of Dataset FakeData\n    Number of datapoints: 1000\n    StandardTransform\nTransform: Compose(\n               ToTensor()\n           )>",
+    "testing_dataset": "<bound method FakeData.__len__ of Dataset FakeData\n    Number of datapoints: 1000\n    StandardTransform\nTransform: Compose(\n               ToTensor()\n           )>"
+},
+
+"model_parameters":{
+    "model_name": "resnet18",
+    "pretrained": 0,
+    "gpu_enable": 1,
+    "modelParameters": "ResNet(\n  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)\n  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  (relu): ReLU(inplace=True)\n  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)\n  (layer1): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (layer2): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (downsample): Sequential(\n        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (layer3): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (downsample): Sequential(\n        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (layer4): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (downsample): Sequential(\n        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))\n  (fc): Linear(in_features=512, out_features=1000, bias=True)\n)",
+    "loss_function": "CrossEntropyLoss",
+    "optimizer": "Adam",
+    "optimizer_learning_rate": 0.001
+},
+
+"training":{
+    "batch_size": 128,
+    "epochs": 1,
+    "train_metrics": "State:\n\titeration: 8\n\tepoch: 1\n\tepoch_length: 8\n\tmax_epochs: 1\n\toutput: 2.4134676456451416\n\tbatch: <class 'list'>\n\tmetrics: <class 'dict'>\n\tdataloader: <class 'torch.utils.data.dataloader.DataLoader'>\n\tseed: <class 'NoneType'>\n\ttimes: <class 'dict'>\n"
+}
+
+}
