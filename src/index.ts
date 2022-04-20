@@ -360,10 +360,9 @@ switch (problemSubmit) {
         content.node.appendChild(IC_classes);
 		IC_classes.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="Number of classes that the dataset has.">
 							<label for="quantity">How many classes/output units?</label>
-							<input type="number" id="quantity" name="quantity" value="1000"> 
-							<div><i>Default: 1000 classes for training on ImageNet</i></div>
+							<input type="number" id="quantity" name="quantity" value="1000">
 						</div>
 					</div>
 				`;
@@ -536,6 +535,7 @@ switch (problemSubmit) {
 					},
 				}
 			};
+			console.log(quantityValue)
 			var method = 'ImageClassification_pytorch'
 			const reply = await generateNotebook(method, objBody, content)
 			console.log(reply);

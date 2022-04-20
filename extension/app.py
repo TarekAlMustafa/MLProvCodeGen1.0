@@ -107,7 +107,7 @@ Install required packages before running"""))
     #Model
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Model"""))
     template = env.get_template('007_model.jinja')
-    output = template.render(model_func = model_func, pretrained = pretrained, num_classes=num_classes loss = loss, optimizer = optimizer, visualization_tool = visualization_tool, lr = lr, gpu = gpu, checkpoint = checkpoint)
+    output = template.render(model_func = model_func, pretrained = pretrained, num_classes=num_classes, loss = loss, optimizer = optimizer, visualization_tool = visualization_tool, lr = lr, gpu = gpu, checkpoint = checkpoint)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #Training
