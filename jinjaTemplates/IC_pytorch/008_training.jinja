@@ -1,3 +1,4 @@
+starttime = datetime.datetime.now()
 seed_everything({{ seed }}, workers=True)
 def set_train_log(log: str, value: str):
     log+= value
@@ -82,18 +83,23 @@ print(train_log)
 {% if visualization_tool == "Weights & Biases" %}
 wandb.finish()
 {% endif %}
+endtime = datetime.datetime.now()
+executionTime = endtime-starttime
 
-#set_training
-d1.add_namespace('training', 'training.org')
-
-e_training = d1.entity('training', (
-    ('training:batch_size', batch_size),    
-    ('training:epochs', num_epochs),
-    ('training:train_metrics', str(train_log)),
-    ('training:print_progress', 1),
-    ('training:seed', 2),
+e_training = d1.entity('ex:Cell Training', (
+    ('ex:type', 'notebook_cell'),
+    ('ex:type', 'p-plan:step'),
 ))
-a_settraining = d1.activity('set_training()', datetime.datetime.now())
-d1.wasGeneratedBy(e_training, a_settraining, None, {'packages:fct': 'set'})
-d1.used(a_settraining, e_modelparameters)
-d1.used(a_settraining, e_datasegregation)
+a_settraining = d1.activity('ex:set_training()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
+d1.wasStartedBy(a_settraining, e_training)
+d1.hadMember(e_notebook, e_training)
+e_training_data = d1.entity(
+    'ex:Training Data',(
+        ('ex:batch_size', batch_size),    
+		('ex:epochs', num_epochs),
+		('ex:train_metrics', str(train_log)),
+		('ex:print_progress', 1),
+		('ex:seed', 2),
+))
+d1.wasGeneratedBy(e_training_data, a_settraining)
+d1.wasInfluencedBy(e_training, e_modelparameters_data)

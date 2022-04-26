@@ -1,23 +1,32 @@
+starttime = datetime.datetime.now()
 {% if data_format == "Public dataset" %}
 transform = transforms.Compose([
     transforms.Resize(256), 
     transforms.CenterCrop(224), 
     transforms.ToTensor(), 
-    transforms.Lambda(lambda x: x.repeat(3, 1, 1)),  # grayscale to RGB
+    {% if dataset == "FakeData" %}#{% endif %}transforms.Lambda(lambda x: x.repeat(3, 1, 1)),  # grayscale to RGB
 ])
 
-#set_data_preparation
-d1.add_namespace('datapreparation', 'datapreparation.org')
+endtime = datetime.datetime.now()
+executionTime = endtime-starttime
 
 dataInfo = training_dataset.__len__
 transform_method = str(dataInfo).splitlines()[4:11]
 
-e_datapreparation = d1.entity('data_preparation', (
-        ('datapreparation:preprocessing', str(transform_method)),
+e_datapreparation = d1.entity('ex:Cell Data Preparation', (
+    ('ex:type', 'notebook_cell'),
+    ('ex:type', 'p-plan:step'),
 ))
-a_setdatapreparation = d1.activity('set_data_preparation()', datetime.datetime.now())
-d1.wasGeneratedBy(e_datapreparation, a_setdatapreparation, None, {'packages:fct': 'set'})
-d1.used(a_setdatapreparation, e_dataingestion)
+a_setdatapreparation = d1.activity('ex:set_data_preparation()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
+
+d1.wasStartedBy(a_setdatapreparation, e_datapreparation)
+d1.hadMember(e_notebook, e_datapreparation)
+e_datapreparation_data = d1.entity(
+    'ex:Data Preparation Data',(
+        ('ex:preprocessing', str(transform_method)),
+))
+d1.wasGeneratedBy(e_datapreparation_data, a_setdatapreparation)
+d1.wasInfluencedBy(e_datapreparation, e_dataingestion_data)
 d1.wasInformedBy(a_splitlines, a_getlength)
 d1.wasInformedBy(a_setdatapreparation, a_splitlines)
 {% else %}

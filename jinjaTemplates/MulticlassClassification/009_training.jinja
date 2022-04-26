@@ -1,4 +1,6 @@
 #Model Training
+starttime = datetime.datetime.now()
+
 EPOCHS  = {{ epochs }}
 X_train = Variable(torch.from_numpy(X_train)).float()
 {% if dataset == "Iris" %}
@@ -31,16 +33,22 @@ for epoch in trange(EPOCHS):
         correct = (torch.argmax(y_pred, dim=1) == y_test).type(torch.FloatTensor)
         accuracy_list[epoch] = correct.mean()
 
+endtime = datetime.datetime.now()
+executionTime = endtime-starttime
 #set_training
-d1.add_namespace('training', 'training.org')
 
-e_training = d1.entity('training', (
-    ('training:epochs', EPOCHS),
-    ('training:numberOfParameters', hierarchical_summary(model, print_summary = False)[1]),
+e_training = d1.entity('ex:Cell Training', (
+    ('ex:type', 'notebook_cell'),
+    ('ex:type', 'p-plan:step'),
 ))
-a_settraining = d1.activity('set_training()', datetime.datetime.now())
-a_hierarchichalsummary = d1.activity('hierarchical_summary(model, print_summary = False)[1]')
-d1.wasGeneratedBy(e_training, a_settraining, None, {'packages:fct': 'set'})
-d1.wasInformedBy(a_settraining, a_hierarchichalsummary)
-d1.used(a_settraining, e_modelparameters)
-d1.used(a_settraining, e_datasegregation)
+a_settraining = d1.activity('ex:set_training()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
+d1.wasStartedBy(a_settraining, e_training)
+d1.used(a_settraining, e_modelparameters_data)
+d1.hadMember(e_notebook, e_training)
+e_training_data = d1.entity(
+    'ex:Training Data',(
+        ('ex:epochs', EPOCHS),
+        ('ex:numberOfParameters', hierarchical_summary(model, print_summary = False)[1]),  
+))
+d1.wasGeneratedBy(e_training_data, a_settraining)
+d1.wasInfluencedBy(e_training, e_modelparameters_data)

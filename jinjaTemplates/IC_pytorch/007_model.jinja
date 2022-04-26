@@ -1,3 +1,4 @@
+starttime = datetime.datetime.now()
 {%if checkpoint%}# Set up logging.
 experiment_id = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 checkpoint_dir = Path(f"checkpoints/{experiment_id}")
@@ -24,22 +25,30 @@ optimizer = optim.{{ optimizer }}(model.parameters(), lr=lr)
 wandb.watch(model)
 
 {% endif %}
-#set_model_parameters
-d1.add_namespace('modelparameters', 'modelparameters.org')
 
-e_modelparameters = d1.entity('model_parameters', (
-    ('modelparameters:model_name', 'resnet18'),
-    ('modelparameters:save_checkpoint', 0),
-    ('modelparameters:pretrained', 0),
-    ('modelparameters:gpu_enable', 1),
-    #('modelparameters:modelParameters', str(model)),
-    ('modelparameters:loss_function', '{{ loss }}'),
-    ('modelparameters:optimizer', '{{ optimizer }}'),
-    ('modelparameters:optimizer_learning_rate', lr),
-    ('modelparameters:num_classes', 1000),
+endtime = datetime.datetime.now()
+executionTime = endtime-starttime
+
+e_modelparameters = d1.entity('ex:Cell Model Parameters', (
+    ('ex:type', 'notebook_cell'),
+    ('ex:type', 'p-plan:step'),
 ))
-a_setmodelparameters = d1.activity('set_model_parameters()', datetime.datetime.now())
-d1.wasGeneratedBy(e_modelparameters, a_setmodelparameters, None, {'packages:fct': 'set'})
-d1.used(a_setmodelparameters, e_dataingestion)
+a_setmodelparameters = d1.activity('ex:set_model_parameters()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
+d1.wasStartedBy(a_setmodelparameters, e_modelparameters)
+d1.hadMember(e_notebook, e_modelparameters)
+e_modelparameters_data = d1.entity(
+    'ex:Model Parameters Data',(
+        ('ex:model_name', 'resnet18'),
+		('ex:save_checkpoint', 0),
+		('ex:pretrained', 0),
+		('ex:gpu_enable', 1),
+		#('ex:modelParameters', str(model)),
+		('ex:loss_function', '{{ loss }}'),
+		('ex:optimizer', '{{ optimizer }}'),
+		('ex:optimizer_learning_rate', lr),
+		('ex:num_classes', 1000),  
+))
+d1.wasGeneratedBy(e_modelparameters_data, a_setmodelparameters)
+d1.wasInfluencedBy(e_modelparameters, e_datasegregation_data)
 
 model

@@ -1,4 +1,6 @@
 #Data Ingestion
+starttime = datetime.datetime.now()
+
 {% if dataset == "Iris" %}
 iris = load_iris()
 X = iris['data']
@@ -64,15 +66,23 @@ y = torch.tensor(df['target'].values)
 y = y-1
 y
 {% endif %}
+endtime = datetime.datetime.now()
+executionTime = endtime-starttime
 
-#set_data_ingestion
-d1.add_namespace('dataingestion', 'dataingestion.org')
-
-e_dataingestion = d1.entity('data_ingestion', (
-    ('dataingestion:dataset_id', '{{ dataset }}'),
-    ('dataingestion:output_dimensions', output_dim),
-    ('dataingestion:samples_total',  len(X)),
-    ('dataingestion:feature_dimensions', len(feature_names)),  
+e_dataingestion = d1.entity('ex:Cell Data Ingestion', (
+    ('ex:type', 'notebook_cell'),
+    ('ex:type', 'p-plan:step'),
 ))
-a_setdataingestion = d1.activity('set_data_ingestion()', datetime.datetime.now())
-d1.wasGeneratedBy(e_dataingestion, a_setdataingestion, None, {'packages:fct': 'set'})	
+
+
+a_setdataingestion = d1.activity('ex:set_data_ingestion()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
+d1.wasStartedBy(a_setdataingestion, e_dataingestion)
+d1.hadMember(e_notebook, e_dataingestion)
+e_dataingestion_data = d1.entity(
+    'ex:Data Ingestion Data',(
+        ('ex:dataset_id', 'Iris'),
+        ('ex:output_dimensions', output_dim),
+        ('ex:samples_total',  len(X)),
+        ('ex:feature_dimensions', len(feature_names)),
+))
+d1.wasGeneratedBy(e_dataingestion_data, a_setdataingestion)

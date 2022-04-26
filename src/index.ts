@@ -70,9 +70,10 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   const content = new Widget();
   const widget = new MainAreaWidget({ content });
   widget.id = 'MLProvCodeGen-jupyterlab';
+  content.id = 'MLProvCodeGen-content' // id used to add scrollbars in base.css
   widget.title.label = 'MLProvCodeGen';
   widget.title.closable = true;
-	
+  
 // ------------------------------------------------------------------------------------------------------------------------------- //
 	// Header
 	const headerFlex = document.createElement('div');
@@ -202,6 +203,7 @@ switch (problemSubmit) {
 								<option value="Public dataset"> Public dataset </option>
 								<option value="Numpy arrays"> Numpy arrays </option>
 								<option value="Image files"> Image files </option>
+								<option value="fake_data"> Fake Data for Evaluation </option>
 							</select>
 						</div>
 					</div>
@@ -216,6 +218,7 @@ switch (problemSubmit) {
 							<option value="MNIST"> MNIST </option>
 							<option value="FashionMNIST"> FashionMNIST </option>
 							<option value="CIFAR10"> CIFAR10 </option>
+							<option value="FakeData"> Fake Data for Evaluation </option>
 						</select>
 						</div>	
 					</div>

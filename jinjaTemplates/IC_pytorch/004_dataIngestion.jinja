@@ -1,3 +1,4 @@
+starttime = datetime.datetime.now()
 {% if data_format == "Numpy arrays" %}
 def fake_data():
     # 4 images of shape 1x16x16 with labels 0, 1, 2, 3
@@ -64,30 +65,49 @@ checkpoint_dir.mkdir(parents=True, exist_ok=True)
 {% endif %}
 
 {% if data_format == "Public dataset" %}
+{% if dataset == "FakeData" %}
+dataset = getattr(datasets, 'FakeData')
+training_dataset = dataset(image_size = (3, 224, 224))
+testing_dataset = dataset(image_size = (3, 224, 224))
+{% else %}
 dataset = getattr(datasets, '{{ dataset }}')
 training_dataset = dataset("./data", train=True, download=True)
 testing_dataset = dataset("./data", train=False, download=True)
-
-#set_data_ingestion
-d1.add_namespace('dataingestion', 'dataingestion.org')
+{% endif %}
+endtime = datetime.datetime.now()
+executionTime = endtime-starttime
 
 dataInfo = training_dataset.__len__
-root_location =  str(dataInfo).splitlines()[2]
-
-e_dataingestion = d1.entity('data_ingestion', (
-    ('dataingestion:data_format', '{{ data_format }}'),
-    ('dataingestion:dataset_id', '{{ dataset }}'),
-    ('dataingestion:feature_classes', 10),
-    ('dataingestion:training_samples',  training_dataset.__len__()),
-    ('dataingestion:testing_samples', testing_dataset.__len__()),
-    ('dataingestion:root_location', root_location),
-))
-a_setdataingestion = d1.activity('set_data_ingestion()', datetime.datetime.now())
-a_splitlines = ('str(dataInfo).splitlines()[2]')
-a_getlength = d1.activity('{dataset}.__len__()')
-d1.wasGeneratedBy(e_dataingestion, a_setdataingestion, None, {'packages:fct': 'set'})
-d1.wasInformedBy(a_setdataingestion, a_getlength)
+{% if dataset == "FakeData" %}
+root_location = 'fake data - root does not exist'
 {% else %}
+root_location =  str(dataInfo).splitlines()[2]
+{% endif %}
+
+e_dataingestion = d1.entity('ex:Cell Data Ingestion', (
+    ('ex:type', 'notebook_cell'),
+    ('ex:type', 'p-plan:step'),
+))
+
+
+a_setdataingestion = d1.activity('ex:set_data_ingestion()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
+d1.wasStartedBy(a_setdataingestion, e_dataingestion)
+d1.hadMember(e_notebook, e_dataingestion)
+e_dataingestion_data = d1.entity(
+    'ex:Data Ingestion Data',(
+        ('ex:data_format', '{{ data_format }}'),
+        ('ex:dataset_id', '{{ dataset }}'),
+		('ex:feature_classes', 10),
+		('ex:training_samples',  training_dataset.__len__()),
+		('ex:testing_samples', testing_dataset.__len__()),
+		('ex:root_location', root_location),
+))
+d1.wasGeneratedBy(e_dataingestion_data, a_setdataingestion)
+a_splitlines = ('ex:str(dataInfo).splitlines()[2]')
+a_getlength = d1.activity('ex:{dataset}.__len__()')
+d1.wasInformedBy(a_setdataingestion, a_getlength)
+{% endif %}
+{% if data_format == "FALSE" %}
 ### Preprocessing
 def preprocess(data, name):
     if data is None:  # val/test can be empty

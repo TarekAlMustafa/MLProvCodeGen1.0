@@ -1,3 +1,4 @@
+starttime = datetime.datetime.now()
 # Set up device.
 {% if gpu %}
 use_cuda = torch.cuda.is_available()
@@ -9,8 +10,14 @@ device = torch.device("cuda" if use_cuda else "cpu")
 batch_size = {{ batch_size }}
 print_every = {{ print_every }}  # batches
 # Wrap in data loader.
+{% if dataset == "FakeData" %}
+dataset = getattr(datasets, 'FakeData')
+training_dataset = dataset(size = 255, image_size = (3, 224, 224), num_classes = 256, transform = transform)
+testing_dataset = dataset(size = 255, image_size = (3, 224, 224), num_classes = 256, transform = transform)
+{% else %}
 training_dataset = dataset("./data", train=True, download=True, transform=transform)
 testing_dataset = dataset("./data", train=False, download=True, transform=transform)
+{% endif %}
 
 if use_cuda:
     kwargs = {"pin_memory": True, "num_workers": 1}
@@ -21,16 +28,22 @@ train_loader = DataLoader(training_dataset, batch_size=batch_size, shuffle=True,
 test_loader = DataLoader(testing_dataset, batch_size=batch_size, shuffle=False, **kwargs)
 val_loader = None
 
-#set_data_segregation
-d1.add_namespace('datasegregation', 'datasegregation.org')
-
-e_datasegregation = d1.entity('data_segregation', (
-    ('datasegregation:training_dataset', str(training_dataset.__len__)),
-    ('datasegregation:testing_dataset', str(testing_dataset.__len__)),
+endtime = datetime.datetime.now()
+executionTime = endtime-starttime
+e_datasegregation = d1.entity('ex:Cell Data Segregation', (
+    ('ex:type', 'notebook_cell'),
+    ('ex:type', 'p-plan:step'),
 ))
-a_setdatasegregation = d1.activity('set_data_segregation()', datetime.datetime.now())
-d1.wasGeneratedBy(e_datasegregation, a_setdatasegregation, None, {'packages:fct': 'set'})
-d1.used(a_setdatasegregation, e_datapreparation)
+a_setdatasegregation = d1.activity('ex:set_data_segregation()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
+d1.wasStartedBy(a_setdatasegregation, e_datasegregation)
+d1.hadMember(e_notebook, e_datasegregation)
+e_datasegregation_data = d1.entity(
+    'ex:Data Segregation Data',(
+        ('ex:training_dataset', str(training_dataset.__len__)),
+		('ex:testing_dataset', str(testing_dataset.__len__)), 
+))
+d1.wasGeneratedBy(e_datasegregation_data, a_setdatasegregation)
+d1.wasInfluencedBy(e_datasegregation, e_datapreparation_data)
 d1.wasInformedBy(a_setdatasegregation, a_getlength)
 {% else %}
 ### Preprocessing

@@ -21,7 +21,6 @@ import tqdm
 from tqdm import trange
 import datetime
 from datetime import date
-import time
 from pytorch_model_summary import hierarchical_summary
 import json
 import ipywidgets as widgets
@@ -29,9 +28,8 @@ import webbrowser
 import IPython
 from IPython.display import display, Image
 import prov
-from prov.model import ProvDocument
+from prov.model import ProvDocument, Namespace, Literal, PROV, Identifier
 from prov.dot import prov_to_dot
 import os
-from notebook import notebookapp
 
 plt.style.use('ggplot')
