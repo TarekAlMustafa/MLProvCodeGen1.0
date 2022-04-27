@@ -203,7 +203,6 @@ switch (problemSubmit) {
 								<option value="Public dataset"> Public dataset </option>
 								<option value="Numpy arrays"> Numpy arrays </option>
 								<option value="Image files"> Image files </option>
-								<option value="fake_data"> Fake Data for Evaluation </option>
 							</select>
 						</div>
 					</div>
@@ -215,10 +214,10 @@ switch (problemSubmit) {
 						<div title="Select your dataset here!">
 						<label for="dataSelection">Select your dataset:</label>
 						<select name="dataSelection" id="dataSelection">
+							<option value="FakeData"> Fake Data for Evaluation </option>
 							<option value="MNIST"> MNIST </option>
 							<option value="FashionMNIST"> FashionMNIST </option>
 							<option value="CIFAR10"> CIFAR10 </option>
-							<option value="FakeData"> Fake Data for Evaluation </option>
 						</select>
 						</div>	
 					</div>
