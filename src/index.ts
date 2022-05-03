@@ -134,8 +134,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				//console.log(reader.result);
 				var provenanceDataObj = JSON.parse(reader.result!.toString());
 				console.log(provenanceDataObj); 
-				console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
-				const taskName = provenanceDataObj.entity.experiment_info['experimentinfo:task_type'];
+				//console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
+				const taskName = provenanceDataObj.entity['ex:Experiment Info Data']['ex:task_type'];
 				var path = window.location.href + '/tree/extension/GeneratedNotebooks/'
 				var notebookPath = "('"+path+taskName+".ipynb', 'MLProvCodeGen')";
 				console.log('path:' +path);
@@ -201,12 +201,12 @@ switch (problemSubmit) {
 							<label for="data">Which data format do you want to use?</label>
 							<select name="data" id="data">
 								<option value="Public dataset"> Public dataset </option>
-								<option value="Numpy arrays"> Numpy arrays </option>
-								<option value="Image files"> Image files </option>
 							</select>
 						</div>
 					</div>
 						`;
+						//<option value="Numpy arrays"> Numpy arrays </option>
+						//<option value="Image files"> Image files </option>
 		const IC_dataset = document.createElement('div');
 		content.node.appendChild(IC_dataset);
 		IC_dataset.innerHTML = `
@@ -218,10 +218,22 @@ switch (problemSubmit) {
 							<option value="MNIST"> MNIST </option>
 							<option value="FashionMNIST"> FashionMNIST </option>
 							<option value="CIFAR10"> CIFAR10 </option>
+							<option value="user"> Use your own data by adding it to the notebook later </option>
 						</select>
 						</div>	
 					</div>
 						`;
+						
+		const IC_classes = document.createElement('div');
+        content.node.appendChild(IC_classes);
+		IC_classes.innerHTML = `
+					<div class="flex-container2">
+						<div title="Number of classes that the dataset has.\nDefault for public datasets is 10 classes.">
+							<label for="quantity">How many classes/output units?</label>
+							<input type="number" id="quantity" name="quantity" value="10">
+						</div>
+					</div>
+				`;
 						
 		const IC_preprocessing_text = document.createElement('div');
         content.node.appendChild(IC_preprocessing_text);
@@ -276,7 +288,7 @@ switch (problemSubmit) {
 							<label for="model">Select a model:</label>
 							<select name="model" id="model">
 								<option value="resnet18"> resnet18 </option>
-								<option value="densenet161"> densenet161 </option>
+								<option value="shufflenet_v2_x1_0"> shufflenet v2 </option>
 								<option value="vgg16"> vgg16 </option>
 							</select>
 						</div>
@@ -352,20 +364,9 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_batchSize);
 		IC_batchSize.innerHTML = `
 					<div class="flex-container2">
-						<div title="Batch size defines how much data is input into the model before changing its parameters.">
+						<div title="Batch size defines how much data is input into the model before changing its parameters.\nWe recommend size 10 for FakeData and 128 for real data.">
 							<label for="batches"> Batch Size</label>
 							<input type="number" id="batches" name="batches" value="128">
-						</div>
-					</div>
-				`;
-		
-        const IC_classes = document.createElement('div');
-        content.node.appendChild(IC_classes);
-		IC_classes.innerHTML = `
-					<div class="flex-container2">
-						<div title="Number of classes that the dataset has.">
-							<label for="quantity">How many classes/output units?</label>
-							<input type="number" id="quantity" name="quantity" value="1000">
 						</div>
 					</div>
 				`;
@@ -392,7 +393,7 @@ switch (problemSubmit) {
 						</div>
 					</div>
 				`;
-		const IC_logging = document.createElement('div');
+		/*const IC_logging = document.createElement('div');
 		content.node.appendChild(IC_logging);
 		IC_logging.innerHTML = `
 					<div class="flex-container2">
@@ -407,7 +408,7 @@ switch (problemSubmit) {
 							</select>
 						</div>
 					</div>
-						`;
+						`;*/
 		const submitButtonIC = document.createElement('div');
 		content.node.appendChild(submitButtonIC);
 		submitButtonIC.innerHTML = `
@@ -435,9 +436,9 @@ switch (problemSubmit) {
             const optimizerValue = (<HTMLSelectElement>(
               document.getElementById('optimizer')
             )).value;
-            const logsValue = (<HTMLSelectElement>(
+            /*const logsValue = (<HTMLSelectElement>(
               document.getElementById('logs')
-            )).value;
+            )).value;*/
             const quantityValue = (<HTMLInputElement>(
               document.getElementById('quantity')
             )).value;
@@ -486,55 +487,56 @@ switch (problemSubmit) {
             const objBody = {
 				exercise: exerciseValue,
 				'entity':{
-					'data_ingestion': {
-						'dataingestion:data_format': dataValue,
-						'dataingestion:dataset_id': dataSelectionValue
-					},
-					'model_parameters': {
-						'modelparameters:model_name': modelValue,
-						'modelparameters:pretrained': {
-							'$': preTrainedModelValue,
-							'type': typeof(preTrainedModelValue),
-						},
-						'modelparameters:gpu_enable': {
-							'$': useGPUValue,
-							'type': typeof(useGPUValue),
-						},
-						'modelparameters:num_classes': {
+					'ex:Data Ingestion Data': {
+						'ex:data_format': dataValue,
+						'ex:dataset_id': dataSelectionValue,
+						'ex:classes': {
 							'$': quantityValue, 
 							'type': typeof(quantityValue),
 						},
-						'modelparameters:save_checkpoint': {
+					},
+					'ex:Model Parameters Data': {
+						'ex:model_name': modelValue,
+						'ex:pretrained': {
+							'$': preTrainedModelValue,
+							'type': typeof(preTrainedModelValue),
+						},
+						'ex:gpu_enable': {
+							'$': useGPUValue,
+							'type': typeof(useGPUValue),
+						},
+						'ex:save_checkpoint': {
 							'$': modelCheckpointValue,
 							'type': typeof(modelCheckpointValue),
 						},
-						'modelparameters:loss_function': lossFuncValue,
-						'modelparameters:optimizer': optimizerValue,
-						'modelparameters:optimizer_learning_rate': {
+						'ex:loss_function': lossFuncValue,
+						'ex:optimizer': optimizerValue,
+						'ex:optimizer_learning_rate': {
 							'$': rateValue,
 							'type': typeof(rateValue)
 						},
 					},
-					'training': {
-						'training:batch_size': {
+					'ex:Training Data': {
+						'ex:batch_size': {
 							'$': batchesValue,
 							'type': typeof(batchesValue),
 						},
-						'training:epochs': {
+						'ex:epochs': {
 							'$': epochsValue,
 							'type': typeof(epochsValue),
 						},
-						'training:print_progress': {
+						'ex:print_progress': {
 							'$': printProgressValue,
 							'type': typeof(printProgressValue),
 						},
-						'training:seed': {
+						'ex:seed': {
 							'$': seedValue,
 							'type': typeof(seedValue)
 						}
 					},
 					'visualization_tool':{
-						'tool' : logsValue
+						//'tool' : logsValue,
+						'tool' : 'notAtAll'
 					},
 				}
 			};
@@ -775,42 +777,42 @@ case 'MulticlassClassification':
 			const objBody = {
 				exercise: exercise,
 				'entity':{
-					'data_ingestion': {
-						'dataingestion:dataset_id': dataset
+					'ex:Data Ingestion Data': {
+						'ex:dataset_id': dataset
 					},			
-					'data_segregation': {
-						'datasegregation:test_size':{
+					'ex:Data Segregation Data': {
+						'ex:test_size':{
 							'$': test_split,
 							'type' : typeof(test_split),
 						},
-						'datasegregation:random_state': {
+						'ex:random_state': {
 							'$': random_seed,
 							'type': typeof(random_seed),
 						},
 					},
-					'model_parameters': {
-						'modelparameters:gpu_enable': {
+					'ex:Model Parameters Data': {
+						'ex:gpu_enable': {
 							'$':use_gpu,
 							'type':typeof(use_gpu),
 						},
-						'modelparameters:neuron_number': {
+						'ex:neuron_number': {
 							'$':neuron_number,
 							'type':typeof(neuron_number),
 						},
-						'modelparameters:loss_function': loss_func,
-						'modelparameters:optimizer': optimizer,
-						'modelparameters:optimizer_default_learning_rate':{
+						'ex:loss_function': loss_func,
+						'ex:optimizer': optimizer,
+						'ex:optimizer_default_learning_rate':{
 							'$':defaultValue,
 							'type': typeof(defaultValue),
 						},
-						'modelparameters:optimizer_learning_rate':{
+						'ex:optimizer_learning_rate':{
 							'$': lr,
 							'type': typeof(lr),
 						},
-						'modelparameters:activation_function': activation_func
+						'ex:activation_function': activation_func
 					},
-					'training': {
-						'training:epochs': {
+					'ex:Training Data': {
+						'ex:epochs': {
 							'$':epochs,
 							'type':typeof(epochs),
 						}

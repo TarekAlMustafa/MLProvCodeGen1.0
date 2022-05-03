@@ -12,8 +12,8 @@ print_every = {{ print_every }}  # batches
 # Wrap in data loader.
 {% if dataset == "FakeData" %}
 dataset = getattr(datasets, 'FakeData')
-training_dataset = dataset(size = 255, image_size = (3, 224, 224), num_classes = 256, transform = transform)
-testing_dataset = dataset(size = 255, image_size = (3, 224, 224), num_classes = 256, transform = transform)
+training_dataset = dataset(size = 100, image_size = (3, 224, 224), num_classes = {{ num_classes }}, transform = transform)
+testing_dataset = dataset(size = 10, image_size = (3, 224, 224), num_classes = {{ num_classes }}, transform = transform)
 {% else %}
 training_dataset = dataset("./data", train=True, download=True, transform=transform)
 testing_dataset = dataset("./data", train=False, download=True, transform=transform)
@@ -30,6 +30,25 @@ val_loader = None
 
 endtime = datetime.datetime.now()
 executionTime = endtime-starttime
+dataInfo = testing_dataset.__len__
+for lines in str(dataInfo).splitlines():
+    if 'Number of datapoints:' in lines:
+        instances_testing = lines
+        break
+    else:
+        instances_testing = 'no_data'
+for lines in str(dataInfo).splitlines():
+    if 'Root location:' in lines:
+        root_testing = lines
+        break
+    else:
+        root_testing = 'no_data'
+for lines in str(dataInfo).splitlines():
+    if 'Split:' in lines:
+        split_testing = lines
+        break
+    else:
+        split_testing = 'no_data'
 e_datasegregation = d1.entity('ex:Cell Data Segregation', (
     ('ex:type', 'notebook_cell'),
     ('ex:type', 'p-plan:step'),
@@ -39,8 +58,8 @@ d1.wasStartedBy(a_setdatasegregation, e_datasegregation)
 d1.hadMember(e_notebook, e_datasegregation)
 e_datasegregation_data = d1.entity(
     'ex:Data Segregation Data',(
-        ('ex:training_dataset', str(training_dataset.__len__)),
-		('ex:testing_dataset', str(testing_dataset.__len__)), 
+        ('ex:training_dataset', str(instances_training + root_training + split_training)),
+		('ex:testing_dataset', str(instances_testing + root_testing + split_testing)), 
 ))
 d1.wasGeneratedBy(e_datasegregation_data, a_setdatasegregation)
 d1.wasInfluencedBy(e_datasegregation, e_datapreparation_data)

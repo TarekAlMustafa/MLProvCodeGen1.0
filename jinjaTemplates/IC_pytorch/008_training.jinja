@@ -86,6 +86,13 @@ wandb.finish()
 endtime = datetime.datetime.now()
 executionTime = endtime-starttime
 
+for lines in str(train_log).splitlines():
+    if 'seed:' in lines:
+        resulting_model_seed = lines
+        break
+    else:
+        resulting_model_seed = 'no_data'
+
 e_training = d1.entity('ex:Cell Training', (
     ('ex:type', 'notebook_cell'),
     ('ex:type', 'p-plan:step'),
@@ -97,9 +104,10 @@ e_training_data = d1.entity(
     'ex:Training Data',(
         ('ex:batch_size', batch_size),    
 		('ex:epochs', num_epochs),
-		('ex:train_metrics', str(train_log)),
-		('ex:print_progress', 1),
-		('ex:seed', 2),
+		#('ex:train_metrics', str(train_log)),
+		('ex:print_progress', {{ print_every }}),
+		('ex:seed', {{ seed }}),
+		('ex:resulting_model_seed', resulting_model_seed),
 ))
 d1.wasGeneratedBy(e_training_data, a_settraining)
 d1.wasInfluencedBy(e_training, e_modelparameters_data)

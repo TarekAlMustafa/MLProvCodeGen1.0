@@ -1,0 +1,452 @@
+{
+  "prefix": {
+    "ex": "https://github.com/TarekAlMustafa/MLProvCodeGen1.0/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "p-plan": "http://purl.org/net/p-plan"
+  },
+  "entity": {
+    "ex:MLProvCodeGen": {
+      "prov:type": {
+        "$": "prov:Plan",
+        "type": "prov:QUALIFIED_NAME"
+      }
+    },
+    "ex:notebook": {
+      "ex:programming_language": "Python",
+      "ex:programming_language_version": "3.9.7.final.0 (64 bit)",
+      "ex:kernel": "python3(ipykernel)",
+      "prov:type": [
+        {
+          "$": "prov:File",
+          "type": "prov:QUALIFIED_NAME"
+        },
+        "prov:Collection"
+      ],
+      "ex:fileformat": ".ipynb",
+      "ex:name": "MulticlassClassification.ipynb",
+      "ex:creation_date": "2022-04-29",
+      "ex:last_modified": "TODO"
+    },
+    "ex:Cell Experiment Info": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Experiment Info Data": {
+      "ex:title": "Image Classification",
+      "ex:creation_date": "2022-04-29",
+      "ex:task_type": "ImageClassification_pytorch"
+    },
+    "ex:Cell Hardware Info": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Hardware Info Data": {
+      "ex:CPU": "AMD Ryzen 7 3700X 8-Core Processor",
+      "ex:RAM": "15.95GB",
+      "ex:Operating System": "Windows 10 Version: 10.0.19044 Machine: AMD64",
+      "ex:GPUs": "[(0, 'NVIDIA GeForce GTX 1060 6GB')]"
+    },
+    "ex:Cell Packages": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Packages Data": {
+      "ex:numpy": "1.22.2",
+      "ex:ipywidgets": "7.6.5",
+      "ex:torch": "1.10.2+cpu",
+      "ex:torchvision": "0.11.3+cpu",
+      "ex:pytorch-ignite": "0.4.6",
+      "ex:pytorch-lightning": "1.5.10",
+      "ex:gputil": "1.4.0",
+      "ex:psutil": "5.9.0",
+      "ex:py-cpuinfo": "py-cpuinfo                    8.0.0",
+      "ex:prov": "2.0.0"
+    },
+    "ex:Cell Data Ingestion": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Data Ingestion Data": {
+      "ex:data_format": "Public dataset",
+      "ex:dataset_id": "FakeData",
+      "ex:description": "A fake dataset that returns randomly generated images and returns them as PIL images.",
+      "ex:classes": {
+        "$": 10,
+        "type": "xsd:int"
+      },
+      "ex:training_samples": "    Number of datapoints: 100>",
+      "ex:root_location": "no_data"
+    },
+    "ex:Cell Data Preparation": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Data Preparation Data": {
+      "ex:preprocessing": "Compose(\n    Resize(size=256, interpolation=bilinear, max_size=None, antialias=None)\n    CenterCrop(size=(224, 224))\n    ToTensor()\n)",
+      "ex:number_operations": {
+        "$": 3,
+        "type": "xsd:int"
+      }
+    },
+    "ex:Cell Data Segregation": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Data Segregation Data": {
+      "ex:training_dataset": "    Number of datapoints: 100>no_datano_data",
+      "ex:testing_dataset": "    Number of datapoints: 10no_datano_data"
+    },
+    "ex:Cell Model Parameters": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Model Parameters Data": {
+      "ex:model_name": "resnet18",
+      "ex:model_description": "https://arxiv.org/abs/1512.03385",
+      "ex:save_checkpoint": {
+        "$": 0,
+        "type": "xsd:int"
+      },
+      "ex:pretrained": {
+        "$": 0,
+        "type": "xsd:int"
+      },
+      "ex:gpu_enable": {
+        "$": 1,
+        "type": "xsd:int"
+      },
+      "ex:loss_function": "CrossEntropyLoss",
+      "ex:optimizer": "Adam",
+      "ex:optimizer_learning_rate": {
+        "$": 0.001,
+        "type": "xsd:double"
+      },
+      "ex:output_neurons": {
+        "$": 10,
+        "type": "xsd:int"
+      }
+    },
+    "ex:Cell Training": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Training Data": {
+      "ex:batch_size": {
+        "$": 128,
+        "type": "xsd:int"
+      },
+      "ex:epochs": {
+        "$": 3,
+        "type": "xsd:int"
+      },
+      "ex:print_progress": {
+        "$": 1,
+        "type": "xsd:int"
+      },
+      "ex:seed": {
+        "$": 2,
+        "type": "xsd:int"
+      },
+      "ex:resulting_model_seed": "\tseed: 872583848"
+    },
+    "ex:Cell Evaluation": {
+      "ex:type": [
+        "p-plan:step",
+        "notebook_cell"
+      ]
+    },
+    "ex:Evaluation Data": {
+      "ex:accuracy": {
+        "$": 0.3,
+        "type": "xsd:double"
+      },
+      "ex:loss": {
+        "$": 2.0879478454589844,
+        "type": "xsd:double"
+      }
+    }
+  },
+  "agent": {
+    "ex:Tarek Al Mustafa": {
+      "prov:type": {
+        "$": "prov:Person",
+        "type": "prov:QUALIFIED_NAME"
+      },
+      "foaf:givenName": "Tarek Al Mustafa",
+      "foaf:mbox": "<tarek.almustafa@uni-jena.de>",
+      "prov:role": "Author"
+    }
+  },
+  "wasAttributedTo": {
+    "_:id1": {
+      "prov:entity": "ex:notebook",
+      "prov:agent": "ex:Tarek Al Mustafa"
+    }
+  },
+  "activity": {
+    "ex:GenerateNotebook": {},
+    "ex:set_experiment_info()": {},
+    "ex:date.today()": {},
+    "ex:set_hardware_info()": {},
+    "ex:platform.uname()": {},
+    "ex:cpuinfo.get_cpu_info()": {},
+    "ex:svmem.total": {},
+    "ex:get_size(svmem.total)": {},
+    "ex:GPUtil.getGPUs()": {},
+    "ex:set_packages()": {},
+    "ex:{package_name}.__version__": {},
+    "ex:!pip list | grep -i py-cpuinfo": {},
+    "ex:!pip list | grep -i pytorch-model-summary": {},
+    "ex:set_data_ingestion()": {
+      "prov:startTime": "2022-04-29T11:42:47.699463",
+      "prov:endTime": "2022-04-29T11:42:47.700464",
+      "prov:executionTime": "0:00:00.001001"
+    },
+    "ex:{dataset}.__len__()": {},
+    "ex:set_data_preparation()": {
+      "prov:startTime": "2022-04-29T11:42:47.714478",
+      "prov:endTime": "2022-04-29T11:42:47.714478",
+      "prov:executionTime": "0:00:00"
+    },
+    "ex:set_data_segregation()": {
+      "prov:startTime": "2022-04-29T11:42:47.733495",
+      "prov:endTime": "2022-04-29T11:42:47.734496",
+      "prov:executionTime": "0:00:00.001001"
+    },
+    "ex:set_model_parameters()": {
+      "prov:startTime": "2022-04-29T11:42:47.747508",
+      "prov:endTime": "2022-04-29T11:42:47.850601",
+      "prov:executionTime": "0:00:00.103093"
+    },
+    "ex:set_training()": {
+      "prov:startTime": "2022-04-29T11:42:47.877627",
+      "prov:endTime": "2022-04-29T11:43:09.916227",
+      "prov:executionTime": "0:00:22.038600"
+    },
+    "ex:set_evaluation()": {
+      "prov:startTime": "2022-04-29T11:43:09.943251",
+      "prov:endTime": "2022-04-29T11:43:09.943251",
+      "prov:executionTime": "0:00:00"
+    }
+  },
+  "wasAssociatedWith": {
+    "_:id2": {
+      "prov:activity": "ex:GenerateNotebook",
+      "prov:agent": "ex:Tarek Al Mustafa",
+      "prov:plan": "ex:MLProvCodeGen"
+    }
+  },
+  "wasGeneratedBy": {
+    "_:id3": {
+      "prov:entity": "ex:notebook",
+      "prov:activity": "ex:GenerateNotebook"
+    },
+    "_:id7": {
+      "prov:entity": "ex:Experiment Info Data",
+      "prov:activity": "ex:set_experiment_info()"
+    },
+    "_:id15": {
+      "prov:entity": "ex:Hardware Info Data",
+      "prov:activity": "ex:set_hardware_info()"
+    },
+    "_:id21": {
+      "prov:entity": "ex:Packages Data",
+      "prov:activity": "ex:set_packages()"
+    },
+    "_:id24": {
+      "prov:entity": "ex:Data Ingestion Data",
+      "prov:activity": "ex:set_data_ingestion()"
+    },
+    "_:id28": {
+      "prov:entity": "ex:Data Preparation Data",
+      "prov:activity": "ex:set_data_preparation()"
+    },
+    "_:id34": {
+      "prov:entity": "ex:Data Segregation Data",
+      "prov:activity": "ex:set_data_segregation()"
+    },
+    "_:id39": {
+      "prov:entity": "ex:Model Parameters Data",
+      "prov:activity": "ex:set_model_parameters()"
+    },
+    "_:id43": {
+      "prov:entity": "ex:Training Data",
+      "prov:activity": "ex:set_training()"
+    },
+    "_:id47": {
+      "prov:entity": "ex:Evaluation Data",
+      "prov:activity": "ex:set_evaluation()"
+    }
+  },
+  "wasStartedBy": {
+    "_:id4": {
+      "prov:activity": "ex:set_experiment_info()",
+      "prov:trigger": "ex:Cell Experiment Info",
+      "prov:time": "2022-04-29T11:42:44.300085"
+    },
+    "_:id8": {
+      "prov:activity": "ex:set_hardware_info()",
+      "prov:trigger": "ex:Cell Hardware Info",
+      "prov:time": "2022-04-29T11:42:44.340226"
+    },
+    "_:id16": {
+      "prov:activity": "ex:set_packages()",
+      "prov:trigger": "ex:Cell Packages",
+      "prov:time": "2022-04-29T11:42:47.681446"
+    },
+    "_:id22": {
+      "prov:activity": "ex:set_data_ingestion()",
+      "prov:trigger": "ex:Cell Data Ingestion"
+    },
+    "_:id26": {
+      "prov:activity": "ex:set_data_preparation()",
+      "prov:trigger": "ex:Cell Data Preparation"
+    },
+    "_:id32": {
+      "prov:activity": "ex:set_data_segregation()",
+      "prov:trigger": "ex:Cell Data Segregation"
+    },
+    "_:id37": {
+      "prov:activity": "ex:set_model_parameters()",
+      "prov:trigger": "ex:Cell Model Parameters"
+    },
+    "_:id41": {
+      "prov:activity": "ex:set_training()",
+      "prov:trigger": "ex:Cell Training"
+    },
+    "_:id45": {
+      "prov:activity": "ex:set_evaluation()",
+      "prov:trigger": "ex:Cell Evaluation"
+    }
+  },
+  "wasInformedBy": {
+    "_:id5": {
+      "prov:informed": "ex:set_experiment_info()",
+      "prov:informant": "ex:date.today()"
+    },
+    "_:id9": {
+      "prov:informed": "ex:set_hardware_info()",
+      "prov:informant": "ex:platform.uname()"
+    },
+    "_:id10": {
+      "prov:informed": "ex:set_hardware_info()",
+      "prov:informant": "ex:cpuinfo.get_cpu_info()"
+    },
+    "_:id11": {
+      "prov:informed": "ex:set_hardware_info()",
+      "prov:informant": "ex:svmem.total"
+    },
+    "_:id12": {
+      "prov:informed": "ex:svmem.total",
+      "prov:informant": "ex:get_size(svmem.total)"
+    },
+    "_:id13": {
+      "prov:informed": "ex:set_hardware_info()",
+      "prov:informant": "ex:GPUtil.getGPUs()"
+    },
+    "_:id17": {
+      "prov:informed": "ex:set_packages()",
+      "prov:informant": "ex:{package_name}.__version__"
+    },
+    "_:id18": {
+      "prov:informed": "ex:set_packages()",
+      "prov:informant": "ex:!pip list | grep -i py-cpuinfo"
+    },
+    "_:id19": {
+      "prov:informed": "ex:set_packages()",
+      "prov:informant": "ex:!pip list | grep -i pytorch-model-summary"
+    },
+    "_:id25": {
+      "prov:informed": "ex:set_data_ingestion()",
+      "prov:informant": "ex:{dataset}.__len__()"
+    },
+    "_:id30": {
+      "prov:informed": "ex:str(dataInfo).splitlines()[2]",
+      "prov:informant": "ex:{dataset}.__len__()"
+    },
+    "_:id31": {
+      "prov:informed": "ex:set_data_preparation()",
+      "prov:informant": "ex:str(dataInfo).splitlines()[2]"
+    },
+    "_:id36": {
+      "prov:informed": "ex:set_data_segregation()",
+      "prov:informant": "ex:{dataset}.__len__()"
+    }
+  },
+  "hadMember": {
+    "_:id6": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Experiment Info"
+    },
+    "_:id14": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Hardware Info"
+    },
+    "_:id20": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Packages"
+    },
+    "_:id23": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Data Ingestion"
+    },
+    "_:id27": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Data Preparation"
+    },
+    "_:id33": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Data Segregation"
+    },
+    "_:id38": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Model Parameters"
+    },
+    "_:id42": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Training"
+    },
+    "_:id46": {
+      "prov:collection": "ex:notebook",
+      "prov:entity": "ex:Cell Evaluation"
+    }
+  },
+  "wasInfluencedBy": {
+    "_:id29": {
+      "prov:influencee": "ex:Cell Data Preparation",
+      "prov:influencer": "ex:Data Ingestion Data"
+    },
+    "_:id35": {
+      "prov:influencee": "ex:Cell Data Segregation",
+      "prov:influencer": "ex:Data Preparation Data"
+    },
+    "_:id40": {
+      "prov:influencee": "ex:Cell Model Parameters",
+      "prov:influencer": "ex:Data Segregation Data"
+    },
+    "_:id44": {
+      "prov:influencee": "ex:Cell Training",
+      "prov:influencer": "ex:Model Parameters Data"
+    },
+    "_:id48": {
+      "prov:influencee": "ex:Cell Evaluation",
+      "prov:influencer": "ex:Training Data"
+    }
+  }
+}

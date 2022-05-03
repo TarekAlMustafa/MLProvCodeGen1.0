@@ -10,9 +10,6 @@ transform = transforms.Compose([
 endtime = datetime.datetime.now()
 executionTime = endtime-starttime
 
-dataInfo = training_dataset.__len__
-transform_method = str(dataInfo).splitlines()[4:11]
-
 e_datapreparation = d1.entity('ex:Cell Data Preparation', (
     ('ex:type', 'notebook_cell'),
     ('ex:type', 'p-plan:step'),
@@ -23,7 +20,12 @@ d1.wasStartedBy(a_setdatapreparation, e_datapreparation)
 d1.hadMember(e_notebook, e_datapreparation)
 e_datapreparation_data = d1.entity(
     'ex:Data Preparation Data',(
-        ('ex:preprocessing', str(transform_method)),
+        ('ex:preprocessing', str(transform)),
+		{% if dataset == "FakeData" %}
+		('ex:number_operations', len(str(transform).splitlines())-2),
+		{% else %}
+		('ex:number_operations', len(str(transform).splitlines())-2),
+		{% endif %}
 ))
 d1.wasGeneratedBy(e_datapreparation_data, a_setdatapreparation)
 d1.wasInfluencedBy(e_datapreparation, e_dataingestion_data)

@@ -67,8 +67,8 @@ checkpoint_dir.mkdir(parents=True, exist_ok=True)
 {% if data_format == "Public dataset" %}
 {% if dataset == "FakeData" %}
 dataset = getattr(datasets, 'FakeData')
-training_dataset = dataset(image_size = (3, 224, 224))
-testing_dataset = dataset(image_size = (3, 224, 224))
+training_dataset = dataset(size = 100, image_size = (3, 224, 224), num_classes = {{ num_classes }})
+testing_dataset = dataset(size = 10, image_size = (3, 224, 224), num_classes = {{ num_classes }})
 {% else %}
 dataset = getattr(datasets, '{{ dataset }}')
 training_dataset = dataset("./data", train=True, download=True)
@@ -78,12 +78,24 @@ endtime = datetime.datetime.now()
 executionTime = endtime-starttime
 
 dataInfo = training_dataset.__len__
-{% if dataset == "FakeData" %}
-root_location = 'fake data - root does not exist'
-{% else %}
-root_location =  str(dataInfo).splitlines()[2]
-{% endif %}
-
+for lines in str(dataInfo).splitlines():
+    if 'Number of datapoints:' in lines:
+        instances_training = lines
+        break
+    else:
+        instances_training = 'no_data'
+for lines in str(dataInfo).splitlines():
+    if 'Root location:' in lines:
+        root_training = lines
+        break
+    else:
+        root_training = 'no_data'
+for lines in str(dataInfo).splitlines():
+    if 'Split:' in lines:
+        split_training = lines
+        break
+    else:
+        split_training = 'no_data'
 e_dataingestion = d1.entity('ex:Cell Data Ingestion', (
     ('ex:type', 'notebook_cell'),
     ('ex:type', 'p-plan:step'),
@@ -97,10 +109,20 @@ e_dataingestion_data = d1.entity(
     'ex:Data Ingestion Data',(
         ('ex:data_format', '{{ data_format }}'),
         ('ex:dataset_id', '{{ dataset }}'),
-		('ex:feature_classes', 10),
-		('ex:training_samples',  training_dataset.__len__()),
-		('ex:testing_samples', testing_dataset.__len__()),
-		('ex:root_location', root_location),
+		{% if dataset == "FakeData" %}
+		('ex:description', 'A fake dataset that returns randomly generated images and returns them as PIL images.'),
+		{% elif dataset == "MNIST" %}
+		('ex:description', 'http://yann.lecun.com/exdb/mnist/'),
+		{% elif dataset == "FashionMNIST" %}
+		('ex:description', 'https://github.com/zalandoresearch/fashion-mnist'),
+		{% elif dataset == "CIFAR10" %}
+		('ex:description', 'https://www.cs.toronto.edu/~kriz/cifar.html'),
+		{% elif dataset == "user" %}
+		('ex:description', ''),
+		{% endif %}
+		('ex:classes', {{ num_classes }}),
+		('ex:training_samples', str(instances_training)),
+		('ex:root_location', str(root_training)),
 ))
 d1.wasGeneratedBy(e_dataingestion_data, a_setdataingestion)
 a_splitlines = ('ex:str(dataInfo).splitlines()[2]')

@@ -6,15 +6,13 @@ checkpoint_dir.mkdir(parents=True, exist_ok=True){%endif%}
 # Set up model, loss, optimizer.
 lr = {{ lr }}
 model = models.{{ model_func }}(pretrained={{ pretrained }})
-{% if num_classes != 1000 %}
 num_classes = {{ num_classes }}
 {% if "resnet18" in model_func %}
 model.fc = torch.nn.Linear(in_features=model.fc.in_features, out_features=num_classes, bias=True)
 {% elif "alexnet" in model_func or "vgg" in model_func %}
 model.classifier[-1] = torch.nn.Linear(in_features=model.classifier[-1].in_features, out_features=num_classes, bias=True)
-{% elif "densenet161" in model_func %}
-model.classifier = torch.nn.Linear(in_features=model.classifier.in_features, out_features=num_classes, bias=True)
-{% endif %}
+{% elif "shufflenet_v2_x1_0" in model_func %}
+model.fc = torch.nn.Linear(in_features=model.fc.in_features, out_features=num_classes, bias=True)
 {% endif %}
 model = model.to(device)
 loss_func = nn.{{ loss }}()
@@ -38,15 +36,22 @@ d1.wasStartedBy(a_setmodelparameters, e_modelparameters)
 d1.hadMember(e_notebook, e_modelparameters)
 e_modelparameters_data = d1.entity(
     'ex:Model Parameters Data',(
-        ('ex:model_name', 'resnet18'),
-		('ex:save_checkpoint', 0),
-		('ex:pretrained', 0),
-		('ex:gpu_enable', 1),
+        ('ex:model_name', '{{ model_func }}'),
+		{% if model_func == "resnet18" %}
+		('ex:model_description', 'https://arxiv.org/abs/1512.03385'),
+		{% elif model_func == "shufflenet_v2_x1_0" %}
+		('ex:model_description', 'https://arxiv.org/abs/1807.11164'),
+		{% elif model_func == "vgg16" %}
+		('ex:model_description', 'https://arxiv.org/abs/1409.1556'),
+		{% endif %}
+		('ex:save_checkpoint', {{ checkpoint }}),
+		('ex:pretrained', {{ pretrained }}),
+		('ex:gpu_enable', {{ gpu }}),
 		#('ex:modelParameters', str(model)),
 		('ex:loss_function', '{{ loss }}'),
 		('ex:optimizer', '{{ optimizer }}'),
 		('ex:optimizer_learning_rate', lr),
-		('ex:num_classes', 1000),  
+		('ex:output_neurons', {{ num_classes }}),  
 ))
 d1.wasGeneratedBy(e_modelparameters_data, a_setmodelparameters)
 d1.wasInfluencedBy(e_modelparameters, e_datasegregation_data)

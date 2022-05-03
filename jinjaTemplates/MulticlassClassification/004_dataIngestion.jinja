@@ -80,7 +80,14 @@ d1.wasStartedBy(a_setdataingestion, e_dataingestion)
 d1.hadMember(e_notebook, e_dataingestion)
 e_dataingestion_data = d1.entity(
     'ex:Data Ingestion Data',(
-        ('ex:dataset_id', 'Iris'),
+        ('ex:dataset_id', '{{ dataset }}'),
+		{% if dataset == "Iris" %}
+		('ex:description', 'function: load_iris().DESCR'),
+		{% elif dataset == "Spiral" or dataset == "Aggregation" or dataset == "R15" %}
+		('ex:description', 'http://cs.joensuu.fi/sipu/datasets/ Section: "Shape sets"'),
+		{% else %}
+		('ex:description', ''),
+		{% endif %}
         ('ex:output_dimensions', output_dim),
         ('ex:samples_total',  len(X)),
         ('ex:feature_dimensions', len(feature_names)),
