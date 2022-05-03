@@ -45,7 +45,7 @@ Made by: https://www.jrieke.com/ Twitter: https://twitter.com/jrieke
 """
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('jinjaTemplates/IC_pytorch')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/IC_pytorch')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
 # GET VARIABLES
     #TODOvisualization_tool = user_inputs['visualization_tool']['tool']
@@ -107,7 +107,7 @@ Install required packages before running"""))
     #Model
     nb['cells'].append(nbf.v4.new_markdown_cell("""### Model"""))
     template = env.get_template('007_model.jinja')
-    output = template.render(model_func = model_func, pretrained = pretrained, num_classes = num_classes, loss = loss, optimizer = optimizer, visualization_tool = visualization_tool, lr = lr, gpu = gpu, checkpoint = checkpoint)
+    output = template.render(model_func = model_func, pretrained = pretrained, num_classes=num_classes, loss = loss, optimizer = optimizer, visualization_tool = visualization_tool, lr = lr, gpu = gpu, checkpoint = checkpoint)
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
     #Training
@@ -140,7 +140,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'GeneratedNotebooks/ImageClassification_PyTorch.ipynb')
+    nbf.write(nb, 'extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb')
     reply = {"greetings": "success"}
     return reply
 
@@ -165,9 +165,9 @@ Original author: N. Janakiev https://github.com/njanakiev Twitter: https://twitt
 
     nb['cells'] = [nbf.v4.new_markdown_cell(text)]
 
-    file_loader = FileSystemLoader('jinjaTemplates/MulticlassClassification')
+    file_loader = FileSystemLoader('extension/jinjaTemplates/MulticlassClassification')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
-     dataset = user_inputs['entity']['ex:Data Ingestion Data']['ex:dataset_id']
+    dataset = user_inputs['entity']['ex:Data Ingestion Data']['ex:dataset_id']
     random_seed = user_inputs['entity']['ex:Data Segregation Data']['ex:random_state']['$']
     test_split = user_inputs['entity']['ex:Data Segregation Data']['ex:test_size']['$']
     activation_func = user_inputs['entity']['ex:Model Parameters Data']['ex:activation_function']
@@ -180,9 +180,9 @@ Original author: N. Janakiev https://github.com/njanakiev Twitter: https://twitt
         lr = user_inputs['entity']['ex:Model Parameters Data']['ex:optimizer_learning_rate'][0]
     except KeyError:
         lr = user_inputs['entity']['ex:Model Parameters Data']['ex:optimizer_learning_rate']['$']
+
     use_gpu = user_inputs['entity']['ex:Model Parameters Data']['ex:gpu_enable']['$']
     default = user_inputs['entity']['ex:Model Parameters Data']['ex:optimizer_default_learning_rate']['$']
-
 
 
     #installs
@@ -288,7 +288,7 @@ Install required packages before running"""))
     output = template.render()
     nb['cells'].append(nbf.v4.new_code_cell(output))
 
-    nbf.write(nb, 'GeneratedNotebooks/MulticlassClassification.ipynb')
+    nbf.write(nb, 'extension/GeneratedNotebooks/MulticlassClassification.ipynb')
 
     reply = {"greetings": "success"}
     return reply
