@@ -73,7 +73,6 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
   content.id = 'MLProvCodeGen-content' // id used to add scrollbars in base.css
   widget.title.label = 'MLProvCodeGen';
   widget.title.closable = true;
-  
 // ------------------------------------------------------------------------------------------------------------------------------- //
 	// Header
 	const headerFlex = document.createElement('div');
@@ -136,7 +135,7 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 				console.log(provenanceDataObj); 
 				//console.log(provenanceDataObj.entity.experiment_info['experimentinfo:task_type']); 
 				const taskName = provenanceDataObj.entity['ex:Experiment Info Data']['ex:task_type'];
-				var path = window.location.href + '/tree/extension/GeneratedNotebooks/'
+				var path = window.location.href + '/tree/GeneratedNotebooks/'
 				var notebookPath = "('"+path+taskName+".ipynb', 'MLProvCodeGen')";
 				console.log('path:' +path);
 				//var notebookPath = "('http://localhost:8888/lab/tree/extension/GeneratedNotebooks/"+provenanceDataObj.entity.experiment_info['experimentinfo:task_type']+".ipynb', 'MLProvCodeGen')";
@@ -228,7 +227,7 @@ switch (problemSubmit) {
         content.node.appendChild(IC_classes);
 		IC_classes.innerHTML = `
 					<div class="flex-container2">
-						<div title="Number of classes that the dataset has.\nDefault for public datasets is 10 classes.">
+						<div title="Number of output classes of the original dataset.\nDefault for public datasets is 10 classes.">
 							<label for="quantity">How many classes/output units?</label>
 							<input type="number" id="quantity" name="quantity" value="10">
 						</div>
@@ -355,7 +354,7 @@ switch (problemSubmit) {
 						<div><b><u> Training</u></b></div>
 						<div title="For each epoch, the whole dataset will be iterated over once.\nIncreasing the # of epochs such that the model is trained longer might improve performance.">
 							<label for="epochs">How many epochs?</label>
-							<input type="number" id="epochs" name="epochs" value="3">
+							<input type="number" id="epochs" name="epochs" value="2">
 						</div>
 					</div>
 				`;
@@ -366,7 +365,7 @@ switch (problemSubmit) {
 					<div class="flex-container2">
 						<div title="Batch size defines how much data is input into the model before changing its parameters.\nWe recommend size 10 for FakeData and 128 for real data.">
 							<label for="batches"> Batch Size</label>
-							<input type="number" id="batches" name="batches" value="128">
+							<input type="number" id="batches" name="batches" value="10">
 						</div>
 					</div>
 				`;
@@ -540,13 +539,12 @@ switch (problemSubmit) {
 					},
 				}
 			};
-			console.log(quantityValue)
 			var method = 'ImageClassification_pytorch'
 			const reply = await generateNotebook(method, objBody, content)
 			console.log(reply);
 			
 			if (reply['greetings'] === 'success') {
-				var path = window.location.href + '/tree/extension/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
+				var path = window.location.href + '/tree/GeneratedNotebooks/ImageClassification_PyTorch.ipynb'
 				console.log(path)
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
@@ -823,7 +821,7 @@ case 'MulticlassClassification':
 			const reply = await generateNotebook(method, objBody, content)
 			console.log(reply);
 			if (reply["greetings"] === 'success') {
-				var path = window.location.href + '/tree/extension/GeneratedNotebooks/MulticlassClassification.ipynb'
+				var path = window.location.href + '/tree/GeneratedNotebooks/MulticlassClassification.ipynb'
 				console.log(path)
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
