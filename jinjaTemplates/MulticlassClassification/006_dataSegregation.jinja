@@ -13,7 +13,6 @@ e_datasegregation = d1.entity('ex:Cell Data Segregation', (
 ))
 a_setdatasegregation = d1.activity('ex:set_data_segregation()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
 d1.wasStartedBy(a_setdatasegregation, e_datasegregation)
-d1.used(a_setdatasegregation, e_datapreparation_data)
 d1.hadMember(e_notebook, e_datasegregation)
 e_datasegregation_data = d1.entity(
     'ex:Data Segregation Data',(

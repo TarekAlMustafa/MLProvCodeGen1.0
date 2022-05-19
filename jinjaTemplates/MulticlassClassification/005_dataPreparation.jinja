@@ -15,7 +15,6 @@ e_datapreparation = d1.entity('ex:Cell Data Preparation', (
 a_setdatapreparation = d1.activity('ex:set_data_preparation()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
 
 d1.wasStartedBy(a_setdatapreparation, e_datapreparation)
-d1.used(a_setdatapreparation, e_dataingestion_data)
 d1.hadMember(e_notebook, e_datapreparation)
 e_datapreparation_data = d1.entity(
     'ex:Data Preparation Data',(

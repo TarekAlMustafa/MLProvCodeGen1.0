@@ -43,7 +43,6 @@ e_training = d1.entity('ex:Cell Training', (
 ))
 a_settraining = d1.activity('ex:set_training()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
 d1.wasStartedBy(a_settraining, e_training)
-d1.used(a_settraining, e_modelparameters_data)
 d1.hadMember(e_notebook, e_training)
 e_training_data = d1.entity(
     'ex:Training Data',(

@@ -55,12 +55,11 @@ e_modelparameters = d1.entity('ex:Cell Model Parameters', (
 ))
 a_setmodelparameters = d1.activity('ex:set_model_parameters()', startTime=starttime, endTime=endtime, other_attributes={'prov:executionTime': str(executionTime)})
 d1.wasStartedBy(a_setmodelparameters, e_modelparameters)
-d1.used(a_setmodelparameters, e_datasegregation_data)
 d1.hadMember(e_notebook, e_modelparameters)
 e_modelparameters_data = d1.entity(
     'ex:Model Parameters Data',(
         ('ex:gpu_enable', 1),
-        ('ex:modelParameters', 'str(model)TODO'),
+        ('ex:modelParameters', str(model)),
         ('ex:neuron_number', neuron_number), 
         ('ex:loss_function', '{{ loss_func }}'), 
         ('ex:optimizer', '{{ optimizer }}'), 
