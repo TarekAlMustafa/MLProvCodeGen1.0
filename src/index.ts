@@ -82,9 +82,9 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 		<div class="flex-container">
 			<div><h2>MLProvCodeGen</h2></div>
 			<div><h3>Generate machine learning scripts using provenance data</h3></div>
-			<div>Input a MLProvCodeGen provenance data file <u>or</u></div>
-			<div>Use the input elements below</div>
-			<div>Hover over input elements for explanations</div>
+			<div>Input a MLProvCodeGen provenance data file <b><u>or</u></b></div>
+			<div>Use the input elements below.</div>
+			<div>Hover over input elements for explanations.</div>
 		</div>
 	`
 // ------------------------------------------------------------------------------------------------------------------------------- //  
@@ -167,8 +167,8 @@ async function activate (app: JupyterFrontEnd, palette: ICommandPalette, launche
 			<div>
 				<label for="exercise">Choose a machine learning exercise:</label>
 				<select name="exercise" id="exercise">
-					<option value="MulticlassClassification"> Multiclass Classification</option>
 					<option value="ImageClassification"> Image Classification </option>
+					<option value="MulticlassClassification"> Multiclass Classification</option>
 				</select>
 			</div>
 		</div>
@@ -210,7 +210,7 @@ switch (problemSubmit) {
 		content.node.appendChild(IC_dataset);
 		IC_dataset.innerHTML = `
 					<div class="flex-container2">
-						<div title="Select your dataset here!">
+						<div title="The 'Fake data set' consists of 110 randomly generated images.\nMNIST is a database of 70000 image files. The images contain handwritten digits.\nFashionMNIST is a dataset of 70000 image files. The images contain clothing articles split into 10 classes.\nCIFAR10 is a dataset of 60000 image files. The images contain 10 classes of vehicles and animals.">
 						<label for="dataSelection">Select your dataset:</label>
 						<select name="dataSelection" id="dataSelection">
 							<option value="FakeData"> Fake Data for Evaluation </option>
@@ -227,7 +227,7 @@ switch (problemSubmit) {
         content.node.appendChild(IC_classes);
 		IC_classes.innerHTML = `
 					<div class="flex-container2">
-						<div title="Number of output classes of the original dataset.\nDefault for public datasets is 10 classes.">
+						<div title="Number of classes that the dataset has.\nDefault for public datasets is 10 classes.">
 							<label for="quantity">How many classes/output units?</label>
 							<input type="number" id="quantity" name="quantity" value="10">
 						</div>
@@ -250,8 +250,8 @@ switch (problemSubmit) {
         IC_segregation_text.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Segregation</u></b></div>
-						<div title="Data Segregation splits the available data into training data and testing data.">
-							<label> <i>Public datasets use premade testing datasets</i></label>
+						<div title="Data Segregation splits the available data into training data and testing data.\nMNIST and FashionMNIST consist of 60000 training images (10 Classes with 6000 samples for each class) and 10000 testing examples.\nCIFAR10 consists of 50000 training images and 10000 testing images.\nThe fake dataset generates 100 training examples and 10 testing examples.">
+							<label><i>Public datasets use premade testing datasets.</i></label>
 						</div>
 					</div>
 					`;
@@ -341,7 +341,7 @@ switch (problemSubmit) {
 							<label for="lossFunc"> Loss function</label>
 							<select name="lossFunc" id="lossFunc">
 								<option value="CrossEntropyLoss"> CrossEntropyLoss </option>
-								<option value="BCEWithLogitsLoss"> BCEWithLogitsLoss </option>
+								<option value="NLLLoss"> NLLLoss </option>
 							</select>
 						</div>
 					</div>
@@ -376,7 +376,7 @@ switch (problemSubmit) {
 					<div class="flex-containerReverse">
 						<div title="This option saves your model to local files.">
 							<input type="checkbox" id="modelCheckpoint" name="modelCheckpoint" value="modelCheckpoint">
-							<label for="modelCheckpoint"> Save model checkpoint each epoch?</label><br>
+							<label for="modelCheckpoint"> Save model checkpoint after each epoch?</label><br>
 						</div>
 						<div><i>Alert: This option uses a lot of storage space.</i></div>
 					</div>
@@ -549,7 +549,7 @@ switch (problemSubmit) {
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
 				success_message.textContent =
-				'Your Code has been generated successfully. Press the button below to open it.';
+				'Your code has been generated successfully. Press the button below to open it.';
 				
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
@@ -568,7 +568,7 @@ case 'MulticlassClassification':
         MC_dataset.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Ingestion</u></b></div>
-						<div title="Select your dataset here!">
+						<div title="In data ingestion, you can select a specific dataset. This option selects the raw data, before any preprocessing.">
 							<label for="dataset">Which dataset do you want to use?</label>
 							<select name="dataset" id="dataset">
 								<option value="Iris"> Iris </option>
@@ -597,7 +597,7 @@ case 'MulticlassClassification':
         MC_random_seed.innerHTML = `
 					<div class="flex-container2">
 						<div><b><u> Data Segregation</u></b></div>
-<div title="Seeds determine the sequence of numbers that a pseudorandom number generator generates.\nWhen the same seed is used for data segregation on the same dataset multiple times, then the training and testing datasets will always be identical.">
+							<div title="Data preparation is the pipeline step that takes the raw data from data ingestion and performs a number of operation on that data to better fit it to the machine learning task at hand and the model that we plan on using.\n The MinMaxScaler scales the data's feature range to [0,1]">
 							<label for="random_seed">Random Seed for data Segregation (default: 2)</label>
 							<input type="number" id="random_seed" name="random_seed" value="2">
 						</div>
@@ -620,7 +620,7 @@ case 'MulticlassClassification':
         MC_use_gpu.innerHTML = `
 					<div class="flex-containerReverse">
 						<div><b><u> Model Parameters</u></b></div>
-						<div title="Not all GPUs work with the useCuda() function.">
+						<div title="Depending on the GPU used, training can be sped up significantly by not only using the CPU's, but also the GPU's computational capabilities.">
 							<input type="checkbox" id="use_gpu" name="use_gpu" value="use_gpu" checked>
 							<label for="use_gpu"> Use GPU if available? </label><br>
 						</div>
@@ -826,7 +826,7 @@ case 'MulticlassClassification':
 				const success_message = document.createElement('text');
 				content.node.appendChild(success_message);
 				success_message.textContent =
-					'Your Code has been generated successfully. Press the button below to open it.';
+					'Your code has been generated successfully. Press the button below to open it.';
 
 				const notebook_open = document.createElement('div');
 				content.node.appendChild(notebook_open);
