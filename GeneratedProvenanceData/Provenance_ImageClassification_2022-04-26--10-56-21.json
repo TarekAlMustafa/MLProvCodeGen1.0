@@ -16,32 +16,32 @@
       "ex:programming_language_version": "3.9.7.final.0 (64 bit)",
       "ex:kernel": "python3(ipykernel)",
       "prov:type": [
+        "prov:Collection",
         {
           "$": "prov:File",
           "type": "prov:QUALIFIED_NAME"
-        },
-        "prov:Collection"
+        }
       ],
       "ex:fileformat": ".ipynb",
       "ex:name": "MulticlassClassification.ipynb",
-      "ex:creation_date": "2022-05-19",
+      "ex:creation_date": "2022-04-26",
       "ex:last_modified": "TODO"
     },
     "ex:Cell Experiment Info": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Experiment Info Data": {
-      "ex:title": "Multiclass Classification",
-      "ex:creation_date": "2022-05-19",
-      "ex:task_type": "MulticlassClassification"
+      "ex:title": "Image Classification",
+      "ex:creation_date": "2022-04-26",
+      "ex:task_type": "ImageClassification_pytorch"
     },
     "ex:Cell Hardware Info": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Hardware Info Data": {
@@ -52,20 +52,17 @@
     },
     "ex:Cell Packages": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Packages Data": {
       "ex:numpy": "1.22.2",
-      "ex:pandas": "1.3.3",
-      "ex:matplotlib": "3.5.1",
-      "ex:sklearn": "1.0.2",
-      "ex:torch": "1.10.2+cpu",
-      "ex:tqdm": "4.60.0",
       "ex:ipywidgets": "7.6.5",
-      "ex:pytorch-model-summary": "pytorch-model-summary         0.1.2",
-      "ex:ipython": "8.2.0",
+      "ex:torch": "1.10.2+cpu",
+      "ex:torchvision": "0.11.3+cpu",
+      "ex:pytorch-ignite": "0.4.6",
+      "ex:pytorch-lightning": "1.5.10",
       "ex:gputil": "1.4.0",
       "ex:psutil": "5.9.0",
       "ex:py-cpuinfo": "py-cpuinfo                    8.0.0",
@@ -73,119 +70,117 @@
     },
     "ex:Cell Data Ingestion": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Data Ingestion Data": {
-      "ex:dataset_id": "Iris",
-      "ex:description": "function: load_iris().DESCR",
-      "ex:output_dimensions": {
-        "$": 3,
+      "ex:data_format": "Public dataset",
+      "ex:dataset_id": "MNIST",
+      "ex:feature_classes": {
+        "$": 10,
         "type": "xsd:int"
       },
-      "ex:samples_total": {
-        "$": 150,
+      "ex:training_samples": {
+        "$": 60000,
         "type": "xsd:int"
       },
-      "ex:feature_dimensions": {
-        "$": 4,
+      "ex:testing_samples": {
+        "$": 10000,
         "type": "xsd:int"
-      }
+      },
+      "ex:root_location": "    Root location: ./data"
     },
     "ex:Cell Data Preparation": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Data Preparation Data": {
-      "ex:number_operations": {
-        "$": 1,
-        "type": "xsd:int"
-      },
-      "ex:transformation": "sklearn.preprocessing.StandardScaler",
-      "ex:transformation_method": "Standardscaler.fit_transform"
+      "ex:preprocessing": "[]"
     },
     "ex:Cell Data Segregation": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Data Segregation Data": {
-      "ex:segregation_method": "sklearn.model_selection.train_test_split",
-      "ex:test_size": {
-        "$": 0.2,
-        "type": "xsd:double"
-      },
-      "ex:train_size": {
-        "$": 0.8,
-        "type": "xsd:double"
-      },
-      "ex:random_state": {
-        "$": 2,
-        "type": "xsd:int"
-      }
+      "ex:training_dataset": "<bound method MNIST.__len__ of Dataset MNIST\n    Number of datapoints: 60000\n    Root location: ./data\n    Split: Train\n    StandardTransform\nTransform: Compose(\n               Resize(size=256, interpolation=bilinear, max_size=None, antialias=None)\n               CenterCrop(size=(224, 224))\n               ToTensor()\n               Lambda()\n           )>",
+      "ex:testing_dataset": "<bound method MNIST.__len__ of Dataset MNIST\n    Number of datapoints: 10000\n    Root location: ./data\n    Split: Test\n    StandardTransform\nTransform: Compose(\n               Resize(size=256, interpolation=bilinear, max_size=None, antialias=None)\n               CenterCrop(size=(224, 224))\n               ToTensor()\n               Lambda()\n           )>"
     },
     "ex:Cell Model Parameters": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Model Parameters Data": {
+      "ex:model_name": "resnet18",
+      "ex:save_checkpoint": {
+        "$": 0,
+        "type": "xsd:int"
+      },
+      "ex:pretrained": {
+        "$": 0,
+        "type": "xsd:int"
+      },
       "ex:gpu_enable": {
         "$": 1,
         "type": "xsd:int"
       },
-      "ex:modelParameters": "Model(\n  (layer1): Linear(in_features=4, out_features=50, bias=True)\n  (layer2): Linear(in_features=50, out_features=50, bias=True)\n  (layer3): Linear(in_features=50, out_features=3, bias=True)\n)",
-      "ex:neuron_number": {
-        "$": 50,
-        "type": "xsd:int"
+      "ex:loss_function": "CrossEntropyLoss",
+      "ex:optimizer": "Adam",
+      "ex:optimizer_learning_rate": {
+        "$": 0.001,
+        "type": "xsd:double"
       },
-      "ex:loss_function": "nn.CrossEntropyLoss()",
-      "ex:optimizer": "torch.optim.Adam(",
-      "ex:optimizer_default_learning_rate": {
-        "$": 1,
+      "ex:num_classes": {
+        "$": 1000,
         "type": "xsd:int"
-      },
-      "ex:optimizer_learning_rate": "None",
-      "ex:activation_function": "F.softmax(self.layer3(x), dim=1)"
+      }
     },
     "ex:Cell Training": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Training Data": {
-      "ex:epochs": {
-        "$": 100,
+      "ex:batch_size": {
+        "$": 128,
         "type": "xsd:int"
       },
-      "ex:numberOfParameters": {
-        "$": 2953,
+      "ex:epochs": {
+        "$": 1,
+        "type": "xsd:int"
+      },
+      "ex:train_metrics": "State:\n\titeration: 469\n\tepoch: 1\n\tepoch_length: 469\n\tmax_epochs: 1\n\toutput: 0.09451604634523392\n\tbatch: <class 'list'>\n\tmetrics: <class 'dict'>\n\tdataloader: <class 'torch.utils.data.dataloader.DataLoader'>\n\tseed: 872583848\n\ttimes: <class 'dict'>\n\trng_states: <class 'NoneType'>\n",
+      "ex:print_progress": {
+        "$": 1,
+        "type": "xsd:int"
+      },
+      "ex:seed": {
+        "$": 2,
         "type": "xsd:int"
       }
     },
     "ex:Cell Evaluation": {
       "ex:type": [
-        "p-plan:step",
-        "notebook_cell"
+        "notebook_cell",
+        "p-plan:step"
       ]
     },
     "ex:Evaluation Data": {
-      "ex:Accuracy": 0.9333333373069763,
-      "ex:Loss": 0.6593589782714844,
-      "ex:Confusion Matrix": "[[13  1  0]\n [ 0  7  1]\n [ 0  0  8]]",
-      "ex:AUC": {
-        "$": 0.98111,
+      "ex:accuracy": {
+        "$": 0.9834,
         "type": "xsd:double"
       },
-      "ex:F1 Score": "[0.96296296 0.875      0.94117647]",
-      "ex:Mean Absolute Error": 0.06666666666666667,
-      "ex:Mean Squared Error": 0.06666666666666667
+      "ex:loss": {
+        "$": 0.04840931396484375,
+        "type": "xsd:double"
+      }
     }
   },
   "agent": {
@@ -220,34 +215,35 @@
     "ex:!pip list | grep -i py-cpuinfo": {},
     "ex:!pip list | grep -i pytorch-model-summary": {},
     "ex:set_data_ingestion()": {
-      "prov:startTime": "2022-05-19T11:09:37.053343",
-      "prov:endTime": "2022-05-19T11:09:37.056346",
-      "prov:executionTime": "0:00:00.003003"
+      "prov:startTime": "2022-04-26T09:44:44.384528",
+      "prov:endTime": "2022-04-26T09:44:44.402544",
+      "prov:executionTime": "0:00:00.018016"
     },
+    "ex:{dataset}.__len__()": {},
     "ex:set_data_preparation()": {
-      "prov:startTime": "2022-05-19T11:09:37.069357",
-      "prov:endTime": "2022-05-19T11:09:37.070359",
-      "prov:executionTime": "0:00:00.001002"
+      "prov:startTime": "2022-04-26T09:44:44.415557",
+      "prov:endTime": "2022-04-26T09:44:44.415557",
+      "prov:executionTime": "0:00:00"
     },
     "ex:set_data_segregation()": {
-      "prov:startTime": "2022-05-19T11:09:37.085372",
-      "prov:endTime": "2022-05-19T11:09:37.086373",
-      "prov:executionTime": "0:00:00.001001"
+      "prov:startTime": "2022-04-26T09:44:44.432572",
+      "prov:endTime": "2022-04-26T09:44:44.455593",
+      "prov:executionTime": "0:00:00.023021"
     },
     "ex:set_model_parameters()": {
-      "prov:startTime": "2022-05-19T11:09:37.294299",
-      "prov:endTime": "2022-05-19T11:09:37.295299",
-      "prov:executionTime": "0:00:00.001000"
+      "prov:startTime": "2022-04-26T09:44:44.479616",
+      "prov:endTime": "2022-04-26T09:44:44.586712",
+      "prov:executionTime": "0:00:00.107096"
     },
     "ex:set_training()": {
-      "prov:startTime": "2022-05-19T11:09:37.309313",
-      "prov:endTime": "2022-05-19T11:09:37.418330",
-      "prov:executionTime": "0:00:00.109017"
+      "prov:startTime": "2022-04-26T09:44:44.611736",
+      "prov:endTime": "2022-04-26T10:56:21.844748",
+      "prov:executionTime": "1:11:37.233012"
     },
     "ex:set_evaluation()": {
-      "prov:startTime": "2022-05-19T11:09:37.430342",
-      "prov:endTime": "2022-05-19T11:09:37.635325",
-      "prov:executionTime": "0:00:00.204983"
+      "prov:startTime": "2022-04-26T10:56:21.881781",
+      "prov:endTime": "2022-04-26T10:56:21.881781",
+      "prov:executionTime": "0:00:00"
     }
   },
   "wasAssociatedWith": {
@@ -278,23 +274,23 @@
       "prov:entity": "ex:Data Ingestion Data",
       "prov:activity": "ex:set_data_ingestion()"
     },
-    "_:id27": {
+    "_:id29": {
       "prov:entity": "ex:Data Preparation Data",
       "prov:activity": "ex:set_data_preparation()"
     },
-    "_:id31": {
+    "_:id36": {
       "prov:entity": "ex:Data Segregation Data",
       "prov:activity": "ex:set_data_segregation()"
     },
-    "_:id35": {
+    "_:id42": {
       "prov:entity": "ex:Model Parameters Data",
       "prov:activity": "ex:set_model_parameters()"
     },
-    "_:id39": {
+    "_:id48": {
       "prov:entity": "ex:Training Data",
       "prov:activity": "ex:set_training()"
     },
-    "_:id43": {
+    "_:id53": {
       "prov:entity": "ex:Evaluation Data",
       "prov:activity": "ex:set_evaluation()"
     }
@@ -303,39 +299,39 @@
     "_:id4": {
       "prov:activity": "ex:set_experiment_info()",
       "prov:trigger": "ex:Cell Experiment Info",
-      "prov:time": "2022-05-19T11:09:33.556482"
+      "prov:time": "2022-04-26T09:44:40.766906"
     },
     "_:id8": {
       "prov:activity": "ex:set_hardware_info()",
       "prov:trigger": "ex:Cell Hardware Info",
-      "prov:time": "2022-05-19T11:09:33.596002"
+      "prov:time": "2022-04-26T09:44:40.806235"
     },
     "_:id16": {
       "prov:activity": "ex:set_packages()",
       "prov:trigger": "ex:Cell Packages",
-      "prov:time": "2022-05-19T11:09:37.038329"
+      "prov:time": "2022-04-26T09:44:44.360507"
     },
     "_:id22": {
       "prov:activity": "ex:set_data_ingestion()",
       "prov:trigger": "ex:Cell Data Ingestion"
     },
-    "_:id25": {
+    "_:id26": {
       "prov:activity": "ex:set_data_preparation()",
       "prov:trigger": "ex:Cell Data Preparation"
     },
-    "_:id29": {
+    "_:id33": {
       "prov:activity": "ex:set_data_segregation()",
       "prov:trigger": "ex:Cell Data Segregation"
     },
-    "_:id33": {
+    "_:id39": {
       "prov:activity": "ex:set_model_parameters()",
       "prov:trigger": "ex:Cell Model Parameters"
     },
-    "_:id37": {
+    "_:id44": {
       "prov:activity": "ex:set_training()",
       "prov:trigger": "ex:Cell Training"
     },
-    "_:id41": {
+    "_:id50": {
       "prov:activity": "ex:set_evaluation()",
       "prov:trigger": "ex:Cell Evaluation"
     }
@@ -376,6 +372,22 @@
     "_:id19": {
       "prov:informed": "ex:set_packages()",
       "prov:informant": "ex:!pip list | grep -i pytorch-model-summary"
+    },
+    "_:id25": {
+      "prov:informed": "ex:set_data_ingestion()",
+      "prov:informant": "ex:{dataset}.__len__()"
+    },
+    "_:id31": {
+      "prov:informed": "ex:str(dataInfo).splitlines()[2]",
+      "prov:informant": "ex:{dataset}.__len__()"
+    },
+    "_:id32": {
+      "prov:informed": "ex:set_data_preparation()",
+      "prov:informant": "ex:str(dataInfo).splitlines()[2]"
+    },
+    "_:id38": {
+      "prov:informed": "ex:set_data_segregation()",
+      "prov:informant": "ex:{dataset}.__len__()"
     }
   },
   "hadMember": {
@@ -395,45 +407,77 @@
       "prov:collection": "ex:notebook",
       "prov:entity": "ex:Cell Data Ingestion"
     },
-    "_:id26": {
+    "_:id28": {
       "prov:collection": "ex:notebook",
       "prov:entity": "ex:Cell Data Preparation"
     },
-    "_:id30": {
+    "_:id35": {
       "prov:collection": "ex:notebook",
       "prov:entity": "ex:Cell Data Segregation"
     },
-    "_:id34": {
+    "_:id41": {
       "prov:collection": "ex:notebook",
       "prov:entity": "ex:Cell Model Parameters"
     },
-    "_:id38": {
+    "_:id47": {
       "prov:collection": "ex:notebook",
       "prov:entity": "ex:Cell Training"
     },
-    "_:id42": {
+    "_:id52": {
       "prov:collection": "ex:notebook",
       "prov:entity": "ex:Cell Evaluation"
     }
   },
+  "used": {
+    "_:id27": [
+      {
+        "prov:activity": "ex:set_data_preparation()",
+        "prov:entity": "ex:Data Ingestion Data"
+      },
+      {
+        "prov:activity": "ex:set_data_preparation()",
+        "prov:entity": "ex:Data Ingestion Data"
+      }
+    ],
+    "_:id34": {
+      "prov:activity": "ex:set_data_segregation()",
+      "prov:entity": "ex:Data Preparation Data"
+    },
+    "_:id40": {
+      "prov:activity": "ex:set_model_parameters()",
+      "prov:entity": "ex:Data Segregation Data"
+    },
+    "_:id45": {
+      "prov:activity": "ex:set_training()",
+      "prov:entity": "ex:Model Parameters Data"
+    },
+    "_:id46": {
+      "prov:activity": "ex:set_training()",
+      "prov:entity": "ex:Data Segregation Data"
+    },
+    "_:id51": {
+      "prov:activity": "ex:set_evaluation()",
+      "prov:entity": "ex:Training Data"
+    }
+  },
   "wasInfluencedBy": {
-    "_:id28": {
+    "_:id30": {
       "prov:influencee": "ex:Cell Data Preparation",
       "prov:influencer": "ex:Data Ingestion Data"
     },
-    "_:id32": {
+    "_:id37": {
       "prov:influencee": "ex:Cell Data Segregation",
       "prov:influencer": "ex:Data Preparation Data"
     },
-    "_:id36": {
+    "_:id43": {
       "prov:influencee": "ex:Cell Model Parameters",
       "prov:influencer": "ex:Data Segregation Data"
     },
-    "_:id40": {
+    "_:id49": {
       "prov:influencee": "ex:Cell Training",
       "prov:influencer": "ex:Model Parameters Data"
     },
-    "_:id44": {
+    "_:id54": {
       "prov:influencee": "ex:Cell Evaluation",
       "prov:influencer": "ex:Training Data"
     }
